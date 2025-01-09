@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "doom_and_gloom:cracked_stone_tablet"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "doom_and_gloom:blocks/cracked_stone_tablet"
+}

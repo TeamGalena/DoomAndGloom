@@ -7,6 +7,7 @@ import galena.doom_and_gloom.content.block.BurialDirtBlock;
 import galena.doom_and_gloom.content.block.SepulcherBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.VigilCandleBlock;
+import galena.doom_and_gloom.content.item.HammerAndChiselItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -30,10 +31,12 @@ import java.util.stream.Stream;
 public class OBlocks {
     public static final BlockSubRegistryHelper HELPER = DoomAndGloom.REGISTRY_HELPER.getBlockSubHelper();
 
-    public static final RegistryObject<Block> SEPULCHER =  register("sepulcher", () -> new SepulcherBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON).sound(OSoundTypes.SEPULCHER)));
-    public static final RegistryObject<Block> BONE_PILE =  register("bone_pile", () -> new BonePileBlock(BlockBehaviour.Properties.copy(Blocks.BONE_BLOCK).sound(OSoundTypes.BONE_PILE).strength(1F)));
-    public static final RegistryObject<Block> ROTTING_FLESH =  HELPER.createBlock("rotting_flesh", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
-    public static final RegistryObject<Block> STONE_TABLET = register("stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryObject<Block> SEPULCHER = register("sepulcher", () -> new SepulcherBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON).sound(OSoundTypes.SEPULCHER)));
+    public static final RegistryObject<Block> BONE_PILE = register("bone_pile", () -> new BonePileBlock(BlockBehaviour.Properties.copy(Blocks.BONE_BLOCK).sound(OSoundTypes.BONE_PILE).strength(1F)));
+    public static final RegistryObject<Block> ROTTING_FLESH = HELPER.createBlock("rotting_flesh", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
+    public static final RegistryObject<Block> STONE_TABLET = register("stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.DEFAULT));
+    public static final RegistryObject<Block> ENGRAVED_STONE_TABLET = register("engraved_stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.ENGRAVED));
+    public static final RegistryObject<Block> CRACKED_STONE_TABLET = register("cracked_stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.ENGRAVED));
 
     private static final Supplier<BlockBehaviour.Properties> VIGIL_CANDLE_PROPERTIES = () -> BlockBehaviour.Properties.of().noOcclusion().lightLevel(VigilCandleBlock.LIGHT_EMISSION).sound(SoundType.METAL).pushReaction(PushReaction.DESTROY);
     public static final RegistryObject<Block> VIGIL_CANDLE = register("vigil_candle", () -> new VigilCandleBlock(VIGIL_CANDLE_PROPERTIES.get()));
@@ -57,17 +60,17 @@ public class OBlocks {
         ));
     }
 
-    public static <T extends Block> RegistryObject<T> baseRegister(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item) {
+    public static <T extends Block> RegistryObject<T> register(String name, Supplier<? extends T> block, Function<T, ? extends BlockItem> item) {
         RegistryObject<T> register = HELPER.createBlockNoItem(name, block);
-        OItems.HELPER.createItem(name, item.apply(register));
+        OItems.HELPER.createItem(name, () -> item.apply(register.get()));
         return register;
     }
 
-    public static <B extends Block> RegistryObject<B> register(String name, Supplier<? extends Block> block) {
-        return (RegistryObject<B>) baseRegister(name, block, OBlocks::registerBlockItem);
+    public static <T extends Block> RegistryObject<T> register(String name, Supplier<? extends T> block) {
+        return register(name, block, OBlocks::createBlockItem);
     }
 
-    private static <T extends Block> Supplier<BlockItem> registerBlockItem(final RegistryObject<T> block) {
-        return () -> new BlockItem(Objects.requireNonNull(block.get()), new Item.Properties());
+    private static BlockItem createBlockItem(final Block block) {
+        return new BlockItem(Objects.requireNonNull(block), new Item.Properties());
     }
 }

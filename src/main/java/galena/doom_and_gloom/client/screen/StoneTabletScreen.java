@@ -7,6 +7,8 @@ import galena.doom_and_gloom.client.OReloadListener;
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.content.block.StoneTabletText;
+import galena.doom_and_gloom.index.OBlocks;
+import galena.doom_and_gloom.index.OItems;
 import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.StoneTabletUpdatePacket;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,6 +19,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.IntStream;
@@ -29,7 +32,7 @@ public class StoneTabletScreen extends Screen {
     /**
      * Reference to the sign object.
      */
-    private final StoneTabletBlockEntity sign;
+    private final StoneTabletBlockEntity tablet;
     private final int maxLines;
     private final boolean canEdit;
     private StoneTabletText text;
@@ -46,19 +49,18 @@ public class StoneTabletScreen extends Screen {
     private TextFieldHelper signField;
     private boolean engraveOnClose = false;
 
-    public StoneTabletScreen(StoneTabletBlockEntity sign, boolean isFiltered) {
-        this(sign, isFiltered, Component.empty());
-    }
-
-    public StoneTabletScreen(StoneTabletBlockEntity sign, boolean isFiltered, Component title) {
-        super(title);
-        this.sign = sign;
-        this.text = sign.getText();
-        this.maxLines = sign.getText().getLineCount();
+    public StoneTabletScreen(StoneTabletBlockEntity tablet, ItemStack stack, boolean isFiltered) {
+        super(Component.empty());
+        this.tablet = tablet;
+        this.text = tablet.getText();
+        this.maxLines = tablet.getText().getLineCount();
         this.messages = IntStream.range(0, maxLines)
                 .mapToObj(i -> this.text.getMessage(i, isFiltered))
                 .map(Component::getString).toArray(String[]::new);
-        this.canEdit = sign.getBlockState().getValue(StoneTabletBlock.TYPE).canEdit();
+
+        var canEdit = tablet.type == StoneTabletBlock.Type.DEFAULT && stack.is(OItems.BUSH_HAMMER.get());
+
+        this.canEdit = canEdit;
     }
 
     @Override
@@ -82,7 +84,7 @@ public class StoneTabletScreen extends Screen {
                 this::setMessage,
                 TextFieldHelper.createClipboardGetter(this.minecraft),
                 TextFieldHelper.createClipboardSetter(this.minecraft),
-                string -> this.minecraft.font.width(string) <= this.sign.getMaxTextLineWidth()
+                string -> this.minecraft.font.width(string) <= this.tablet.getMaxTextLineWidth()
         );
     }
 
@@ -97,8 +99,8 @@ public class StoneTabletScreen extends Screen {
     private boolean isValid() {
         return this.minecraft != null
                 && this.minecraft.player != null
-                && !this.sign.isRemoved()
-                && !this.sign.playerIsTooFarAwayToEdit(this.minecraft.player.getUUID());
+                && !this.tablet.isRemoved()
+                && !this.tablet.playerIsTooFarAwayToEdit(this.minecraft.player.getUUID());
     }
 
     @Override
@@ -141,7 +143,7 @@ public class StoneTabletScreen extends Screen {
     @Override
     public void removed() {
         DGNetwork.CHANNEL.sendToServer(
-                new StoneTabletUpdatePacket(this.sign.getBlockPos(), this.messages, this.engraveOnClose));
+                new StoneTabletUpdatePacket(tablet.getBlockPos(), messages, engraveOnClose, true));
     }
 
     @Override
@@ -161,11 +163,11 @@ public class StoneTabletScreen extends Screen {
                 0, 0, imageWidth, imageHeight);
 
 
-        this.renderSignText(guiGraphics);
+        this.renderText(guiGraphics);
         guiGraphics.pose().popPose();
     }
 
-    private void renderSignText(GuiGraphics guiGraphics) {
+    private void renderText(GuiGraphics guiGraphics) {
         guiGraphics.pose().translate(0.0F, -5.0F, 4.0F);
 
         int color = OReloadListener.getColor();
@@ -174,8 +176,8 @@ public class StoneTabletScreen extends Screen {
         boolean showCursor = this.frame / 6 % 2 == 0 && canEdit;
         int j = this.signField.getCursorPos();
         int k = this.signField.getSelectionPos();
-        int l = maxLines * this.sign.getTextLineHeight() / 2;
-        int m = this.line * this.sign.getTextLineHeight() - l;
+        int l = maxLines * this.tablet.getTextLineHeight() / 2;
+        int m = this.line * this.tablet.getTextLineHeight() - l;
 
         for (int n = 0; n < this.messages.length; ++n) {
             String string = this.messages[n];
@@ -184,8 +186,8 @@ public class StoneTabletScreen extends Screen {
                     string = this.font.bidirectionalShaping(string);
                 }
 
-                int pX = -this.font.width(string) / 2 -1;
-                int pY = n * this.sign.getTextLineHeight() - l;
+                int pX = -this.font.width(string) / 2 - 1;
+                int pY = n * this.tablet.getTextLineHeight() - l;
                 drawEngravedString(guiGraphics, string, pX, pY, color, darkColor2, darkColor);
 
 
@@ -205,7 +207,7 @@ public class StoneTabletScreen extends Screen {
                 int o = this.font.width(string.substring(0, Math.max(Math.min(j, string.length()), 0)));
                 int p = o - this.font.width(string) / 2;
                 if (showCursor && j < string.length()) {
-                    guiGraphics.fill(p, m - 1, p + 1, m + this.sign.getTextLineHeight(), 0xFF000000 | color);
+                    guiGraphics.fill(p, m - 1, p + 1, m + this.tablet.getTextLineHeight(), 0xFF000000 | color);
                 }
 
                 if (k != j) {
@@ -215,7 +217,7 @@ public class StoneTabletScreen extends Screen {
                     int t = this.font.width(string.substring(0, r)) - this.font.width(string) / 2;
                     int u = Math.min(s, t);
                     int v = Math.max(s, t);
-                    guiGraphics.fill(RenderType.guiTextHighlight(), u, m, v, m + this.sign.getTextLineHeight(), -16776961);
+                    guiGraphics.fill(RenderType.guiTextHighlight(), u, m, v, m + this.tablet.getTextLineHeight(), -16776961);
                 }
             }
         }
@@ -254,7 +256,7 @@ public class StoneTabletScreen extends Screen {
 
     private void onEngrave() {
         //TODO: Engrave sound
-        this.sign.setText(this.text);
+        this.tablet.setText(this.text);
         this.engraveOnClose = true;
         this.minecraft.setScreen(null);
     }

@@ -1,5 +1,6 @@
 package galena.doom_and_gloom.data;
 
+import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.data.provider.ORecipeProvider;
 import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.index.OItems;
@@ -67,6 +68,29 @@ public class ORecipes extends ORecipeProvider {
 
         compact(OBlocks.BONE_PILE.get().asItem(), Items.BONE).save(consumer);
         unCompact(Items.BONE, OBlocks.BONE_PILE.get().asItem()).save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, OBlocks.STONE_TABLET.get())
+                .pattern("##")
+                .pattern("##")
+                .define('#', Blocks.STONE_PRESSURE_PLATE)
+                .unlockedBy("has_stone", has(Blocks.STONE_PRESSURE_PLATE))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, OItems.HAMMER_AND_CHISEL.get())
+                .pattern("## ")
+                .pattern("##H")
+                .define('#', Blocks.STONE_PRESSURE_PLATE)
+                .define('H', OItems.BUSH_HAMMER.get())
+                .unlockedBy("has_hammer", has(OItems.BUSH_HAMMER.get()))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, OItems.HAMMER_AND_CHISEL.get())
+                .requires(OItems.BUSH_HAMMER.get())
+                .requires(OBlocks.STONE_TABLET.get())
+                .unlockedBy("has_hammer", has(OItems.BUSH_HAMMER.get()))
+                .save(consumer, new ResourceLocation(DoomAndGloom.MOD_ID, "hammer_and_chisel_from_tablet"));
+
+        smeltingResultFromBase(consumer, OBlocks.CRACKED_STONE_TABLET.get(), OBlocks.STONE_TABLET.get());
     }
 
     private Consumer<Consumer<FinishedRecipe>> withFallback(TagKey<Item> prefer, TagKey<Item> fallback, Function<TagKey<Item>, RecipeBuilder> builder) {

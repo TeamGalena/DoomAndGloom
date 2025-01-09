@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "doom_and_gloom:bush_hammer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "doom_and_gloom:hammer_and_chisel_from_tablet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_hammer",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "doom_and_gloom:hammer_and_chisel_from_tablet"
+    ]
+  },
+  "sends_telemetry_event": false
+}

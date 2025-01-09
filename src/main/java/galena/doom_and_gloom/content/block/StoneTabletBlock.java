@@ -2,6 +2,7 @@ package galena.doom_and_gloom.content.block;
 
 import galena.doom_and_gloom.client.screen.StoneTabletScreen;
 import galena.doom_and_gloom.index.OBlockEntities;
+import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.EngraveStoneTabletPacket;
 import net.minecraft.client.Minecraft;
@@ -11,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -44,12 +46,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, TickingEntityBlock {
+public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, TickingEntityBlock<StoneTabletBlockEntity> {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<Attachment> ATTACHMENT = EnumProperty.create("attachment", Attachment.class);
-    public static final EnumProperty<Type> TYPE = EnumProperty.create("type", Type.class);
 
     protected static final VoxelShape SHAPE_Z = Block.box(6.0, 0.0, 2.0, 10.0, 16.0, 14.0);
     protected static final VoxelShape SHAPE_X = Block.box(2.0, 0.0, 6.0, 14.0, 16.0, 10.0);
@@ -63,26 +64,29 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
     protected static final VoxelShape SHAPE_FLOOR_Z = Block.box(2.0, 0.0, 0.0, 14.0, 4.0, 16.0);
     protected static final VoxelShape SHAPE_FLOOR_X = Block.box(0.0, 0.0, 2.0, 16.0, 4.0, 14.0);
 
-    protected static final VoxelShape SHAPE_CEILING_Z =Block.box(2.0, 12.0, 0.0, 14.0, 16.0, 16.0);
-    protected static final VoxelShape SHAPE_CEILING_X =Block.box(0.0, 12.0, 2.0, 16.0, 16.0, 14.0);
+    protected static final VoxelShape SHAPE_CEILING_Z = Block.box(2.0, 12.0, 0.0, 14.0, 16.0, 16.0);
+    protected static final VoxelShape SHAPE_CEILING_X = Block.box(0.0, 12.0, 2.0, 16.0, 16.0, 14.0);
+    public final Type type;
 
-    public StoneTabletBlock(Properties pProperties) {
-        super(pProperties);
+    public StoneTabletBlock(Properties properties, Type type) {
+        super(properties);
+        this.type = type;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(WATERLOGGED, false)
-                .setValue(FACING, Direction.NORTH).setValue(ATTACHMENT, Attachment.CENTER_UPRIGHT)
-                .setValue(TYPE, Type.DEFAULT));
+                .setValue(FACING, Direction.NORTH)
+                .setValue(ATTACHMENT, Attachment.CENTER_UPRIGHT)
+        );
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        BlockPos pos = pContext.getClickedPos();
-        boolean water = pContext.getLevel().getFluidState(pos).getType() == Fluids.WATER;
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockPos pos = context.getClickedPos();
+        boolean water = context.getLevel().getFluidState(pos).getType() == Fluids.WATER;
         BlockState state = this.defaultBlockState().setValue(WATERLOGGED, water);
 
-        Level level = pContext.getLevel();
+        Level level = context.getLevel();
 
-        Direction clickFace = pContext.getClickedFace();
+        Direction clickFace = context.getClickedFace();
         if (clickFace.getAxis() == Direction.Axis.Y) {
             BlockState below = level.getBlockState(pos.relative(clickFace.getOpposite()));
             if (below.getBlock() instanceof StoneTabletBlock && below.getValue(ATTACHMENT).isUpright()) {
@@ -90,13 +94,13 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
                         .setValue(ATTACHMENT, below.getValue(ATTACHMENT));
             }
 
-            Player p = pContext.getPlayer();
+            Player p = context.getPlayer();
             if (p != null && p.isShiftKeyDown()) {
-                return state.setValue(FACING, pContext.getHorizontalDirection().getOpposite())
+                return state.setValue(FACING, context.getHorizontalDirection().getOpposite())
                         .setValue(ATTACHMENT, clickFace == Direction.UP ? Attachment.FLOOR : Attachment.CEILING);
             }
 
-            return state.setValue(FACING, pContext.getHorizontalDirection().getOpposite())
+            return state.setValue(FACING, context.getHorizontalDirection().getOpposite())
                     .setValue(ATTACHMENT, Attachment.CENTER_UPRIGHT);
         } else {
             return this.defaultBlockState().setValue(FACING, clickFace)
@@ -105,40 +109,40 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(WATERLOGGED, FACING, ATTACHMENT, TYPE);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(WATERLOGGED, FACING, ATTACHMENT);
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        if (pState.getValue(WATERLOGGED)) {
-            pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return switch (pState.getValue(ATTACHMENT)) {
-            case FLOOR -> switch (pState.getValue(FACING)) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(ATTACHMENT)) {
+            case FLOOR -> switch (state.getValue(FACING)) {
                 case NORTH, SOUTH -> SHAPE_FLOOR_Z;
                 default -> SHAPE_FLOOR_X;
             };
 
-            case CEILING -> switch (pState.getValue(FACING)) {
+            case CEILING -> switch (state.getValue(FACING)) {
                 case NORTH, SOUTH -> SHAPE_CEILING_Z;
                 default -> SHAPE_CEILING_X;
             };
 
-            case WALL -> switch (pState.getValue(FACING)) {
+            case WALL -> switch (state.getValue(FACING)) {
                 case SOUTH -> SHAPE_SOUTH;
                 case EAST -> SHAPE_EAST;
                 case WEST -> SHAPE_WEST;
                 default -> SHAPE_NORTH;
             };
 
-            case CENTER_UPRIGHT -> switch (pState.getValue(FACING)) {
+            case CENTER_UPRIGHT -> switch (state.getValue(FACING)) {
                 case NORTH, SOUTH -> SHAPE_X;
                 default -> SHAPE_Z;
             };
@@ -146,18 +150,18 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new StoneTabletBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new StoneTabletBlockEntity(pos, state);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-
-        if (pLevel.getBlockEntity(pPos) instanceof StoneTabletBlockEntity tile) {
-            if (pPlayer instanceof ServerPlayer sp) {
-                if (!this.otherPlayerIsEditingSign(pPlayer, tile) && pPlayer.mayBuild() &&
-                        this.hasEditableText(pPlayer, tile)) {
-                    this.openTextEdit(sp, tile);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
+            if (player instanceof ServerPlayer serverPlayer) {
+                if (clear(level, pos, serverPlayer, hand)) {
+                    return InteractionResult.SUCCESS;
+                }
+                if (openTextEdit(serverPlayer, tile)) {
                     return InteractionResult.SUCCESS;
                 } else {
                     return InteractionResult.PASS;
@@ -170,15 +174,31 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
         }
     }
 
-    private boolean hasEditableText(Player pPlayer, StoneTabletBlockEntity pSignEntity) {
-        StoneTabletText signText = pSignEntity.getText();
-        return Arrays.stream(signText.getMessages(pPlayer.isTextFilteringEnabled()))
+    private boolean clear(Level level, BlockPos pos, ServerPlayer player, InteractionHand hand) {
+        var held = player.getItemInHand(hand);
+        var state = level.getBlockState(pos);
+
+        if (!held.is(ItemTags.PICKAXES)) return false;
+        if (type != Type.ENGRAVED) return false;
+
+        var tablet = level.random.nextInt(5) == 0 ? OBlocks.CRACKED_STONE_TABLET : OBlocks.STONE_TABLET;
+
+        level.setBlockAndUpdate(pos, tablet.get().withPropertiesOf(state));
+
+        held.hurtAndBreak(1, player, it -> it.broadcastBreakEvent(hand));
+
+        return true;
+    }
+
+    private boolean hasEditableText(Player player, StoneTabletBlockEntity signEntity) {
+        StoneTabletText signText = signEntity.getText();
+        return Arrays.stream(signText.getMessages(player.isTextFilteringEnabled()))
                 .allMatch((p) -> p.equals(CommonComponents.EMPTY) || p.getContents() instanceof LiteralContents);
     }
 
     @Override
-    public FluidState getFluidState(BlockState pState) {
-        return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -188,7 +208,6 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
             CompoundTag tag = new CompoundTag();
             tag.put("BlockEntityTag", tile.saveWithoutMetadata());
             CompoundTag c = new CompoundTag();
-            c.putString("type", state.getValue(TYPE).getSerializedName());
             tag.put("BlockStateTag", c);
             stack.setTag(tag);
             return stack;
@@ -196,29 +215,37 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
         return super.getCloneItemStack(state, target, level, pos, player);
     }
 
-    public void openTextEdit(ServerPlayer pPlayer, StoneTabletBlockEntity pSignEntity) {
-        pSignEntity.setAllowedPlayerEditor(pPlayer.getUUID());
+    public boolean openTextEdit(ServerPlayer player, StoneTabletBlockEntity blockEntity) {
+        if (otherPlayerIsEditingSign(player, blockEntity)) return false;
+        if (!player.mayBuild()) return false;
+        if (!hasEditableText(player, blockEntity)) return false;
+
+        blockEntity.setAllowedPlayerEditor(player.getUUID());
         DGNetwork.CHANNEL.send(
-                PacketDistributor.PLAYER.with(() -> pPlayer),
-                new EngraveStoneTabletPacket(pSignEntity.getBlockPos()));
+                PacketDistributor.PLAYER.with(() -> player),
+                new EngraveStoneTabletPacket(blockEntity.getBlockPos()));
+
+        return true;
     }
 
-    private boolean otherPlayerIsEditingSign(Player pPlayer, StoneTabletBlockEntity pSignEntity) {
-        UUID id = pSignEntity.getPlayerWhoMayEdit();
-        return id != null && !id.equals(pPlayer.getUUID());
+    private boolean otherPlayerIsEditingSign(Player player, StoneTabletBlockEntity signEntity) {
+        UUID id = signEntity.getPlayerWhoMayEdit();
+        return id != null && !id.equals(player.getUUID());
     }
 
     @OnlyIn(Dist.CLIENT)
     public static void openScreen(BlockPos pos) {
         Minecraft mc = Minecraft.getInstance();
         var level = mc.level;
-        if(level != null && level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
-            mc.setScreen(new StoneTabletScreen(tile, mc.isTextFilteringEnabled()));
+        var player = mc.player;
+        if (level != null && player != null && level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
+            var stack = player.getUseItem();
+            mc.setScreen(new StoneTabletScreen(tile, stack, mc.isTextFilteringEnabled()));
         }
     }
 
     @Override
-    public BlockEntityType<?> getType() {
+    public BlockEntityType<StoneTabletBlockEntity> getType() {
         return OBlockEntities.STONE_TABLET.get();
     }
 
@@ -228,10 +255,6 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
         @Override
         public String getSerializedName() {
             return this.name().toLowerCase();
-        }
-
-        public boolean canEdit() {
-            return this == DEFAULT;
         }
     }
 

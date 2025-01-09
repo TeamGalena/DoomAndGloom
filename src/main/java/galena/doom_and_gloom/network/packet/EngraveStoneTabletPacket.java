@@ -1,9 +1,6 @@
 package galena.doom_and_gloom.network.packet;
 
-import galena.doom_and_gloom.client.screen.StoneTabletScreen;
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
-import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

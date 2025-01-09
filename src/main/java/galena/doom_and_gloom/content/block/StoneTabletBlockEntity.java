@@ -36,9 +36,11 @@ public class StoneTabletBlockEntity extends BlockEntity implements Ticking {
     @Nullable
     private UUID playerWhoMayEdit;
     private StoneTabletText frontText = new StoneTabletText();
+    public final StoneTabletBlock.Type type;
 
     public StoneTabletBlockEntity(BlockPos pos, BlockState blockState) {
         super(OBlockEntities.STONE_TABLET.get(), pos, blockState);
+        this.type = ((StoneTabletBlock) blockState.getBlock()).type;
     }
 
     public StoneTabletText getText() {

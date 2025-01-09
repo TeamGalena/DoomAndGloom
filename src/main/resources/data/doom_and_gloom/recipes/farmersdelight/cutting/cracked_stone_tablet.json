@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "doom_and_gloom:stone_tablet"
+    }
+  ],
+  "result": [
+    {
+      "item": "doom_and_gloom:cracked_stone_tablet"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "pickaxe_dig"
+  }
+}

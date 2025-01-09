@@ -2,6 +2,7 @@ package galena.doom_and_gloom.network.packet;
 
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
+import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.index.OSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -9,6 +10,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.FilteredText;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.network.NetworkEvent;
@@ -18,11 +20,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public record StoneTabletUpdatePacket(BlockPos pos, String[] lines, boolean engrave) {
+public record StoneTabletUpdatePacket(BlockPos pos, String[] lines, boolean engrave, boolean usedItem) {
 
     public void write(FriendlyByteBuf buffer) {
         buffer.writeBlockPos(pos);
-buffer.writeBoolean(engrave);
+        buffer.writeBoolean(engrave);
+        buffer.writeBoolean(usedItem);
         buffer.writeVarInt(lines.length);
         for (var line : lines) {
             buffer.writeUtf(line);
@@ -55,12 +58,15 @@ buffer.writeBoolean(engrave);
 
         if (level.hasChunkAt(pos) && level.getBlockEntity(pos) instanceof StoneTabletBlockEntity te) {
             te.updateStoneTabletText(player, filteredText);
-            if(engrave){
-                level.setBlockAndUpdate(pos, level.getBlockState(pos)
-                        .setValue(StoneTabletBlock.TYPE, StoneTabletBlock.Type.ENGRAVED));
+            if (engrave) {
+                level.setBlockAndUpdate(pos, OBlocks.ENGRAVED_STONE_TABLET.get().withPropertiesOf(level.getBlockState(pos)));
                 level.playSound(null, pos, OSoundEvents.STONE_TABLET_ENGRAVE.get(),
                         SoundSource.BLOCKS, 1.0f, 1.0f);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+
+                if (usedItem) {
+                    player.setItemInHand(player.getUsedItemHand(), ItemStack.EMPTY);
+                }
             }
         }
     }
@@ -69,11 +75,12 @@ buffer.writeBoolean(engrave);
     public static StoneTabletUpdatePacket from(FriendlyByteBuf buffer) {
         var pos = buffer.readBlockPos();
         var engrave = buffer.readBoolean();
+        var usedItem = buffer.readBoolean();
         var lines = new String[buffer.readVarInt()];
         for (int i = 0; i < lines.length; i++) {
             lines[i] = buffer.readUtf();
         }
-        return new StoneTabletUpdatePacket(pos, lines, engrave);
+        return new StoneTabletUpdatePacket(pos, lines, engrave, usedItem);
     }
 
 }
