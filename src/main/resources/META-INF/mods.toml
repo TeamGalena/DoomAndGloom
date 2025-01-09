@@ -1,46 +1,46 @@
-modLoader="javafml" #mandatory
-loaderVersion="[43,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+modLoader="javafml"
+loaderVersion="[43,)"
 license="MIT"
-issueTrackerURL="https://github.com/TeamGalena/DoomAndGloom/issues/" #optional
+issueTrackerURL="https://github.com/${repository}/issues/"
 
-[[mods]] #mandatory
-modId="doom_and_gloom" #mandatory
-version="${file.jarVersion}" #mandatory
-displayName="Doom & Gloom" #mandatory
-updateJSONURL="https://api.modrinth.com/updates/doom-and-gloom/forge_updates.json" #optional
-displayURL="https://www.curseforge.com/minecraft/mc-mods/doom-and-gloom" #optional
-logoFile="doom_and_gloom.png" #optional
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+updateJSONURL="https://api.modrinth.com/updates/doom-and-gloom/forge_updates.json"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/doom-and-gloom"
+logoFile="${mod_id}.png"
 logoBlur=false
-itemIcon="doom_and_gloom:bush_hammer"
-configBackground="doom_and_gloom:textures/block/bone_pile_side.png"
-credits="Thanks to our wonderful Patreon members and those who help participate in discussions on our Discord server!" #optional
-authors="Team Galena" #optional
+itemIcon="${mod_id}:bush_hammer"
+configBackground="${mod_id}:textures/block/bone_pile_side.png"
+credits="Thanks to our wonderful Patreon members and those who help participate in discussions on our Discord server!"
+authors="${mod_author}"
 description='''
-TODO
+An addon-mod for Oreganized adding Halloween-themed content
 '''
 
-[[dependencies.doom_and_gloom]]
-    modId="forge" #mandatory
-    mandatory=true #mandatory
-    versionRange="[43,)" #mandatory
+[[dependencies.${mod_id}]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.doom_and_gloom]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.20,1.21)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.doom_and_gloom]]
+[[dependencies.${mod_id}]]
     modId="blueprint"
     mandatory=true
     versionRange="[7.1.0,)"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.doom_and_gloom]]
+[[dependencies.${mod_id}]]
     modId="oreganized"
     mandatory=false
     versionRange="*"

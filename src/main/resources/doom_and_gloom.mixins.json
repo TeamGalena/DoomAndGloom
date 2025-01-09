@@ -13,5 +13,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "doom_and_gloom.refmap.json"
+  "refmap": "${mod_id}.refmap.json"
 }
