@@ -54,9 +54,9 @@ public class OLootTables extends LootTableProvider {
             );
             dropSelf(OBlocks.BONE_PILE);
             dropNothing(OBlocks.ROTTING_FLESH);
-            dropSelf(OBlocks.STONE_TABLET);
-            dropSelf(OBlocks.ENGRAVED_STONE_TABLET);
-            dropSelf(OBlocks.CRACKED_STONE_TABLET);
+            stoneTablet(OBlocks.STONE_TABLET);
+            stoneTablet(OBlocks.ENGRAVED_STONE_TABLET);
+            stoneTablet(OBlocks.CRACKED_STONE_TABLET);
             dropOther(OBlocks.BURIAL_DIRT, Blocks.DIRT);
             OBlocks.vigilCandles().forEach(this::vigilCandle);
         }

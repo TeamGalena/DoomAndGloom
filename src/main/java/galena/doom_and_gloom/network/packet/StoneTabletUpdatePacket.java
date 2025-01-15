@@ -20,12 +20,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public record StoneTabletUpdatePacket(BlockPos pos, String[] lines, boolean engrave, boolean usedItem) {
+public record StoneTabletUpdatePacket(BlockPos pos, String[] lines) {
 
     public void write(FriendlyByteBuf buffer) {
         buffer.writeBlockPos(pos);
-        buffer.writeBoolean(engrave);
-        buffer.writeBoolean(usedItem);
         buffer.writeVarInt(lines.length);
         for (var line : lines) {
             buffer.writeUtf(line);
@@ -57,14 +55,16 @@ public record StoneTabletUpdatePacket(BlockPos pos, String[] lines, boolean engr
         Level level = player.level();
 
         if (level.hasChunkAt(pos) && level.getBlockEntity(pos) instanceof StoneTabletBlockEntity te) {
+            var engraved = filteredText.stream().anyMatch(text -> !text.filteredOrEmpty().isBlank());
             te.updateStoneTabletText(player, filteredText);
-            if (engrave) {
+
+            if (engraved) {
                 level.setBlockAndUpdate(pos, OBlocks.ENGRAVED_STONE_TABLET.get().withPropertiesOf(level.getBlockState(pos)));
                 level.playSound(null, pos, OSoundEvents.STONE_TABLET_ENGRAVE.get(),
                         SoundSource.BLOCKS, 1.0f, 1.0f);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 
-                if (usedItem) {
+                if (!player.getAbilities().instabuild) {
                     player.setItemInHand(player.getUsedItemHand(), ItemStack.EMPTY);
                 }
             }
@@ -74,13 +74,11 @@ public record StoneTabletUpdatePacket(BlockPos pos, String[] lines, boolean engr
 
     public static StoneTabletUpdatePacket from(FriendlyByteBuf buffer) {
         var pos = buffer.readBlockPos();
-        var engrave = buffer.readBoolean();
-        var usedItem = buffer.readBoolean();
         var lines = new String[buffer.readVarInt()];
         for (int i = 0; i < lines.length; i++) {
             lines[i] = buffer.readUtf();
         }
-        return new StoneTabletUpdatePacket(pos, lines, engrave, usedItem);
+        return new StoneTabletUpdatePacket(pos, lines);
     }
 
 }

@@ -58,9 +58,7 @@ public class StoneTabletScreen extends Screen {
                 .mapToObj(i -> this.text.getMessage(i, isFiltered))
                 .map(Component::getString).toArray(String[]::new);
 
-        var canEdit = tablet.type == StoneTabletBlock.Type.DEFAULT && stack.is(OItems.BUSH_HAMMER.get());
-
-        this.canEdit = canEdit;
+        this.canEdit = tablet.type == StoneTabletBlock.Type.DEFAULT && stack.is(OItems.BUSH_HAMMER.get());
     }
 
     @Override
@@ -142,8 +140,9 @@ public class StoneTabletScreen extends Screen {
 
     @Override
     public void removed() {
-        DGNetwork.CHANNEL.sendToServer(
-                new StoneTabletUpdatePacket(tablet.getBlockPos(), messages, engraveOnClose, true));
+        if (engraveOnClose) {
+            DGNetwork.CHANNEL.sendToServer(new StoneTabletUpdatePacket(tablet.getBlockPos(), messages));
+        }
     }
 
     @Override

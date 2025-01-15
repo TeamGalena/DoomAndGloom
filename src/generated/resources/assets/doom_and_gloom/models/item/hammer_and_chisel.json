@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "doom_and_gloom:item/hammer_and_chisel"
+  }
+}

@@ -26,6 +26,9 @@ public class OBlockStates extends OBlockStateProvider {
         vigilCandle(OBlocks.VIGIL_CANDLE, null);
         simpleBlock(OBlocks.BURIAL_DIRT.get(), models().cubeTop("burial_dirt", new ResourceLocation("block/dirt"), DoomAndGloom.modLoc("block/burial_dirt")));
         OBlocks.COLORED_VIGIL_CANDLES.forEach((color, block) -> vigilCandle(block, color.getSerializedName()));
+        stoneTablet(OBlocks.STONE_TABLET, null);
+        stoneTablet(OBlocks.ENGRAVED_STONE_TABLET, "engraved");
+        stoneTablet(OBlocks.CRACKED_STONE_TABLET, "cracked");
     }
 
 }

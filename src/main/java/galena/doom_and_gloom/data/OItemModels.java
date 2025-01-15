@@ -27,6 +27,10 @@ public class OItemModels extends OItemModelProvider {
         OBlocks.vigilCandles().forEach(this::normalItem);
         spawnEggItem(OItems.HOLLER_SPAWN_EGG);
         normalItem(OItems.MUSIC_DISC_AFTERLIFE);
+        normalItem(OBlocks.STONE_TABLET);
+        normalItem(OBlocks.ENGRAVED_STONE_TABLET);
+        normalItem(OBlocks.CRACKED_STONE_TABLET);
+        normalItem(OItems.HAMMER_AND_CHISEL);
     }
 
 }

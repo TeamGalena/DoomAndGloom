@@ -1,0 +1,68 @@
+{
+  "variants": {
+    "attachment=ceiling,facing=east": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor",
+      "y": 90
+    },
+    "attachment=ceiling,facing=north": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor"
+    },
+    "attachment=ceiling,facing=south": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor",
+      "y": 180
+    },
+    "attachment=ceiling,facing=west": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor",
+      "y": 270
+    },
+    "attachment=center_upright,facing=east": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet",
+      "y": 90
+    },
+    "attachment=center_upright,facing=north": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet"
+    },
+    "attachment=center_upright,facing=south": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet",
+      "y": 180
+    },
+    "attachment=center_upright,facing=west": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet",
+      "y": 270
+    },
+    "attachment=floor,facing=east": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor",
+      "x": 180,
+      "y": 90
+    },
+    "attachment=floor,facing=north": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor",
+      "x": 180
+    },
+    "attachment=floor,facing=south": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor",
+      "x": 180,
+      "y": 180
+    },
+    "attachment=floor,facing=west": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_floor",
+      "x": 180,
+      "y": 270
+    },
+    "attachment=wall,facing=east": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_wall",
+      "y": 90
+    },
+    "attachment=wall,facing=north": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_wall"
+    },
+    "attachment=wall,facing=south": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_wall",
+      "y": 180
+    },
+    "attachment=wall,facing=west": {
+      "model": "doom_and_gloom:block/cracked_stone_tablet_wall",
+      "y": 270
+    }
+  }
+}

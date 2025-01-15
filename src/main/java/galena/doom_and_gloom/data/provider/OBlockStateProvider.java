@@ -41,6 +41,14 @@ public abstract class OBlockStateProvider extends BlockStateProvider {
         return name(block.get());
     }
 
+    private static String asPrefix(@Nullable String string) {
+        return Optional.ofNullable(string).map(it -> it + "_").orElse("");
+    }
+
+    private static String asSuffix(@Nullable String string) {
+        return Optional.ofNullable(string).map(it -> "_" + it).orElse("");
+    }
+
     private String sepulcherSuffix(int fillLevel) {
         if (fillLevel == 0) return "";
         if (fillLevel > SepulcherBlock.MAX_LEVEL) return "_sealed_" + (fillLevel - SepulcherBlock.MAX_LEVEL);
@@ -145,6 +153,40 @@ public abstract class OBlockStateProvider extends BlockStateProvider {
 
             return ConfiguredModel.builder()
                     .modelFile(model)
+                    .build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
+    public void stoneTablet(Supplier<? extends Block> block, @Nullable String type) {
+        getVariantBuilder(block.get()).forAllStatesExcept(state -> {
+            var attachment = state.getValue(StoneTabletBlock.ATTACHMENT);
+
+            var suffix = switch (attachment) {
+                case WALL -> "_wall";
+                case CEILING, FLOOR -> "_floor";
+                default -> "";
+            };
+
+            var xRot = attachment == StoneTabletBlock.Attachment.FLOOR ? 180 : 0;
+            var yRot = switch (state.getValue(StoneTabletBlock.FACING)) {
+                case EAST -> 90;
+                case SOUTH -> 180;
+                case WEST -> 270;
+                default -> 0;
+            };
+
+            var base = "stone_tablet" + suffix;
+            var name = asPrefix(type) + base;
+            var parent = DoomAndGloom.modLoc(BLOCK_FOLDER + "/template/" + base);
+            var texture = BLOCK_FOLDER + "/stone_tablet" + asSuffix(type);
+
+            var model = models().withExistingParent(name, parent)
+                    .texture("texture", texture);
+
+            return ConfiguredModel.builder()
+                    .modelFile(model)
+                    .rotationY(yRot)
+                    .rotationX(xRot)
                     .build();
         }, BlockStateProperties.WATERLOGGED);
     }

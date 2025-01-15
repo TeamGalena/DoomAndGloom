@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class HammerAndChiselItem extends BlockItem {
 
     public HammerAndChiselItem(Block block) {
-        super(block, new Properties());
+        super(block, new Properties().stacksTo(1));
     }
 
     @Override
@@ -25,7 +25,9 @@ public class HammerAndChiselItem extends BlockItem {
 
         if (!updated && player instanceof ServerPlayer serverPlayer) {
             if (level.getBlockEntity(pos) instanceof StoneTabletBlockEntity blockEntity && state.getBlock() instanceof StoneTabletBlock block) {
-                serverPlayer.setItemInHand(serverPlayer.getUsedItemHand(), new ItemStack(OItems.BUSH_HAMMER.get()));
+                if(!serverPlayer.getAbilities().instabuild) {
+                    serverPlayer.setItemInHand(serverPlayer.getUsedItemHand(), new ItemStack(OItems.BUSH_HAMMER.get()));
+                }
                 block.openTextEdit(serverPlayer, blockEntity);
             }
         }
@@ -33,4 +35,8 @@ public class HammerAndChiselItem extends BlockItem {
         return updated;
     }
 
+    @Override
+    public String getDescriptionId() {
+        return this.getOrCreateDescriptionId();
+    }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "doom_and_gloom:block/template/stone_tablet",
+  "textures": {
+    "texture": "doom_and_gloom:block/stone_tablet_cracked"
+  }
+}

@@ -239,7 +239,7 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
         var level = mc.level;
         var player = mc.player;
         if (level != null && player != null && level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
-            var stack = player.getUseItem();
+            var stack = player.getItemInHand(player.getUsedItemHand());
             mc.setScreen(new StoneTabletScreen(tile, stack, mc.isTextFilteringEnabled()));
         }
     }
