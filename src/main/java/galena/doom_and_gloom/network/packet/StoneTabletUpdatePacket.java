@@ -1,9 +1,12 @@
 package galena.doom_and_gloom.network.packet;
 
-import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.index.OSoundEvents;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -14,11 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.network.NetworkEvent;
-
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public record StoneTabletUpdatePacket(BlockPos pos, String[] lines) {
 

@@ -1,5 +1,6 @@
 package galena.doom_and_gloom.client.particle;
 
+import java.util.List;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleEngine;
@@ -10,8 +11,6 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.List;
 
 public class FogParticle extends TextureSheetParticle {
 

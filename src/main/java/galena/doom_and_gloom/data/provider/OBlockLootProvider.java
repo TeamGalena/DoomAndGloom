@@ -1,21 +1,17 @@
 package galena.doom_and_gloom.data.provider;
 
+import java.util.Set;
+import java.util.function.Supplier;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.network.protocol.game.ClientboundLevelChunkPacketData;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
-import net.minecraft.world.level.storage.loot.providers.nbt.NbtProvider;
-
-import java.util.Set;
-import java.util.function.Supplier;
 
 public abstract class OBlockLootProvider extends BlockLootSubProvider {
 

@@ -1,7 +1,11 @@
 package galena.doom_and_gloom.data;
 
+import static galena.doom_and_gloom.index.OTags.Blocks.*;
+
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.OBlocks;
+import java.util.concurrent.CompletableFuture;
+import javax.annotation.Nullable;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -13,11 +17,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
-import java.util.concurrent.CompletableFuture;
-
-import static galena.doom_and_gloom.index.OTags.Blocks.*;
 
 public class OBlockTags extends IntrinsicHolderTagsProvider<Block> {
 

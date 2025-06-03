@@ -5,7 +5,6 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.config.ModConfig;
-import org.apache.commons.compress.archivers.sevenz.CLI;
 import org.apache.commons.lang3.tuple.Pair;
 
 @EventBusSubscriber(modid = DoomAndGloom.MOD_ID)

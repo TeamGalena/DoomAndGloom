@@ -1,15 +1,11 @@
 package galena.doom_and_gloom.network.packet;
 
 import galena.doom_and_gloom.content.block.SepulcherBlock;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkEvent;
-
 import java.awt.*;
 import java.util.function.Supplier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
 
 public record SepulcherRotsPacket(BlockPos at) {
 

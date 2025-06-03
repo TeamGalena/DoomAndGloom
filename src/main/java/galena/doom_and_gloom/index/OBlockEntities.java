@@ -5,12 +5,11 @@ import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.content.entity.SepulcherBlockEntity;
 import galena.doom_and_gloom.content.entity.VigilCandleBlockEntity;
+import java.util.Set;
+import java.util.stream.Collectors;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = DoomAndGloom.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OBlockEntities {

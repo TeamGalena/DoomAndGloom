@@ -4,7 +4,6 @@ import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.effect.FogEffect;
 import galena.doom_and_gloom.content.effect.WardingEffect;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;

@@ -3,23 +3,18 @@ package galena.doom_and_gloom.compat.moonlight;
 import com.mojang.datafixers.util.Pair;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.OVillagerTypes;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
 import net.mehvahdjukaar.moonlight.api.entity.VillagerAIHooks;
 import net.mehvahdjukaar.moonlight.api.events.IVillagerBrainEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.moonlight.core.MoonlightClient;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.schedule.Activity;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class MoonlightCompat {
 

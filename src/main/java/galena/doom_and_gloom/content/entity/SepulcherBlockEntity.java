@@ -1,7 +1,7 @@
 package galena.doom_and_gloom.content.entity;
 
-import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.DGConfig;
+import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.block.SepulcherBlock;
 import galena.doom_and_gloom.index.OBlockEntities;
 import galena.doom_and_gloom.index.OBlocks;
@@ -10,6 +10,7 @@ import galena.doom_and_gloom.index.OTags;
 import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.SepulcherConsumesDeathPacket;
 import galena.doom_and_gloom.network.packet.SepulcherRotsPacket;
+import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -36,8 +37,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
 
 public class SepulcherBlockEntity extends BlockEntity implements Ticking, Container, GameEventListener.Holder<SepulcherBlockEntity.DeathListener> {
 

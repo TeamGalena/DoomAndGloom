@@ -6,13 +6,11 @@ import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.index.OEffects;
 import galena.doom_and_gloom.index.OEntityTypes;
 import galena.doom_and_gloom.index.OItems;
-import galena.doom_and_gloom.index.OVillagerTypes;
+import java.util.function.Supplier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-
-import java.util.function.Supplier;
 
 public class OLang extends OLangProvider {
 

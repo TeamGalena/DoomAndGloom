@@ -1,6 +1,7 @@
 package galena.doom_and_gloom.data.provider;
 
 import galena.doom_and_gloom.index.OTags;
+import java.util.function.Supplier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -10,8 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.function.Supplier;
 
 public abstract class ORecipeProvider extends RecipeProvider {
 

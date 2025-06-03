@@ -4,6 +4,7 @@ import galena.doom_and_gloom.content.entity.SepulcherBlockEntity;
 import galena.doom_and_gloom.index.OBlockEntities;
 import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.index.OSoundEvents;
+import java.awt.*;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.TerrainParticle;
@@ -36,8 +37,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
 
 public class SepulcherBlock extends Block implements TickingEntityBlock<SepulcherBlockEntity> {
 

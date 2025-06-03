@@ -2,6 +2,8 @@ package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.OTags;
+import java.util.concurrent.CompletableFuture;
+import javax.annotation.Nullable;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -10,9 +12,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
-import java.util.concurrent.CompletableFuture;
 
 public class OMobEffectTags extends TagsProvider<MobEffect> {
 

@@ -1,11 +1,10 @@
 package galena.doom_and_gloom.network.packet;
 
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
+import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
 
 public record EngraveStoneTabletPacket(BlockPos pos) {
 

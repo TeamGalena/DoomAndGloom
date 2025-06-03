@@ -5,6 +5,8 @@ import galena.doom_and_gloom.data.provider.ORecipeProvider;
 import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.index.OItems;
 import galena.doom_and_gloom.index.OTags;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -13,7 +15,6 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
@@ -23,9 +24,6 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
-
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class ORecipes extends ORecipeProvider {
 

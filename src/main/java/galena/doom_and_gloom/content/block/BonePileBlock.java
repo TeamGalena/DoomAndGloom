@@ -2,6 +2,7 @@ package galena.doom_and_gloom.content.block;
 
 import galena.doom_and_gloom.index.OParticleTypes;
 import galena.doom_and_gloom.index.OSoundEvents;
+import java.util.function.Consumer;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -20,8 +21,6 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
-
-import java.util.function.Consumer;
 
 public class BonePileBlock extends FallingBlock {
 

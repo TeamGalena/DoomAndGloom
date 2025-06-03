@@ -2,14 +2,13 @@ package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.OTags;
+import java.util.concurrent.CompletableFuture;
+import javax.annotation.Nullable;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
-
-import javax.annotation.Nullable;
-import java.util.concurrent.CompletableFuture;
 
 public class OEntityTags extends EntityTypeTagsProvider {
 

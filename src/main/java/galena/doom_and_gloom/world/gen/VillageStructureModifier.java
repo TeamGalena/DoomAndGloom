@@ -2,6 +2,8 @@ package galena.doom_and_gloom.world.gen;
 
 import com.mojang.datafixers.util.Pair;
 import galena.doom_and_gloom.DoomAndGloom;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -12,9 +14,6 @@ import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // Thanks to TelepathicGrunt
 public class VillageStructureModifier {

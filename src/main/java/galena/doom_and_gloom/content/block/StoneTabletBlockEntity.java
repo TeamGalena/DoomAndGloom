@@ -4,6 +4,9 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.entity.Ticking;
 import galena.doom_and_gloom.index.OBlockEntities;
+import java.util.List;
+import java.util.UUID;
+import java.util.function.UnaryOperator;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
@@ -19,14 +22,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.function.UnaryOperator;
 
 // shamelessly copied from vanilla sign block entity.
 // Reason: vanilla has the number of lines hardcoded as shit
@@ -189,4 +187,3 @@ public class StoneTabletBlockEntity extends BlockEntity implements Ticking {
         }
     }
 }
-

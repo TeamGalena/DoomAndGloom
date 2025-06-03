@@ -1,7 +1,6 @@
 package galena.doom_and_gloom.content.entity.holler;
 
 import galena.doom_and_gloom.index.OEffects;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;

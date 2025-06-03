@@ -1,8 +1,14 @@
 package galena.doom_and_gloom.data.provider;
 
+import static galena.doom_and_gloom.DoomAndGloom.MOD_ID;
+import static net.minecraftforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
+
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.block.SepulcherBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
+import java.util.Optional;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -15,13 +21,6 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.stream.IntStream;
-
-import static galena.doom_and_gloom.DoomAndGloom.MOD_ID;
-import static net.minecraftforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
 
 public abstract class OBlockStateProvider extends BlockStateProvider {
 

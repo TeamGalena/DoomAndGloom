@@ -3,6 +3,7 @@ package galena.doom_and_gloom.compat.moonlight;
 import com.google.common.collect.ImmutableSet;
 import galena.doom_and_gloom.index.OTags;
 import galena.doom_and_gloom.index.OVillagerTypes;
+import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.resources.ResourceKey;
@@ -12,8 +13,6 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
-
-import java.util.Set;
 
 public class CandleSensor extends Sensor<Villager> {
 

@@ -7,7 +7,9 @@
     "EntityMixin"
   ],
   "client": [
-    "client.LevelRendererMixin", "client.LocalPlayerAccessor", "client.LocalPlayerMixin"
+    "client.LevelRendererMixin",
+    "client.LocalPlayerAccessor",
+    "client.LocalPlayerMixin"
   ],
   "server": [],
   "injectors": {

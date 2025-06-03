@@ -3,8 +3,8 @@ package galena.doom_and_gloom;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import galena.doom_and_gloom.compat.CompatHandler;
-import galena.doom_and_gloom.compat.moonlight.MoonlightCompat;
 import galena.doom_and_gloom.compat.amendments.AmendmentsCompat;
+import galena.doom_and_gloom.compat.moonlight.MoonlightCompat;
 import galena.doom_and_gloom.content.entity.holler.Holler;
 import galena.doom_and_gloom.data.OBlockStates;
 import galena.doom_and_gloom.data.OBlockTags;
@@ -27,6 +27,11 @@ import galena.doom_and_gloom.index.OVillagerTypes;
 import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.world.AddItemLootModifier;
 import galena.doom_and_gloom.world.gen.VillageStructureModifier;
+import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -60,12 +65,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Arrays;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 @Mod(DoomAndGloom.MOD_ID)
 public class DoomAndGloom {

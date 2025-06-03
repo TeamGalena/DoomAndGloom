@@ -1,23 +1,94 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [48, 48],
-	"textures": {
-		"particle": "doom_and_gloom:block/sepulcher",
-		"texture": "doom_and_gloom:block/sepulcher"
-	},
-	"elements": [
-		{
-			"from": [2, 15, 1],
-			"to": [14, 15, 14],
-			"rotation": {"angle": 0, "axis": "x", "origin": [8, 14, 1]},
-			"faces": {
-				"north": {"uv": [0, 0, 4, 0], "rotation": 180, "texture": "#texture"},
-				"east": {"uv": [0, 0, 0, 4.33333], "rotation": 270, "texture": "#texture"},
-				"south": {"uv": [0, 0, 4, 0], "texture": "#texture"},
-				"west": {"uv": [0, 0, 0, 4.33333], "rotation": 90, "texture": "#texture"},
-				"up": {"uv": [0.66667, 0.66667, 4.66667, 5], "rotation": 180, "texture": "#texture"},
-				"down": {"uv": [0.66667, 0.66667, 4.66667, 5], "texture": "#texture"}
-			}
-		}
-	]
+  "credit": "Made with Blockbench",
+  "texture_size": [
+    48,
+    48
+  ],
+  "textures": {
+    "particle": "doom_and_gloom:block/sepulcher",
+    "texture": "doom_and_gloom:block/sepulcher"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        15,
+        1
+      ],
+      "to": [
+        14,
+        15,
+        14
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "x",
+        "origin": [
+          8,
+          14,
+          1
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            4,
+            0
+          ],
+          "rotation": 180,
+          "texture": "#texture"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            4.33333
+          ],
+          "rotation": 270,
+          "texture": "#texture"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            4,
+            0
+          ],
+          "texture": "#texture"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            4.33333
+          ],
+          "rotation": 90,
+          "texture": "#texture"
+        },
+        "up": {
+          "uv": [
+            0.66667,
+            0.66667,
+            4.66667,
+            5
+          ],
+          "rotation": 180,
+          "texture": "#texture"
+        },
+        "down": {
+          "uv": [
+            0.66667,
+            0.66667,
+            4.66667,
+            5
+          ],
+          "texture": "#texture"
+        }
+      }
+    }
+  ]
 }

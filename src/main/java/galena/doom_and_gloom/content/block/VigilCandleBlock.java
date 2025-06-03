@@ -1,7 +1,14 @@
 package galena.doom_and_gloom.content.block;
 
+import static net.minecraft.world.level.block.CandleBlock.LIT;
+import static net.minecraft.world.level.block.CandleBlock.MAX_CANDLES;
+import static net.minecraft.world.level.block.CandleBlock.MIN_CANDLES;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.CANDLES;
+
 import galena.doom_and_gloom.content.entity.VigilCandleBlockEntity;
 import galena.doom_and_gloom.index.OBlockEntities;
+import java.util.Optional;
+import java.util.function.ToIntFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -25,14 +32,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
-import java.util.function.ToIntFunction;
-
-import static net.minecraft.world.level.block.CandleBlock.LIT;
-import static net.minecraft.world.level.block.CandleBlock.MAX_CANDLES;
-import static net.minecraft.world.level.block.CandleBlock.MIN_CANDLES;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.CANDLES;
 
 public class VigilCandleBlock extends LanternBlock implements TickingEntityBlock<VigilCandleBlockEntity> {
 

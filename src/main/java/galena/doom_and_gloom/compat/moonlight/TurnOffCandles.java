@@ -3,6 +3,9 @@ package galena.doom_and_gloom.compat.moonlight;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.authlib.GameProfile;
 import galena.doom_and_gloom.index.OTags;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,10 +26,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 //TODO: this isnt working! villagers arent persisting their added memory!
 public class TurnOffCandles extends Behavior<Villager> {

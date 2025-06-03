@@ -1,6 +1,5 @@
 package galena.doom_and_gloom.compat;
 
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraftforge.fml.ModList;
 
 public class CompatHandler {

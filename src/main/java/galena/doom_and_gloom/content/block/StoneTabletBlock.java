@@ -5,6 +5,8 @@ import galena.doom_and_gloom.index.OBlockEntities;
 import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.EngraveStoneTabletPacket;
+import java.util.Arrays;
+import java.util.UUID;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,9 +44,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.UUID;
 
 public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, TickingEntityBlock<StoneTabletBlockEntity> {
 

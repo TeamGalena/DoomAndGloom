@@ -2,6 +2,9 @@ package galena.doom_and_gloom.content.block;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.Function;
 import net.minecraft.Util;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.CommonComponents;
@@ -11,10 +14,6 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.function.Function;
 
 // once again copied from sign text. Just needed for the amount of lines
 public class StoneTabletText {

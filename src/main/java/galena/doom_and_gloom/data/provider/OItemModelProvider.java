@@ -2,6 +2,8 @@ package galena.doom_and_gloom.data.provider;
 
 import com.teamabnormals.blueprint.core.data.client.BlueprintItemModelProvider;
 import galena.doom_and_gloom.DoomAndGloom;
+import java.util.Objects;
+import java.util.function.Supplier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -9,9 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Objects;
-import java.util.function.Supplier;
 
 public abstract class OItemModelProvider extends BlueprintItemModelProvider {
 

@@ -1,6 +1,5 @@
 package galena.doom_and_gloom.content.block;
 
-import galena.doom_and_gloom.index.OTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;

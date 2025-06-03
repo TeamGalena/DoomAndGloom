@@ -1,13 +1,12 @@
 package galena.doom_and_gloom.index;
 
 import galena.doom_and_gloom.DoomAndGloom;
+import java.util.HashSet;
+import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraftforge.registries.DeferredRegister;
-
-import java.util.HashSet;
-import java.util.function.Supplier;
 
 public class OPoi {
     public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(Registries.POINT_OF_INTEREST_TYPE, DoomAndGloom.MOD_ID);

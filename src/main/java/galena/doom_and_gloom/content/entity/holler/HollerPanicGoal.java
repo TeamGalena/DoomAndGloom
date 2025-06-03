@@ -1,6 +1,8 @@
 package galena.doom_and_gloom.content.entity.holler;
 
 import galena.doom_and_gloom.index.OTags;
+import java.util.Optional;
+import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -9,9 +11,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 public class HollerPanicGoal extends PanicGoal {
     private final Holler holler;

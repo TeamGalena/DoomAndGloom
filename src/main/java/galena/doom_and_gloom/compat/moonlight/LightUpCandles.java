@@ -3,6 +3,7 @@ package galena.doom_and_gloom.compat.moonlight;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.authlib.GameProfile;
 import galena.doom_and_gloom.index.OTags;
+import java.util.UUID;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,22 +17,13 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.entity.schedule.Schedule;
-import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractCandleBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 public class LightUpCandles extends Behavior<Villager> {
     private final float speedModifier;

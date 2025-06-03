@@ -7,10 +7,10 @@ import galena.doom_and_gloom.client.OReloadListener;
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.content.block.StoneTabletText;
-import galena.doom_and_gloom.index.OBlocks;
 import galena.doom_and_gloom.index.OItems;
 import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.StoneTabletUpdatePacket;
+import java.util.stream.IntStream;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.font.TextFieldHelper;
@@ -21,8 +21,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.stream.IntStream;
 
 //Based off of AbstractSignEditScreen
 public class StoneTabletScreen extends Screen {
