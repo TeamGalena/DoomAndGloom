@@ -9,6 +9,7 @@ val mod_version: String by extra
 val release_type: String by extra
 
 val repository: String by extra
+val maven_group: String by extra
 val modrinth_project: String by extra
 val curseforge_project: String by extra
 
@@ -23,14 +24,18 @@ val moonlight_lib_version: String by extra
 val oreganized_version: String by extra
 val dye_depot_version: String by extra
 val jei_version: String by extra
+val galena_hats_version: String by extra
 
 plugins {
     java
-    id("net.minecraftforge.gradle") version ("[6.0,6.2)")
-    id("org.parchmentmc.librarian.forgegradle") version ("1+")
-    id("org.spongepowered.mixin") version ("0.7-SNAPSHOT")
-    id("net.darkhax.curseforgegradle") version ("1.1.15")
-    id("com.modrinth.minotaur") version ("2.+")
+    `maven-publish`
+    id("net.minecraftforge.gradle") version "[6.0,6.2)"
+    id("org.spongepowered.mixin") version "0.7-SNAPSHOT"
+    id("org.parchmentmc.librarian.forgegradle") version "1.+"
+    id("com.diffplug.spotless") version "7.0.4"
+    id("org.sonarqube") version "6.2.0.5505"
+    id("com.modrinth.minotaur") version "2.+"
+    id("net.darkhax.curseforgegradle") version "1.1.15"
 }
 
 base {
@@ -42,11 +47,13 @@ mixin {
     config("${mod_id}.mixins.json")
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    withSourcesJar()
+}
 
 minecraft {
-    mappingChannel.set("parchment")
-    mappingVersion.set("2023.09.03-1.20.1")
+    mappings("parchment", "2023.09.03-1.20.1")
 
     accessTransformer(file("src/main/resources/META-INF/accesstransformer.cfg"))
 
@@ -113,6 +120,12 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven {
+        url = uri("https://registry.somethingcatchy.net/repository/maven-releases/")
+        content {
+            includeGroup("dev.galena")
+        }
+    }
 }
 
 dependencies {
@@ -124,6 +137,14 @@ dependencies {
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")) {
         jarJar.ranged(this, "[${mixin_extras_version},)")
     }
+
+    val hatsVersion = "${minecraft_version}-${galena_hats_version}"
+    implementation(fg.deobf(jarJar("dev.galena:hats-forge:${hatsVersion}") {
+        version {
+            strictly("[${hatsVersion},)")
+            prefer(hatsVersion)
+        }
+    }))
 
     // Compatibilities
     implementation(fg.deobf("maven.modrinth:supplementaries:${supplementaries_version}"))
@@ -170,10 +191,6 @@ tasks.jar {
     }
 }
 
-tasks.jarJar {
-    archiveClassifier.set("")
-}
-
 tasks.withType<ProcessResources> {
     // this will ensure that this task is redone when the versions change.
     inputs.property("version", mod_version)
@@ -199,7 +216,76 @@ tasks.withType<ProcessResources> {
     }
 }
 
-val outputJar = tasks.jarJar.get().archiveFile.get().asFile
+
+jarJar.enable()
+tasks.jarJar {
+    archiveClassifier.set("")
+}
+
+tasks.jar {
+    archiveClassifier.set("raw")
+    finalizedBy("reobfJar")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = maven_group
+            artifactId = mod_id
+            version = mod_version
+
+            from(components["java"])
+
+            pom.withXml {
+                val node = asNode()
+                val list = node.get("dependencies") as groovy.util.NodeList
+                list.forEach { node.remove(it as groovy.util.Node) }
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+
+        val nexusToken = System.getenv("NEXUS_TOKEN")
+        val nexusUser = System.getenv("NEXUS_USER")
+        if (nexusToken != null && nexusUser != null) {
+            maven {
+                url = uri("https://registry.somethingcatchy.net/repository/maven-releases/")
+                credentials {
+                    username = nexusUser
+                    password = nexusToken
+                }
+            }
+        }
+    }
+}
+
+spotless {
+    java {
+        importOrder()
+        removeUnusedImports()
+    }
+
+    kotlinGradle {
+        ktlint()
+        suppressLintsFor { shortCode = "standard:property-naming" }
+    }
+
+    json {
+        target("src/main/**/*.json")
+        gson().indentWithSpaces(2)
+    }
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", mod_id)
+        property("sonar.gradle.skipCompile", "true")
+        property("sonar.links.scm", "https://github.com/${repository}")
+    }
+}
+
+val outputJar = tasks.jarJar.get().archiveFile.get()
 val changelogMarkdown = System.getenv("CHANGELOG")
 
 modrinth {
