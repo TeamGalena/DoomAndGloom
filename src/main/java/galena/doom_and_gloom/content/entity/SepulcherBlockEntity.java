@@ -83,10 +83,12 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
             sound(OSoundEvents.SEPULCHER_ROTTING, 0.5F);
         }
 
-        DGNetwork.CHANNEL.send(
-                PacketDistributor.NEAR.with(PacketDistributor.TargetPoint.p(pos.getX(), pos.getY(), pos.getZ(), 16.0, level.dimension())),
-                new SepulcherRotsPacket(pos)
-        );
+        if(!level.isClientSide()) {
+            DGNetwork.CHANNEL.send(
+                    PacketDistributor.NEAR.with(PacketDistributor.TargetPoint.p(pos.getX(), pos.getY(), pos.getZ(), 16.0, level.dimension())),
+                    new SepulcherRotsPacket(pos)
+            );
+        }
     }
 
     private void sound(Supplier<? extends SoundEvent> sound, float volume) {

@@ -96,22 +96,18 @@ sourceSets.main.get().resources {
 }
 
 repositories {
+    mavenLocal()
+
     maven {
-        // location of the maven that hosts Blueprint
-        url = uri("https://maven.jaackson.me")
-    }
-    maven {
-        // location of the maven that hosts JEI files
-        url = uri("https://dvs1.progwml6.com/files/maven/")
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        url = uri("https://modmaven.dev")
-    }
-    maven {
-        url = uri("https://www.cursemaven.com")
+        url = uri("https://maven.teamabnormals.com/")
         content {
-            includeGroup("curse.maven")
+            includeGroup("com.teamabnormals")
+        }
+    }
+    maven {
+        url = uri("https://modmaven.dev")
+        content {
+            includeGroup("mezz.jei")
         }
     }
     maven {
@@ -152,21 +148,17 @@ dependencies {
     implementation(fg.deobf("maven.modrinth:moonlight:${moonlight_lib_version}"))
 
     // For dev testing
-    runtimeOnly(fg.deobf("maven.modrinth:oreganized:${oreganized_version}"))
+    runtimeOnly(fg.deobf("dev.galena:oreganized:${oreganized_version}:slim"))
     runtimeOnly(fg.deobf("maven.modrinth:dye-depot:${dye_depot_version}"))
 
-    /// Utilities for the development environment
-    //runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_version}")
-    // compile against the JEI API but do not include it at runtime
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-    // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 }
 
 
 tasks.jar {
-    archiveClassifier.set("raw")
+    archiveClassifier.set("slim")
     finalizedBy("reobfJar")
 
     val now = LocalDateTime.now().toString()
@@ -234,7 +226,9 @@ publishing {
             artifactId = mod_id
             version = mod_version
 
-            from(components["java"])
+            artifact(tasks.getByName("sourcesJar"))
+            artifact(tasks.jar)
+            artifact(tasks.jarJar)
 
             pom.withXml {
                 val node = asNode()
@@ -258,6 +252,10 @@ publishing {
             }
         }
     }
+}
+
+tasks.withType<GenerateModuleMetadata> {
+    enabled = false
 }
 
 spotless {

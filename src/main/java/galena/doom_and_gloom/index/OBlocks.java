@@ -2,6 +2,7 @@ package galena.doom_and_gloom.index;
 
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import galena.doom_and_gloom.DoomAndGloom;
+import galena.doom_and_gloom.DyeColors;
 import galena.doom_and_gloom.content.block.BonePileBlock;
 import galena.doom_and_gloom.content.block.BurialDirtBlock;
 import galena.doom_and_gloom.content.block.SepulcherBlock;
@@ -52,7 +53,7 @@ public class OBlocks {
     }
 
     public static <T extends Block> Map<DyeColor, RegistryObject<T>> registerColored(String baseName, Function<DyeColor, ? extends T> factory) {
-        return Arrays.stream(DyeColor.values()).collect(Collectors.toMap(
+        return DyeColors.supported().collect(Collectors.toMap(
                 it -> it,
                 color -> register(color.getSerializedName() + "_" + baseName, () -> factory.apply(color))
         ));
