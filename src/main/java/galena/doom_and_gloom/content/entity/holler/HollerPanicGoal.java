@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class HollerPanicGoal extends PanicGoal {
     private final Holler holler;
@@ -35,6 +36,7 @@ public class HollerPanicGoal extends PanicGoal {
     @Override
     protected boolean findRandomPosition() {
         var pos = getPanicPos();
+        if(pos == null) return false;
 
         posX = pos.x;
         posY = pos.y;
@@ -43,7 +45,7 @@ public class HollerPanicGoal extends PanicGoal {
         return true;
     }
 
-    private Vec3 getPanicPos() {
+    private @Nullable Vec3 getPanicPos() {
         Optional<Vec3> dirtPosition = findTargetPos().map(Vec3::atBottomCenterOf);
         return dirtPosition.orElseGet(() -> LandRandomPos.getPos(mob, 5, 5));
     }
