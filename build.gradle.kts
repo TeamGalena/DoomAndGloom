@@ -5,7 +5,6 @@ import java.time.LocalDateTime
 val mod_id: String by extra
 val mod_name: String by extra
 val mod_author: String by extra
-val mod_version: String by extra
 val release_type: String by extra
 
 val repository: String by extra
@@ -25,6 +24,8 @@ val oreganized_version: String by extra
 val dye_depot_version: String by extra
 val jei_version: String by extra
 val galena_hats_version: String by extra
+
+val mod_version = System.getenv("RELEASE_VERSION") ?: extra["mod_version"] as String
 
 plugins {
     java
