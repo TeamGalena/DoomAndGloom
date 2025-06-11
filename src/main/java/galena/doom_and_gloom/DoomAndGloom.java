@@ -152,7 +152,7 @@ public class DoomAndGloom {
         generator.addProvider(server, new OMobEffectTags(output, lookupProvider, helper));
 
         generator.addProvider(server, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(
-                Component.literal("Oreganized resources"),
+                Component.literal("Doom & Gloom resources"),
                 DetectedVersion.BUILT_IN.getPackVersion(PackType.CLIENT_RESOURCES),
                 Arrays.stream(PackType.values()).collect(Collectors.toMap(Function.identity(), DetectedVersion.BUILT_IN::getPackVersion))
         )));
