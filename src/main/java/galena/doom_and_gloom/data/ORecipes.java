@@ -45,7 +45,8 @@ public class ORecipes extends ORecipeProvider {
         vigilCandle(OBlocks.VIGIL_CANDLE, Blocks.CANDLE).save(consumer);
 
         OBlocks.COLORED_VIGIL_CANDLES.forEach((color, block) -> {
-            var candle = BuiltInRegistries.BLOCK.get(new ResourceLocation(color.getSerializedName() + "_candle"));
+            var namespace = color.getId() > 15 ? "dye_depot" : "minecraft";
+            var candle = BuiltInRegistries.BLOCK.get(new ResourceLocation(namespace, color.getSerializedName() + "_candle"));
             vigilCandle(block, candle).save(consumer);
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, block.get())

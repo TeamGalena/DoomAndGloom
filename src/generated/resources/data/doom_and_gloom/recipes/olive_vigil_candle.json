@@ -3,7 +3,9 @@
   "category": "building",
   "group": "vigil_candle",
   "key": {
-    "C": [],
+    "C": {
+      "item": "dye_depot:olive_candle"
+    },
     "S": {
       "tag": "forge:ingots/silver"
     }
