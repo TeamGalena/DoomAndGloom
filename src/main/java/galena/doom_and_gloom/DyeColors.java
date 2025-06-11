@@ -1,11 +1,10 @@
 package galena.doom_and_gloom;
 
-import net.minecraft.world.item.DyeColor;
-import net.minecraftforge.fml.ModList;
-
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import net.minecraft.world.item.DyeColor;
+import net.minecraftforge.fml.ModList;
 
 public class DyeColors {
     private static Stream<DyeColor> vanillaColors() {
