@@ -179,15 +179,15 @@ public class DoomAndGloom {
             event.accept(new ItemStack(OItems.HOLLER_SPAWN_EGG.get()));
         }
 
-        if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(new ItemStack(OItems.BUSH_HAMMER.get()));
-            event.accept(new ItemStack(OItems.HAMMER_AND_CHISEL.get()));
-        }
+        //if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+        //    event.accept(new ItemStack(OItems.BUSH_HAMMER.get()));
+        //    event.accept(new ItemStack(OItems.HAMMER_AND_CHISEL.get()));
+        //}
 
-        if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            event.accept(new ItemStack(OBlocks.STONE_TABLET.get()));
-            event.accept(new ItemStack(OBlocks.CRACKED_STONE_TABLET.get()));
-        }
+        //if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+        //    event.accept(new ItemStack(OBlocks.STONE_TABLET.get()));
+        //    event.accept(new ItemStack(OBlocks.CRACKED_STONE_TABLET.get()));
+        //}
     }
 
     private static void putAfter(MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries, ItemLike after, Supplier<? extends ItemLike> supplier) {

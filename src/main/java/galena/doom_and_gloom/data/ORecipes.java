@@ -1,9 +1,7 @@
 package galena.doom_and_gloom.data;
 
-import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.data.provider.ORecipeProvider;
 import galena.doom_and_gloom.index.OBlocks;
-import galena.doom_and_gloom.index.OItems;
 import galena.doom_and_gloom.index.OTags;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -33,15 +31,6 @@ public class ORecipes extends ORecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        withFallback(OTags.Items.INGOTS_LEAD, Tags.Items.INGOTS_COPPER, ingot ->
-                ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, OItems.BUSH_HAMMER.get())
-                        .pattern("AA")
-                        .pattern("B ")
-                        .define('A', ingot)
-                        .define('B', Tags.Items.RODS_WOODEN)
-                        .unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
-        ).accept(consumer);
-
         vigilCandle(OBlocks.VIGIL_CANDLE, Blocks.CANDLE).save(consumer);
 
         OBlocks.COLORED_VIGIL_CANDLES.forEach((color, block) -> {
@@ -68,6 +57,16 @@ public class ORecipes extends ORecipeProvider {
         compact(OBlocks.BONE_PILE.get().asItem(), Items.BONE).save(consumer);
         unCompact(Items.BONE, OBlocks.BONE_PILE.get().asItem()).save(consumer);
 
+        /*
+        withFallback(OTags.Items.INGOTS_LEAD, Tags.Items.INGOTS_COPPER, ingot ->
+                ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, OItems.BUSH_HAMMER.get())
+                        .pattern("AA")
+                        .pattern("B ")
+                        .define('A', ingot)
+                        .define('B', Tags.Items.RODS_WOODEN)
+                        .unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+        ).accept(consumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, OBlocks.STONE_TABLET.get())
                 .pattern("##")
                 .pattern("##")
@@ -90,6 +89,7 @@ public class ORecipes extends ORecipeProvider {
                 .save(consumer, new ResourceLocation(DoomAndGloom.MOD_ID, "hammer_and_chisel_from_tablet"));
 
         smeltingResultFromBase(consumer, OBlocks.CRACKED_STONE_TABLET.get(), OBlocks.STONE_TABLET.get());
+        */
     }
 
     private Consumer<Consumer<FinishedRecipe>> withFallback(TagKey<Item> prefer, TagKey<Item> fallback, Function<TagKey<Item>, RecipeBuilder> builder) {
