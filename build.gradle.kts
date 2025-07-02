@@ -316,7 +316,7 @@ tasks.register<TaskPublishCurseForge>("curseforge") {
         addGameVersion(minecraft_version)
         displayName = "$mod_name $mod_version"
 
-        addRelation("blueprint", Constants.RELATION_REQUIRED)
-        addRelation("oreganized", Constants.RELATION_OPTIONAL)
+        addRelation("382216", Constants.RELATION_REQUIRED)
+        addRelation("769203", Constants.RELATION_OPTIONAL)
     }
 }
