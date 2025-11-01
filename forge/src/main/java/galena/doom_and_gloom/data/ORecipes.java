@@ -1,11 +1,16 @@
 package galena.doom_and_gloom.data;
 
+import com.possible_triangle.multikulti.datagen.conditions.Conditional;
+import com.possible_triangle.multikulti.datagen.conditions.ModLoaded;
 import galena.doom_and_gloom.compat.DyeColors;
 import galena.doom_and_gloom.data.provider.ORecipeProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGTags;
+
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -35,16 +40,20 @@ public class ORecipes extends ORecipeProvider {
         vigilCandle(DGBlocks.VIGIL_CANDLE, Blocks.CANDLE).save(consumer);
 
         DGBlocks.COLORED_VIGIL_CANDLES.forEach((color, block) -> {
-            var namespace = DyeColors.modNamespace(color).orElse(ResourceLocation.DEFAULT_NAMESPACE);
-            var candle = BuiltInRegistries.BLOCK.get(new ResourceLocation(namespace, color.getSerializedName() + "_candle"));
-            vigilCandle(block, candle).save(consumer);
+            var namespace = DyeColors.modNamespace(color);
+            var conditions = namespace.map(ModLoaded::new).map(List::of).orElseGet(List::of);
 
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, block.get())
-                    .requires(DGBlocks.VIGIL_CANDLE.get())
-                    .requires(DyeItem.byColor(color))
-                    .unlockedBy("has_vigil_candle", has(DGBlocks.VIGIL_CANDLE.get()))
-                    .group("vigil_candle")
-                    .save(consumer, RecipeBuilder.getDefaultRecipeId(block.get()).withSuffix("_dyeing"));
+            Conditional.with(this, conditions, () -> {
+                var candle = BuiltInRegistries.BLOCK.get(new ResourceLocation(namespace.orElse(ResourceLocation.DEFAULT_NAMESPACE), color.getSerializedName() + "_candle"));
+                vigilCandle(block, candle).save(consumer);
+
+                ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, block.get())
+                        .requires(DGBlocks.VIGIL_CANDLE.get())
+                        .requires(DyeItem.byColor(color))
+                        .unlockedBy("has_vigil_candle", has(DGBlocks.VIGIL_CANDLE.get()))
+                        .group("vigil_candle")
+                        .save(consumer, RecipeBuilder.getDefaultRecipeId(block.get()).withSuffix("_dyeing"));
+            });
         });
 
         withFallback(DGTags.Items.INGOTS_SILVER, Tags.Items.INGOTS_IRON, ingot ->
