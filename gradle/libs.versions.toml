@@ -1,0 +1,24 @@
+[versions]
+multikulti = "1.20.1-1.1.5"
+jei = "15.20.0.106"
+forge-config-api = "8.0.2"
+
+[libraries]
+multikulti-core = { group = "com.possible-triangle", name = "multikulti-core-forge", version.ref = "multikulti" }
+multikulti-datagen = { group = "com.possible-triangle", name = "multikulti-datagen-forge", version.ref = "multikulti" }
+multikulti-datagen-fix = { group = "com.possible-triangle", name = "multikulti-datagen-forge-fix", version.ref = "multikulti" }
+
+galena-hats = { "group" = "dev.galena", name = "hats-forge", version = "1.20.1-1.2.2" }
+oreganized = { "group" = "dev.galena", name = "oreganized", version = "4.3.0" }
+
+dye-depot = { group = "com.ninni.dye_depot", name = "dye_depot", version = "1.20.1-1.2.2-forge" }
+
+jei-forge = { group = "mezz.jei", name = "jei-1.20.1-forge", version.ref = "jei" }
+jei-fabric = { group = "mezz.jei", name = "jei-1.20.1-fabric", version.ref = "jei" }
+
+forge-config-api-common = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-common", version.ref = "forge-config-api" }
+forge-config-api-fabric = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-fabric", version.ref = "forge-config-api" }
+
+
+[plugins]
+parchment = { id = "org.parchmentmc.librarian.forgegradle", version = "1.+" }

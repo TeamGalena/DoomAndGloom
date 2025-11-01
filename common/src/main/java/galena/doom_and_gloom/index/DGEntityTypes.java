@@ -1,0 +1,32 @@
+package galena.doom_and_gloom.index;
+
+import static galena.doom_and_gloom.DoomAndGloom.modLoc;
+
+import galena.doom_and_gloom.content.entity.DirtMound;
+import galena.doom_and_gloom.content.entity.holler.Holler;
+import java.util.function.Supplier;
+import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+
+public class DGEntityTypes {
+
+    public static final RegSupplier<EntityType<Holler>> HOLLER = register("holler", () ->
+            EntityType.Builder.of(Holler::new, MobCategory.MONSTER).sized(0.4F, 0.8F).clientTrackingRange(8).updateInterval(2)
+    );
+
+    public static final RegSupplier<EntityType<DirtMound>> DIRT_MOUND = register("dirt_mound", () ->
+            EntityType.Builder.of(DirtMound::new, MobCategory.MISC).sized(0.8F, 0.25F)
+    );
+
+    private static <T extends Entity> RegSupplier<EntityType<T>> register(String name, Supplier<EntityType.Builder<T>> type) {
+        return RegHelper.registerEntityType(modLoc(name), () -> type.get().build(name));
+    }
+
+    public static void init() {
+        // Loads this class
+    }
+
+}

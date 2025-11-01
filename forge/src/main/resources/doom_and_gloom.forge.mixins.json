@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "galena.doom_and_gloom.forge.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "SepulcherBlockEntityMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

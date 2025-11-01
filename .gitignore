@@ -16,10 +16,12 @@ out
 # gradle
 build
 .gradle
+.kotlin
 
 # other
 eclipse
 run
+runs
 
 # Files from Forge MDK
 forge*changelog.txt

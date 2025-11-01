@@ -1,0 +1,27 @@
+package galena.doom_and_gloom.compat;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Stream;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.minecraft.world.item.DyeColor;
+
+public class DyeColors {
+    private static Stream<DyeColor> vanillaColors() {
+        return Stream.of(DyeColor.WHITE, DyeColor.LIGHT_GRAY, DyeColor.GRAY, DyeColor.BLACK, DyeColor.BROWN, DyeColor.RED, DyeColor.ORANGE, DyeColor.YELLOW, DyeColor.LIME, DyeColor.GREEN, DyeColor.CYAN, DyeColor.LIGHT_BLUE, DyeColor.BLUE, DyeColor.PURPLE, DyeColor.MAGENTA, DyeColor.PINK);
+    }
+
+    private static Stream<DyeColor> depotColors() {
+        return !PlatHelper.isModLoaded(CompatMods.DYE_DEPOT) ? Stream.empty() : Stream.of("amber", "aqua", "beige", "coral", "forest", "ginger", "indigo", "maroon", "mint", "navy", "olive", "rose", "slate", "tan", "teal", "verdant").map((it) -> DyeColor.byName(it, (DyeColor) null)).filter(Objects::nonNull);
+    }
+
+    public static Optional<String> modNamespace(DyeColor color) {
+        if (color.getId() > 15) return Optional.of(CompatMods.DYE_DEPOT);
+        return Optional.empty();
+    }
+
+    public static Stream<DyeColor> supported() {
+        return Stream.of(vanillaColors(), depotColors()).flatMap(Function.identity());
+    }
+}
