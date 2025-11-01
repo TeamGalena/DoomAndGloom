@@ -6,11 +6,9 @@ import galena.doom_and_gloom.compat.DyeColors;
 import galena.doom_and_gloom.data.provider.ORecipeProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGTags;
-
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
-
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;

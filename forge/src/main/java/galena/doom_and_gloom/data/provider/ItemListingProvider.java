@@ -4,7 +4,6 @@ import com.mojang.serialization.JsonOps;
 import galena.doom_and_gloom.content.listing.BuyTagListing;
 import galena.doom_and_gloom.content.listing.SellTagListing;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import net.mehvahdjukaar.moonlight.api.trades.ModItemListing;
