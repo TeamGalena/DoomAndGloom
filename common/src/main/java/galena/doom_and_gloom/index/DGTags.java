@@ -8,7 +8,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.versions.forge.ForgeVersion;
 
 public class DGTags {
 
@@ -26,7 +25,7 @@ public class DGTags {
         }
 
         private static TagKey<Item> loaderTag(String name) {
-            // TODO move to c space and reflect forge tags
+            // TODO move to c space and reference forge tags there
             return TagKey.create(Registries.ITEM, new ResourceLocation("forge", name));
         }
     }

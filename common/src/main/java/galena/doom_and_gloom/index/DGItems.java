@@ -4,9 +4,7 @@ import static galena.doom_and_gloom.DoomAndGloom.modLoc;
 
 import galena.doom_and_gloom.content.item.BushHammerItem;
 import galena.doom_and_gloom.content.item.HammerAndChiselItem;
-
 import java.util.function.Supplier;
-
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
@@ -22,7 +20,10 @@ public class DGItems {
     public static final RegSupplier<Item> HAMMER_AND_CHISEL = register("hammer_and_chisel", () -> new HammerAndChiselItem(DGBlocks.STONE_TABLET.get()));
 
     // Misc
-    public static final RegSupplier<SpawnEggItem> HOLLER_SPAWN_EGG = register("holler_spawn_egg", () -> new SpawnEggItem(DGEntityTypes.HOLLER.get(), 0x84EED2, 0x24352F, new Item.Properties()));
+    // TODO on forge there's ForgeSpawnEggItem and on fabric it's ok to simply use SpawnEggItem
+    // might need to extract the creation of this to a service, or might be a case for moonlight
+    // public static final RegSupplier<SpawnEggItem> HOLLER_SPAWN_EGG = register("holler_spawn_egg", () -> new SpawnEggItem(DGEntityTypes.HOLLER.get(), 0x84EED2, 0x24352F, new Item.Properties()));
+    public static final RegSupplier<Item> HOLLER_SPAWN_EGG = register("holler_spawn_egg", () -> new Item(new Item.Properties()));
 
     private static <T extends Item> RegSupplier<T> register(String name, Supplier<T> factory) {
         return RegHelper.registerItem(modLoc(name), factory);

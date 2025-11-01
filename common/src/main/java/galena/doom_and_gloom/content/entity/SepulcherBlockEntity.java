@@ -105,7 +105,7 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
     }
 
     public static boolean wasConsumerBySepulcher(Entity entity) {
-        return entity.getPersistentData().getBoolean(DeathListener.TAG_KEY);
+        return WithExtraData.getOrEmpty(entity).getBoolean(DeathListener.TAG_KEY);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
 
             if (fillLevel >= SepulcherBlock.MAX_LEVEL) return false;
 
-            entity.getPersistentData().putBoolean(TAG_KEY, true);
+            WithExtraData.getOrEmpty(entity).putBoolean(TAG_KEY, true);
 
             if (entity instanceof LivingEntity living && !(entity instanceof Player)) {
                 living.skipDropExperience();

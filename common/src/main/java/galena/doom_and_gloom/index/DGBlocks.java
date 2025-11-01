@@ -58,7 +58,12 @@ public class DGBlocks {
     }
 
     public static <T extends Block> RegSupplier<T> register(String name, Supplier<? extends T> block, Function<T, ? extends BlockItem> item) {
-        RegSupplier<T> register = registerBlock(modLoc(name), block);
+        @SuppressWarnings("unchecked")
+        // TODO message to mehvahdjukaar
+        // RegistryHelper implementation should probably be:
+        // public static <T extends Block> RegSupplier<T> registerBlock(ResourceLocation name, Supplier<? extends T> block)
+        // (yes I hate how java generics work too)
+        RegSupplier<T> register = (RegSupplier<T>) registerBlock(modLoc(name), block);
         registerItem(modLoc(name), () -> item.apply(register.get()));
         return register;
     }

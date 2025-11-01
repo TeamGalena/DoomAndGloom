@@ -32,7 +32,7 @@ public class VigilCandleBlockEntity extends BlockEntity implements Ticking {
 
         entities.forEach(entity -> {
             shouldClear.forEach(effect -> {
-                entity.removeEffect(effect.get());
+                entity.removeEffect(effect.value());
             });
 
             var duration = 20 * 5;

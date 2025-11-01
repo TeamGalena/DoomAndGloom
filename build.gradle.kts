@@ -30,6 +30,12 @@ subprojects {
                 includeGroup("fuzs.forgeconfigapiport")
             }
         }
+        maven {
+            url = uri("https://maven.teamabnormals.com/")
+            content {
+                includeGroup("com.teamabnormals")
+            }
+        }
     }
 
     upload {
@@ -38,7 +44,6 @@ subprojects {
         }
 
         forEach {
-            // TODO required?
             includeKotlinDependency = false
 
             dependencies {

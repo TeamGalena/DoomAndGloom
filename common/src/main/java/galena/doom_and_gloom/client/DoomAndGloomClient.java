@@ -30,6 +30,7 @@ public class DoomAndGloomClient {
         DGBlocks.vigilCandles().forEach(block -> render(block, RenderType.cutout()));
     }
 
+    // TODO this is not called on fabric yet
     public static void registerParticleFactories(BiConsumer<SimpleParticleType, Function<SpriteSet, ParticleProvider<SimpleParticleType>>> event) {
         event.accept(DGParticleTypes.BONE_FRAGMENT.get(), BoneFragmentParticle.Provider::new);
         event.accept(DGParticleTypes.FOG.get(), sprites -> new FogParticle.Provider(sprites, 200));

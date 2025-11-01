@@ -2,6 +2,7 @@ package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.DGBlocks;
+import galena.doom_and_gloom.index.DGTags;
 import java.util.concurrent.CompletableFuture;
 import javax.annotation.Nullable;
 import net.minecraft.core.HolderLookup;
@@ -30,25 +31,25 @@ public class OBlockTags extends IntrinsicHolderTagsProvider<Block> {
     @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(HEAT_SOURCE).addTag(BlockTags.FIRE).addTag(BlockTags.CAMPFIRES);
+        tag(DGTags.Blocks.HEAT_SOURCE).addTag(BlockTags.FIRE).addTag(BlockTags.CAMPFIRES);
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 DGBlocks.SEPULCHER.get(),
                 DGBlocks.BONE_PILE.get()
         );
 
-        var vigilCandles = tag(VIGIL_CANDLES);
+        var vigilCandles = tag(DGTags.Blocks.VIGIL_CANDLES);
 
         DGBlocks.vigilCandles().forEach(block -> {
             var id = BuiltInRegistries.BLOCK.getKey(block.get());
             vigilCandles.addOptional(id);
         });
 
-        tag(BlockTags.CANDLES).addTags(VIGIL_CANDLES);
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).addTags(VIGIL_CANDLES);
+        tag(BlockTags.CANDLES).addTags(DGTags.Blocks.VIGIL_CANDLES);
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).addTags(DGTags.Blocks.VIGIL_CANDLES);
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(DGBlocks.SEPULCHER.get());
 
-        tag(CAN_TURN_INTO_BURIAL_DIRT).add(
+        tag(DGTags.Blocks.CAN_TURN_INTO_BURIAL_DIRT).add(
                 Blocks.DIRT,
                 Blocks.GRASS_BLOCK,
                 Blocks.PODZOL,
@@ -57,7 +58,7 @@ public class OBlockTags extends IntrinsicHolderTagsProvider<Block> {
                 Blocks.ROOTED_DIRT
         );
 
-        tag(GRAVETENDER_LIGHTABLE)
+        tag(DGTags.Blocks.GRAVETENDER_LIGHTABLE)
                 .addTag(BlockTags.CANDLES)
                 .addOptionalTag(new ResourceLocation("amendments:skull_candles"));
 

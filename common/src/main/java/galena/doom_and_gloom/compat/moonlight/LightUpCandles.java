@@ -5,11 +5,11 @@ import com.mojang.authlib.GameProfile;
 import galena.doom_and_gloom.index.DGTags;
 import java.util.UUID;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.util.FakePlayerManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
@@ -17,13 +17,11 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.FakePlayerFactory;
 
 public class LightUpCandles extends Behavior<Villager> {
     private final float speedModifier;
@@ -79,7 +77,7 @@ public class LightUpCandles extends Behavior<Villager> {
     private static final GameProfile GRAVETENDER = new GameProfile(UUID.fromString("f3f3f3f3-2233-f3f3-f3f3-f3f3f3f3f3f3"), "[Gravetender]");
 
     @Override
-    protected void tick(ServerLevel pLevel, Villager pOwner, long pGameTime) {
+    protected void tick(ServerLevel level, Villager pOwner, long pGameTime) {
         BlockPos pos = targetPos.pos();
 
         //hax
@@ -90,7 +88,7 @@ public class LightUpCandles extends Behavior<Villager> {
         if (pos.closerToCenterThan(pOwner.position(), 2.3)) {
             this.ticksSinceReached++;
 
-            BlockState state = pLevel.getBlockState(pos);
+            BlockState state = level.getBlockState(pos);
             if (!state.is(DGTags.Blocks.GRAVETENDER_LIGHTABLE)) {
                 pOwner.getBrain().eraseMemory(MoonlightCompat.NEAREST_UNLIT_CANDLE.get());
             } else {
@@ -102,13 +100,13 @@ public class LightUpCandles extends Behavior<Villager> {
 
                 //TODO: this task is run for candles that are already on too. We would need to clear them off first and validate thatthey canbe extinguished
                 if (ticksSinceReached > 20) {
-                    ServerPlayer player = FakePlayerFactory.get(pLevel, GRAVETENDER);
-                    ItemStack itemStack = Items.FLINT_AND_STEEL.getDefaultInstance();
+                    var player = FakePlayerManager.get(GRAVETENDER, level);
+                    var itemStack = Items.FLINT_AND_STEEL.getDefaultInstance();
                     player.setItemInHand(InteractionHand.MAIN_HAND, itemStack);
                     BlockHitResult hit = new BlockHitResult(Vec3.atBottomCenterOf(pos), Direction.UP, pos, false);
 
-                    if(!itemStack.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND,hit)).consumesAction()){
-                        state.use(pLevel, player, InteractionHand.MAIN_HAND, hit);
+                    if (!itemStack.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, hit)).consumesAction()) {
+                        state.use(level, player, InteractionHand.MAIN_HAND, hit);
                     }
                     pOwner.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);
                 }

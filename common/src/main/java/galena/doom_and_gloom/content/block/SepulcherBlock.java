@@ -85,7 +85,7 @@ public class SepulcherBlock extends Block implements TickingEntityBlock<Sepulche
 
     public static boolean tryInsert(ItemStack stack, @Nullable Player player, BlockState state, Level level, BlockPos pos, boolean simulate) {
         int fillLevel = state.getValue(LEVEL);
-        var food = stack.getFoodProperties(null);
+        var food = stack.getItem().getFoodProperties();
 
         if (fillLevel < MAX_LEVEL && food != null && food.isMeat()) {
             if (!simulate) insert(player, state, level, pos, level.random.nextIntBetweenInclusive(1, 2));

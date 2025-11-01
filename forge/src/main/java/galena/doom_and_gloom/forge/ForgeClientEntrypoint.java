@@ -5,6 +5,7 @@ import galena.doom_and_gloom.client.DGReloadListener;
 import galena.doom_and_gloom.client.DoomAndGloomClient;
 import galena.doom_and_gloom.client.FogRendering;
 import galena.doom_and_gloom.client.OModelLayers;
+import galena.doom_and_gloom.client.ORenderTypes;
 import galena.doom_and_gloom.client.model.DirtMoundModel;
 import galena.doom_and_gloom.client.model.HollerModel;
 import galena.doom_and_gloom.client.render.entity.DirtMoundRenderer;
@@ -20,6 +21,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -53,7 +55,14 @@ public class ForgeClientEntrypoint {
 
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        DoomAndGloomClient.registerParticleFactories(event::registerSpriteSet);
+        DoomAndGloomClient.registerParticleFactories((type, factory) ->
+                event.registerSpriteSet(type, factory::apply)
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerShaders(RegisterShadersEvent event) {
+        ORenderTypes.registerShaders(event.getResourceProvider(), event::registerShader);
     }
 
     @EventBusSubscriber(modid = DoomAndGloom.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.FORGE)

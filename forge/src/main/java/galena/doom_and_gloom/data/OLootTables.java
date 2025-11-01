@@ -7,7 +7,6 @@ import galena.doom_and_gloom.index.DGEntityTypes;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.PackOutput;
@@ -71,7 +70,7 @@ public class OLootTables extends LootTableProvider {
 
         @Override
         protected Stream<EntityType<?>> getKnownEntityTypes() {
-            return DGEntityTypes.ENTITIES.getEntries().stream().map(Supplier::get);
+            return Stream.of(DGEntityTypes.HOLLER.get());
         }
     }
 }

@@ -6,12 +6,12 @@
       "loot_table_id": "minecraft:chests/desert_pyramid"
     },
     {
-      "condition": "minecraft:random_chance",
-      "chance": 0.4
+      "chance": 0.4,
+      "condition": "minecraft:random_chance"
     }
   ],
   "item": {
-    "id": "doom_and_gloom:bone_pile",
-    "Count": 2
+    "Count": 2,
+    "id": "doom_and_gloom:bone_pile"
   }
 }

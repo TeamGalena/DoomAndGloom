@@ -41,4 +41,9 @@ public abstract class OItemModelProvider extends ItemModelProvider {
         return withExistingParent(ForgeRegistries.ITEMS.getKey(item.get()).getPath(), mcLoc("item/handheld"))
                 .texture("layer0", modLoc("item/" + ForgeRegistries.ITEMS.getKey(item.get()).getPath()));
     }
+
+    public ItemModelBuilder spawnEggItem(Supplier<? extends Item> item) {
+        return withExistingParent(ForgeRegistries.ITEMS.getKey(item.get()).getPath(), "minecraft:item/template_spawn_egg");
+    }
+
 }

@@ -4,13 +4,8 @@ import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.data.provider.OLangProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEffects;
-import galena.doom_and_gloom.index.DGEntityTypes;
 import galena.doom_and_gloom.index.DGItems;
-import java.util.function.Supplier;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 public class OLang extends OLangProvider {
 
@@ -54,6 +49,9 @@ public class OLang extends OLangProvider {
             This must be at the very bottom to avoid overwriting errors. These functions ignore objects
             that have already been translated above.
          */
+
+        // TODO do this differently
+        /*
         for (Supplier<? extends Block> blocks : DoomAndGloom.REGISTRY_HELPER.getBlockSubHelper().getDeferredRegister().getEntries()) {
             tryBlock(blocks);
         }
@@ -63,5 +61,6 @@ public class OLang extends OLangProvider {
         for (Supplier<? extends EntityType<?>> entities : DGEntityTypes.ENTITIES.getEntries()) {
             tryEntity(entities);
         }
+         */
     }
 }

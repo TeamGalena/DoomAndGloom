@@ -12,7 +12,6 @@ import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEntityTypes;
 import galena.doom_and_gloom.index.DGItems;
 import java.util.function.Supplier;
-
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -85,6 +84,7 @@ public class ForgeEntrypoint {
         VillageStructureModifier.setup(event.getServer().registryAccess());
     }
 
+    // TODO move to common with a wrapper or some moonlight solution
     public void buildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
         ResourceKey<CreativeModeTab> tab = event.getTabKey();
         MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries = event.getEntries();

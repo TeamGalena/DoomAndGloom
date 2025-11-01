@@ -1,6 +1,6 @@
 {
-  "replace": false,
   "entries": [
     "doom_and_gloom:bone_piles_in_desert_temples"
-  ]
+  ],
+  "replace": false
 }

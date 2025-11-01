@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:simple",
+  "level": 4,
+  "max_trades": 8,
+  "offer": {
+    "Count": 2,
+    "id": "minecraft:emerald"
+  },
+  "price": {
+    "Count": 1,
+    "id": "minecraft:lantern"
+  },
+  "price_multiplier": 0.2,
+  "xp": 15
+}

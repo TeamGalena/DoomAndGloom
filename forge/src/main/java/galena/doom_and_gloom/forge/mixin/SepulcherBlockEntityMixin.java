@@ -3,6 +3,9 @@ package galena.doom_and_gloom.forge.mixin;
 import galena.doom_and_gloom.content.entity.SepulcherBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Container;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -12,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(SepulcherBlockEntity.class)
-public abstract class SepulcherBlockEntityMixin extends SepulcherBlockEntity {
+@Mixin(value = SepulcherBlockEntity.class, remap = false)
+public abstract class SepulcherBlockEntityMixin extends BlockEntity {
 
-    public SepulcherBlockEntityMixin(BlockPos pos, BlockState state) {
-        super(pos, state);
+    public SepulcherBlockEntityMixin(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+        super(pType, pPos, pBlockState);
     }
 
     @Unique
@@ -24,7 +27,7 @@ public abstract class SepulcherBlockEntityMixin extends SepulcherBlockEntity {
 
     @Unique
     private LazyOptional<InvWrapper> createItemHandler() {
-        return LazyOptional.of(() -> new InvWrapper(this));
+        return LazyOptional.of(() -> new InvWrapper((Container) this));
     }
 
     @Override

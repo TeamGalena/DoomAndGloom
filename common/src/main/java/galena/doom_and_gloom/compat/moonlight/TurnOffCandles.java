@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.util.FakePlayerManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
@@ -128,7 +128,7 @@ public class TurnOffCandles extends Behavior<Villager> {
 
                 //TODO: this task is run for candles that are already on too. We would need to clear them off first and validate thatthey canbe extinguished
                 if (ticksSinceReached > 20) {
-                    ServerPlayer player = FakePlayerFactory.get(pLevel, GRAVETENDER);
+                    var player = FakePlayerManager.get(GRAVETENDER, pLevel);
                     player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
                     BlockHitResult hit = new BlockHitResult(Vec3.atBottomCenterOf(pos), Direction.UP, pos, false);
                     state.use(pLevel, player, InteractionHand.MAIN_HAND, hit);

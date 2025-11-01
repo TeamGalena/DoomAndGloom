@@ -2,13 +2,9 @@ package galena.doom_and_gloom.content.block;
 
 import galena.doom_and_gloom.index.DGParticleTypes;
 import galena.doom_and_gloom.index.DGSoundEvents;
-import java.util.function.Consumer;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -20,7 +16,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 
 public class BonePileBlock extends FallingBlock {
 
@@ -54,27 +49,7 @@ public class BonePileBlock extends FallingBlock {
         particles(level, Vec3.atCenterOf(pos), 20);
     }
 
-    @Override
-    public boolean addLandingEffects(BlockState state, ServerLevel level, BlockPos pos, BlockState other, LivingEntity entity, int numberOfParticles) {
-        particles(level, entity.position().add(0, 0.2, 0.0), numberOfParticles / 2);
-        return true;
-    }
-
-    @Override
-    public boolean addRunningEffects(BlockState state, Level level, BlockPos pos, Entity entity) {
-        var vec = entity.position().add(0, 0.2, 0.0);
-        var speed = entity.isSprinting() ? 0.5F : 0.2F;
-        var halfSpeed = speed / 2;
-        level.addParticle(DGParticleTypes.BONE_FRAGMENT.get(), vec.x, vec.y, vec.z, level.random.nextDouble() * speed - halfSpeed, level.random.nextDouble() * speed - halfSpeed, level.random.nextDouble() * speed - halfSpeed);
-        return true;
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientBlockExtensions> consumer) {
-        consumer.accept(new ClientProperties());
-    }
-
-    private void particles(Level level, Vec3 vec, int numberOfParticles) {
+    public void particles(Level level, Vec3 vec, int numberOfParticles) {
         if (level instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(DGParticleTypes.BONE_FRAGMENT.get(), vec.x, vec.y, vec.z, numberOfParticles, 0.35, 0.35, 0.35, 0.1);
         } else for (int i = 0; i < numberOfParticles; i++) {
@@ -83,16 +58,6 @@ public class BonePileBlock extends FallingBlock {
                     level.random.nextDouble() * 0.3 - 0.15, level.random.nextDouble() * 0.3 - 0.15, level.random.nextDouble() * 0.3 - 0.15
             );
         }
-    }
-
-    public class ClientProperties implements IClientBlockExtensions {
-
-        @Override
-        public boolean addDestroyEffects(BlockState state, Level level, BlockPos pos, ParticleEngine manager) {
-            particles(level, Vec3.atCenterOf(pos), 20);
-            return IClientBlockExtensions.super.addDestroyEffects(state, level, pos, manager);
-        }
-
     }
 
 }

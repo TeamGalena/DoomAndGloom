@@ -6,12 +6,15 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import galena.doom_and_gloom.DoomAndGloom;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceProvider;
 
 public abstract class ORenderTypes extends RenderType {
     //TODO: check if iris is on. If on use default render type
@@ -57,12 +60,12 @@ public abstract class ORenderTypes extends RenderType {
         super(pName, pFormat, pMode, pBufferSize, pAffectsCrumbling, pSortOnUpload, pSetupState, pClearState);
     }
 
-    public static void registerShaders(RegisterShadersEvent event) {
+    // TODO this is not called on fabric yet
+    public static void registerShaders(ResourceProvider resources, BiConsumer<ShaderInstance, Consumer<ShaderInstance>> event) {
         try {
-            var shader = new ShaderInstance(event.getResourceProvider(),
-                    DoomAndGloom.modLoc("rendertype_entity_translucent_additive"), DefaultVertexFormat.NEW_ENTITY);
-
-            event.registerShader(shader, NO_ALPHA_CUTOFF_SHADER::set);
+            // TODO this is a resource location on forge, right now it tries to look in the "minecraft" folder instead
+            var shader = new ShaderInstance(resources, "rendertype_entity_translucent_additive", DefaultVertexFormat.NEW_ENTITY);
+            event.accept(shader, NO_ALPHA_CUTOFF_SHADER::set);
         } catch (Exception e) {
             DoomAndGloom.LOGGER.error("Failed to register shader", e);
         }

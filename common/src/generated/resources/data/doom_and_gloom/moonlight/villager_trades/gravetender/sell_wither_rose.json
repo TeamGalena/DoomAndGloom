@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:simple",
+  "level": 4,
+  "max_trades": 20,
+  "offer": {
+    "Count": 2,
+    "id": "minecraft:wither_rose"
+  },
+  "price": {
+    "Count": 10,
+    "id": "minecraft:emerald"
+  },
+  "price_multiplier": 0.2,
+  "xp": 8
+}

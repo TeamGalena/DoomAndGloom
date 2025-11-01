@@ -6,6 +6,7 @@ import galena.doom_and_gloom.index.DGBlockEntities;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEffects;
 import galena.doom_and_gloom.index.DGEntityTypes;
+import galena.doom_and_gloom.index.DGItemListings;
 import galena.doom_and_gloom.index.DGItems;
 import galena.doom_and_gloom.index.DGParticleTypes;
 import galena.doom_and_gloom.index.DGPoi;
@@ -35,6 +36,7 @@ public class DoomAndGloom {
         DGPoi.init();
         DGSoundEvents.init();
         DGVillagerTypes.init();
+        DGItemListings.init();
 
         DGNetwork.register();
 

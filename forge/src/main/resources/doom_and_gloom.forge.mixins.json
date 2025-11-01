@@ -4,6 +4,8 @@
   "package": "galena.doom_and_gloom.forge.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BonePileBlockMixin",
+    "EntityMixin",
     "SepulcherBlockEntityMixin"
   ],
   "server": [],

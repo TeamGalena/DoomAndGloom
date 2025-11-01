@@ -22,7 +22,7 @@ public class AddItemLootModifier extends LootModifier {
 
     private final ItemStack stack;
 
-    protected AddItemLootModifier(LootItemCondition[] conditions, ItemStack stack) {
+    public AddItemLootModifier(LootItemCondition[] conditions, ItemStack stack) {
         super(conditions);
         this.stack = stack;
     }

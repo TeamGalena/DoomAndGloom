@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:simple",
+  "max_trades": 12,
+  "offer": {
+    "Count": 1,
+    "id": "minecraft:stone_shovel",
+    "tag": {
+      "Damage": 0
+    }
+  },
+  "price": {
+    "Count": 1,
+    "id": "minecraft:emerald"
+  },
+  "price_multiplier": 0.2,
+  "xp": 1
+}
