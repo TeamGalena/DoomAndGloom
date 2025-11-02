@@ -16,9 +16,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(value = SepulcherBlockEntity.class, remap = false)
-public abstract class SepulcherBlockEntityMixin extends BlockEntity {
+public abstract class SelfSepulcherBlockEntityMixin extends BlockEntity {
 
-    public SepulcherBlockEntityMixin(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+    public SelfSepulcherBlockEntityMixin(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
 

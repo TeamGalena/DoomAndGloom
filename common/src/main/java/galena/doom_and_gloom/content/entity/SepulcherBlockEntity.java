@@ -104,10 +104,6 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
         heated = nbt.getBoolean("heated");
     }
 
-    public static boolean wasConsumerBySepulcher(Entity entity) {
-        return WithExtraData.getOrEmpty(entity).getBoolean(DeathListener.TAG_KEY);
-    }
-
     @Override
     public DeathListener getListener() {
         return listener;
@@ -117,38 +113,40 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
         private final PositionSource listenerSource;
         private final int listenerRadius;
 
-        private static final String TAG_KEY = DoomAndGloom.MOD_ID + ":sepulched";
-
         public DeathListener() {
             this.listenerSource = new BlockPositionSource(SepulcherBlockEntity.this.getBlockPos());
             this.listenerRadius = 3;
         }
 
+        @Override
         public PositionSource getListenerSource() {
             return this.listenerSource;
         }
 
+        @Override
         public int getListenerRadius() {
             return this.listenerRadius;
         }
 
+        @Override
         public boolean handleGameEvent(ServerLevel level, GameEvent event, GameEvent.Context context, Vec3 vec) {
             if (event != GameEvent.ENTITY_DIE) return false;
 
-            var entity = context.sourceEntity();
-            if (entity == null) return false;
-            if (wasConsumerBySepulcher(entity)) return false;
+            Entity entity = context.sourceEntity();
+            if (!(entity instanceof LivingEntity living)) return false;
+            ISepulcherable sepulchered = ISepulcherable.cast(living);
+            if (sepulchered.DG$wasSepulchered()) return false;
 
             if (!entity.getType().is(DGTags.Entities.FILLS_SEPULCHER)) return false;
 
-            var state = getBlockState();
-            var fillLevel = state.getValue(SepulcherBlock.LEVEL);
+            BlockState state = getBlockState();
+            int fillLevel = state.getValue(SepulcherBlock.LEVEL);
 
             if (fillLevel >= SepulcherBlock.MAX_LEVEL) return false;
 
-            WithExtraData.getOrEmpty(entity).putBoolean(TAG_KEY, true);
+            sepulchered.DG$setSepulchered(true);
 
-            if (entity instanceof LivingEntity living && !(entity instanceof Player)) {
+            if (!(entity instanceof Player)) {
                 living.skipDropExperience();
             }
 

@@ -6,6 +6,7 @@ import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
 
 import java.util.function.Supplier;
 
+//TODO: add mod menu compat
 public class DGConfig {
     public static final Common COMMON;
     private static final ConfigSpec COMMON_SPEC;

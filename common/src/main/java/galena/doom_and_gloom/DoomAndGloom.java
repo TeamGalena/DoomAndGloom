@@ -40,8 +40,7 @@ public class DoomAndGloom {
         DGSoundEvents.init();
         DGVillagerTypes.init();
         DGItemListings.init();
-
-        if (CompatMods.AMENDMENTS) AmendmentsCompat.init();
+        DGLootInjects.init();
 
         DGNetwork.register();
 
