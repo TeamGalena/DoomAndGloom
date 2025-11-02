@@ -22,6 +22,8 @@ forge-config-api-common = { group = "fuzs.forgeconfigapiport", name = "forgeconf
 forge-config-api-fabric = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-fabric", version.ref = "forge-config-api" }
 
 moonlight-lib-common = { group = "net.mehvahdjukaar", name = "moonlight", version.ref = "moonlight" }
+moonlight-lib-forge = { group = "net.mehvahdjukaar", name = "moonlight-forge", version.ref = "moonlight" }
+moonlight-lib-fabric = { group = "net.mehvahdjukaar", name = "moonlight-fabric", version.ref = "moonlight" }
 
 
 [plugins]

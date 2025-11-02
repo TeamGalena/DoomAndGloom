@@ -1,8 +1,6 @@
 package galena.doom_and_gloom;
 
-import galena.doom_and_gloom.compat.AmendmentsCompat;
-import galena.doom_and_gloom.compat.CompatMods;
-import galena.doom_and_gloom.content.entity.SepulcherBlockEntity;
+import galena.doom_and_gloom.content.entity.ISepulcherable;
 import galena.doom_and_gloom.gen.VillageStructureModifier;
 import galena.doom_and_gloom.index.*;
 import galena.doom_and_gloom.network.DGNetwork;
@@ -10,6 +8,7 @@ import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -81,7 +80,10 @@ public class DoomAndGloom {
     //TODO: fabric
     public static boolean onItemDrop(Entity entity) {
         if (entity instanceof Player) return false;
-        return SepulcherBlockEntity.wasConsumerBySepulcher(entity);
+        if (entity instanceof LivingEntity le) {
+            return ISepulcherable.cast(le).DG$wasSepulchered();
+        }
+        return false;
     }
 
 }

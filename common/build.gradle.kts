@@ -9,5 +9,7 @@ loom {
 
 dependencies {
     modApi(libs.moonlight.lib.common)
-    modApi(libs.forge.config.api.common)
+
+    modImplementation(pack.forge.modrinth.amendments)
+
 }

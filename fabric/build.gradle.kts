@@ -16,7 +16,7 @@ loom {
 }
 
 dependencies {
-    modApi(pack.fabric.modrinth.moonlight)
+    modApi(libs.moonlight.lib.fabric)
 
     if (!env.isCI) {
         modRuntimeOnly(libs.jei.fabric)

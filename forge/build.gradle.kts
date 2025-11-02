@@ -35,7 +35,8 @@ configure<MixinExtension> {
 
 dependencies {
     // Compatibilities
-    modImplementation(pack.forge.modrinth.moonlight)
+    modApi(libs.moonlight.lib.forge)
+
     modImplementation(pack.forge.modrinth.supplementaries)
     modImplementation(pack.forge.modrinth.amendments)
 
