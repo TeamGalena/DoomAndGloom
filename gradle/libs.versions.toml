@@ -2,6 +2,7 @@
 multikulti = "1.20.1-1.1.5"
 jei = "15.20.0.106"
 forge-config-api = "8.0.2"
+moonlight = "1.20-2.16.15"
 
 [libraries]
 multikulti-core = { group = "com.possible-triangle", name = "multikulti-core-forge", version.ref = "multikulti" }
@@ -19,6 +20,8 @@ jei-fabric = { group = "mezz.jei", name = "jei-1.20.1-fabric", version.ref = "je
 
 forge-config-api-common = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-common", version.ref = "forge-config-api" }
 forge-config-api-fabric = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-fabric", version.ref = "forge-config-api" }
+
+moonlight-lib-common = { group = "net.mehvahdjukaar", name = "moonlight", version.ref = "moonlight" }
 
 
 [plugins]

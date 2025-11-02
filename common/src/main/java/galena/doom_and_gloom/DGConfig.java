@@ -1,34 +1,40 @@
 package galena.doom_and_gloom;
 
-import java.util.function.BiConsumer;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.fml.config.ModConfig;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
+
+import java.util.function.Supplier;
 
 public class DGConfig {
     public static final Common COMMON;
-    private static final ForgeConfigSpec COMMON_SPEC;
+    private static final ConfigSpec COMMON_SPEC;
 
     public static final Client CLIENT;
-    private static final ForgeConfigSpec CLIENT_SPEC;
+    private static final ConfigSpec CLIENT_SPEC;
+
+    public static void init() {
+        //just classloads this
+    }
 
     public static class Common {
-        public final ConfigValue<Integer> sepulcherDuration;
+        public final Supplier<Integer> sepulcherDuration;
 
-        private Common(ForgeConfigSpec.Builder builder) {
+        private Common(ConfigBuilder builder) {
             builder.comment("Common");
             builder.push("common");
 
-            sepulcherDuration = builder.comment("Time in ticks the sepulcher takes to turn meat into bones").defineInRange("sepulcherDuration", 20 * 30, 0, Integer.MAX_VALUE);
+            sepulcherDuration = builder.comment("Time in ticks the sepulcher takes to turn meat into bones")
+                    .define("sepulcherDuration", 20 * 30, 0, Integer.MAX_VALUE);
 
             builder.pop();
         }
     }
 
     public static class Client {
-        public final ConfigValue<Boolean> fancyRenderType;
+        public final Supplier<Boolean> fancyRenderType;
 
-        private Client(ForgeConfigSpec.Builder builder) {
+        private Client(ConfigBuilder builder) {
             builder.comment("Client");
             builder.push("client");
 
@@ -40,19 +46,15 @@ public class DGConfig {
     }
 
     static {
-        var commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
 
-        COMMON = commonSpecPair.getLeft();
-        COMMON_SPEC = commonSpecPair.getRight();
+        ConfigBuilder commonBuilder = ConfigBuilder.create(DoomAndGloom.MOD_ID, ConfigType.COMMON);
 
-        var clientSpecPair = new ForgeConfigSpec.Builder().configure(Client::new);
-        CLIENT = clientSpecPair.getLeft();
-        CLIENT_SPEC = clientSpecPair.getRight();
-    }
+        COMMON = new Common(commonBuilder);
+        COMMON_SPEC = commonBuilder.buildAndRegister();
 
-    public static void register(BiConsumer<ModConfig.Type, ForgeConfigSpec> registry) {
-        registry.accept(ModConfig.Type.COMMON, DGConfig.COMMON_SPEC);
-        registry.accept(ModConfig.Type.CLIENT, DGConfig.CLIENT_SPEC);
+        ConfigBuilder clientBuilder = ConfigBuilder.create(DoomAndGloom.MOD_ID, ConfigType.CLIENT);
+        CLIENT = new Client(clientBuilder);
+        CLIENT_SPEC = clientBuilder.buildAndRegister();
     }
 
 }

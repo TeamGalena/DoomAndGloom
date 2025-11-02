@@ -15,9 +15,9 @@ import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(value = BonePileBlock.class, remap = false)
-public abstract class BonePileBlockMixin extends FallingBlock {
+public abstract class SelfBonePileBlockMixin extends FallingBlock {
 
-    public BonePileBlockMixin(Properties properties) {
+    public SelfBonePileBlockMixin(Properties properties) {
         super(properties);
     }
 

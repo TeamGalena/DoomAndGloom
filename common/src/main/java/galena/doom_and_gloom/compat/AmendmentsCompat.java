@@ -1,4 +1,4 @@
-package galena.doom_and_gloom.forge.compat;
+package galena.doom_and_gloom.compat;
 
 import net.mehvahdjukaar.amendments.common.tile.WallLanternBlockTile;
 import net.minecraft.sounds.SoundEvents;

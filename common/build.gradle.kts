@@ -8,7 +8,6 @@ loom {
 }
 
 dependencies {
-    // TODO switch out with actual common module
-    modApi(pack.forge.modrinth.moonlight)
+    modApi(libs.moonlight.lib.common)
     modApi(libs.forge.config.api.common)
 }
