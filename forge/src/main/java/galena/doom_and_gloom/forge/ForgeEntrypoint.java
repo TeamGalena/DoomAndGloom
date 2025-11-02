@@ -20,11 +20,6 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod(DoomAndGloom.MOD_ID)
 public class ForgeEntrypoint {
 
-    private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, DoomAndGloom.MOD_ID);
-
-    // TODO can maybe be replaced with moonlights modifier? yeah there is one that does just this
-    public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_ITEM = LOOT_MODIFIERS.register("add_item", () -> AddItemLootModifier.CODEC);
-
     public ForgeEntrypoint() {
         DoomAndGloom.init();
 
@@ -34,15 +29,11 @@ public class ForgeEntrypoint {
 
         if (CompatMods.AMENDMENTS) {
             forgeBus.addListener(this::onBlockInteract);
-
-            AmendmentsCompat.init();
         }
 
 
         forgeBus.addListener(this::onServerStart);
         forgeBus.addListener(this::onLivingDrops);
-
-        LOOT_MODIFIERS.register(modBus);
     }
 
     private void onBlockInteract(PlayerInteractEvent.RightClickBlock event) {
