@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.compat.AmendmentsCompat;
 import galena.doom_and_gloom.compat.CompatMods;
+import net.minecraft.world.InteractionResult;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -49,6 +50,7 @@ public class ForgeEntrypoint {
                 event.getEntity(),
                 event.getHand(),
                 event.getItemStack())) {
+            event.setCancellationResult(InteractionResult.sidedSuccess(event.getLevel().isClientSide));
             event.setCanceled(true);
         }
     }
