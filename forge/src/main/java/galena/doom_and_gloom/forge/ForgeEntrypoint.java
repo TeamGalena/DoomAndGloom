@@ -4,11 +4,12 @@ import com.mojang.serialization.Codec;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.compat.AmendmentsCompat;
 import galena.doom_and_gloom.compat.CompatMods;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,18 +28,29 @@ public class ForgeEntrypoint {
         DoomAndGloom.init();
 
         //if(PlatHelper.getPhysicalSide().isClient()) DoomAndGloomClient.init();
+        IEventBus modBus = EventBusSubscriber.Bus.MOD.bus().get();
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
-        if (PlatHelper.isModLoaded(CompatMods.AMENDMENTS)) {
-            AmendmentsCompat.register();
+        if (CompatMods.AMENDMENTS) {
+            forgeBus.addListener(this::onBlockInteract);
+
+            AmendmentsCompat.init();
         }
 
-        var modBus = EventBusSubscriber.Bus.MOD.bus().get();
-        var forgeBus = MinecraftForge.EVENT_BUS;
 
         forgeBus.addListener(this::onServerStart);
         forgeBus.addListener(this::onLivingDrops);
 
         LOOT_MODIFIERS.register(modBus);
+    }
+
+    private void onBlockInteract(PlayerInteractEvent.RightClickBlock event) {
+        if (AmendmentsCompat.onBlockInteract(event.getLevel(), event.getPos(),
+                event.getEntity(),
+                event.getHand(),
+                event.getItemStack())) {
+            event.setCanceled(true);
+        }
     }
 
     public void onServerStart(ServerAboutToStartEvent event) {

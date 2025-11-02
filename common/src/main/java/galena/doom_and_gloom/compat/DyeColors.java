@@ -13,11 +13,11 @@ public class DyeColors {
     }
 
     private static Stream<DyeColor> depotColors() {
-        return !PlatHelper.isModLoaded(CompatMods.DYE_DEPOT) ? Stream.empty() : Stream.of("amber", "aqua", "beige", "coral", "forest", "ginger", "indigo", "maroon", "mint", "navy", "olive", "rose", "slate", "tan", "teal", "verdant").map((it) -> DyeColor.byName(it, (DyeColor) null)).filter(Objects::nonNull);
+        return !CompatMods.DYE_DEPOT ? Stream.empty() : Stream.of("amber", "aqua", "beige", "coral", "forest", "ginger", "indigo", "maroon", "mint", "navy", "olive", "rose", "slate", "tan", "teal", "verdant").map((it) -> DyeColor.byName(it, (DyeColor) null)).filter(Objects::nonNull);
     }
 
     public static Optional<String> modNamespace(DyeColor color) {
-        if (color.getId() > 15) return Optional.of(CompatMods.DYE_DEPOT);
+        if (color.getId() > 15) return Optional.of(CompatMods.DYE_DEPOT_NAME);
         return Optional.empty();
     }
 

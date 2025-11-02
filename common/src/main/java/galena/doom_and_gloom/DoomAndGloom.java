@@ -1,6 +1,7 @@
 package galena.doom_and_gloom;
 
-import galena.doom_and_gloom.compat.moonlight.MoonlightCompat;
+import galena.doom_and_gloom.compat.AmendmentsCompat;
+import galena.doom_and_gloom.compat.CompatMods;
 import galena.doom_and_gloom.content.entity.SepulcherBlockEntity;
 import galena.doom_and_gloom.gen.VillageStructureModifier;
 import galena.doom_and_gloom.index.*;
@@ -8,11 +9,9 @@ import galena.doom_and_gloom.network.DGNetwork;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +19,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class DoomAndGloom {
     public static final Logger LOGGER = LogManager.getLogger();
@@ -42,6 +40,8 @@ public class DoomAndGloom {
         DGSoundEvents.init();
         DGVillagerTypes.init();
         DGItemListings.init();
+
+        if (CompatMods.AMENDMENTS) AmendmentsCompat.init();
 
         DGNetwork.register();
 
@@ -80,7 +80,7 @@ public class DoomAndGloom {
     }
 
     //TODO: fabric
-    public static boolean onItemDrop(Entity entity){
+    public static boolean onItemDrop(Entity entity) {
         if (entity instanceof Player) return false;
         return SepulcherBlockEntity.wasConsumerBySepulcher(entity);
     }

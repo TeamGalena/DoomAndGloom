@@ -1,32 +1,30 @@
 package galena.doom_and_gloom.compat;
 
 import net.mehvahdjukaar.amendments.common.tile.WallLanternBlockTile;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CandleBlock;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-// TODO also add to fabric?
 public class AmendmentsCompat {
 
-    public static void register() {
-        MinecraftForge.EVENT_BUS.addListener(AmendmentsCompat::onBlockInteract);
-    }
 
-    private static void onBlockInteract(PlayerInteractEvent.RightClickBlock event) {
-        var pos = event.getPos();
-        var level = event.getLevel();
+    //TODO: add better amendments API to register interactions on wall lanterns
+    public static boolean onBlockInteract(Level level, BlockPos pos,
+                                          Player player, InteractionHand hand, ItemStack held) {
+
         var be = level.getBlockEntity(pos);
-        var held = event.getItemStack();
-        var player = event.getEntity();
 
-        if (!(be instanceof WallLanternBlockTile lantern)) return;
+        if (!(be instanceof WallLanternBlockTile lantern)) return false;
 
         var state = lantern.getHeldBlock();
-        if (!state.hasProperty(CandleBlock.LIT)) return;
+        if (!state.hasProperty(CandleBlock.LIT)) return false;
 
         boolean lit = state.getValue(CandleBlock.LIT);
 
@@ -37,22 +35,20 @@ public class AmendmentsCompat {
             lantern.setHeldBlock(state.setValue(CandleBlock.LIT, true));
             if (player != null) {
                 held.hurtAndBreak(1, player, it ->
-                        it.broadcastBreakEvent(event.getHand())
+                        it.broadcastBreakEvent(hand)
                 );
             }
 
-            result = InteractionResult.sidedSuccess(level.isClientSide());
+            return true;
         } else if (held.isEmpty() && lit) {
             level.playSound(player, pos, SoundEvents.CANDLE_EXTINGUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
             lantern.setHeldBlock(state.setValue(CandleBlock.LIT, false));
 
-            result = InteractionResult.sidedSuccess(level.isClientSide());
+            return true;
         }
 
-        if (result != InteractionResult.PASS) {
-            event.setCancellationResult(result);
-            event.setCanceled(true);
-        }
+        return false;
     }
+
 
 }
