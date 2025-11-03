@@ -1,21 +1,7 @@
 package galena.doom_and_gloom.index;
 
-import static galena.doom_and_gloom.DoomAndGloom.modLoc;
-import static net.mehvahdjukaar.moonlight.api.platform.RegHelper.registerBlock;
-import static net.mehvahdjukaar.moonlight.api.platform.RegHelper.registerItem;
-
 import galena.doom_and_gloom.compat.DyeColors;
-import galena.doom_and_gloom.content.block.BonePileBlock;
-import galena.doom_and_gloom.content.block.BurialDirtBlock;
-import galena.doom_and_gloom.content.block.SepulcherBlock;
-import galena.doom_and_gloom.content.block.StoneTabletBlock;
-import galena.doom_and_gloom.content.block.VigilCandleBlock;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import galena.doom_and_gloom.content.block.*;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
@@ -25,6 +11,16 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static galena.doom_and_gloom.DoomAndGloom.modLoc;
+import static net.mehvahdjukaar.moonlight.api.platform.RegHelper.*;
 
 public class DGBlocks {
 
@@ -57,23 +53,14 @@ public class DGBlocks {
         ));
     }
 
-    public static <T extends Block> RegSupplier<T> register(String name, Supplier<? extends T> block, Function<T, ? extends BlockItem> item) {
-        @SuppressWarnings("unchecked")
-        // TODO message to mehvahdjukaar
-        // RegistryHelper implementation should probably be:
-        // public static <T extends Block> RegSupplier<T> registerBlock(ResourceLocation name, Supplier<? extends T> block)
-        // (yes I hate how java generics work too)
-        RegSupplier<T> register = (RegSupplier<T>) registerBlock(modLoc(name), block);
+    public static <T extends Block> RegSupplier<T> register(String name, Supplier<T> block, Function<T, ? extends BlockItem> item) {
+        RegSupplier<T> register = registerBlock(modLoc(name), block);
         registerItem(modLoc(name), () -> item.apply(register.get()));
         return register;
     }
 
-    public static <T extends Block> RegSupplier<T> register(String name, Supplier<? extends T> block) {
-        return register(name, block, DGBlocks::createBlockItem);
-    }
-
-    private static BlockItem createBlockItem(final Block block) {
-        return new BlockItem(Objects.requireNonNull(block), new Item.Properties());
+    public static <T extends Block> RegSupplier<T> register(String name, Supplier<T> block) {
+        return registerBlockWithItem(modLoc(name), block);
     }
 
     public static void init() {
