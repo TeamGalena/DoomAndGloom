@@ -63,6 +63,10 @@ public class DGBlocks {
         return registerBlockWithItem(modLoc(name), block);
     }
 
+    public static <T extends Block> RegSupplier<T> register(String name, Supplier<T> block, Item.Properties prop) {
+        return registerBlockWithItem(modLoc(name), block, prop, 0);
+    }
+
     public static void init() {
         // Loads this class
     }

@@ -20,18 +20,21 @@ import java.util.function.Supplier;
 
 public class DoomAndGloomClient {
 
-    private static void render(Supplier<? extends Block> block, RenderType render) {
-        // TODO try to handle in model?
-        // ItemBlockRenderTypes.setRenderLayer(block.get(), render);
-    }
 
     public static void init() {
-        DoomAndGloomClient.registerBlockRenderers();
+        ClientHelper.addClientSetup(DoomAndGloomClient::setup);
         ClientHelper.addClientReloadListener(DGReloadListener::new, DoomAndGloom.modLoc("tablets_reloader"));
         ClientHelper.addParticleRegistration(DoomAndGloomClient::registerParticleFactories);
         ClientHelper.addEntityRenderersRegistration(DoomAndGloomClient::registerEntityRenderers);
         ClientHelper.addModelLayerRegistration(DoomAndGloomClient::registerModelLayers);
         ClientHelper.addShaderRegistration(DoomAndGloomClient::registerShaders);
+    }
+
+    private static void setup() {
+        //render layers
+        RenderType cutout = RenderType.cutout();
+        ClientHelper.registerRenderType(DGBlocks.SEPULCHER.get(), cutout);
+        DGBlocks.vigilCandles().forEach(block -> ClientHelper.registerRenderType(block.get(), cutout));
     }
 
 
@@ -57,9 +60,5 @@ public class DoomAndGloomClient {
         event.register(DGParticleTypes.HOLLERING_SOUL.get(), SoulParticle.Provider::new);
     }
 
-    private static void registerBlockRenderers() {
-        render(DGBlocks.SEPULCHER, RenderType.cutout());
-        DGBlocks.vigilCandles().forEach(block -> render(block, RenderType.cutout()));
-    }
 
 }
