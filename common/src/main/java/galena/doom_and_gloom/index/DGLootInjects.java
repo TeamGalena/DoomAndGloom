@@ -1,8 +1,10 @@
 package galena.doom_and_gloom.index;
 
 import galena.doom_and_gloom.DoomAndGloom;
+import java.util.Set;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 
 public class DGLootInjects {
 
@@ -11,11 +13,14 @@ public class DGLootInjects {
     }
 
     //TODO: add repurposed structures or similar compat here
-    private static final ResourceLocation PYRAMID = new ResourceLocation("chests/desert_pyramid");
-    private static final ResourceLocation PYRAMID_BONES = DoomAndGloom.modLoc("inject/desert_pyramid_bone_pile");
+    private static final Set<ResourceLocation> PYRAMIDS = Set.of(
+            BuiltInLootTables.DESERT_PYRAMID
+    );
+
+    public static final ResourceLocation PYRAMID_BONES = DoomAndGloom.modLoc("inject/desert_pyramid_bone_pile");
 
     private static void injectLootTables(RegHelper.LootInjectEvent event) {
-        if (event.getTable().equals(PYRAMID))
+        if (PYRAMIDS.contains(event.getTable()))
             event.addTableReference(PYRAMID_BONES);
 
     }

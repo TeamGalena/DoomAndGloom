@@ -1,7 +1,6 @@
 package galena.doom_and_gloom.forge.mixin;
 
 import galena.doom_and_gloom.content.entity.ISepulcherable;
-import galena.doom_and_gloom.forge.ForgeEntrypoint;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,11 +17,11 @@ public abstract class LivingEntityMixin extends Entity implements ISepulcherable
 
     @Override
     public void DG$setSepulchered(boolean sepulchered) {
-        this.getPersistentData().putBoolean(ForgeEntrypoint.DG_TAG_KEY, sepulchered);
+        this.getPersistentData().putBoolean(ISepulcherable.DG_TAG_KEY, sepulchered);
     }
 
     @Override
     public boolean DG$wasSepulchered() {
-        return this.getPersistentData().getBoolean(ForgeEntrypoint.DG_TAG_KEY);
+        return this.getPersistentData().getBoolean(ISepulcherable.DG_TAG_KEY);
     }
 }

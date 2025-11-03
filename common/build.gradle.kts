@@ -2,14 +2,14 @@ plugins {
     id("com.possible-triangle.architectury")
 }
 
-loom {
-    // TODO auto-detect by gradle plugin
-    accessWidenerPath = file("src/main/resources/${mod.id.get()}.accesswidener")
+common {
+    accessWidener()
 }
 
 dependencies {
-    modApi(libs.moonlight.lib.common)
+    modApi(libs.moonlight.lib.common) {
+        isTransitive = false
+    }
 
     modImplementation(pack.forge.modrinth.amendments)
-
 }

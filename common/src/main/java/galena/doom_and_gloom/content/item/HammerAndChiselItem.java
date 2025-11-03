@@ -3,10 +3,12 @@ package galena.doom_and_gloom.content.item;
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.index.DGItems;
+import java.util.Map;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -39,4 +41,10 @@ public class HammerAndChiselItem extends BlockItem {
     public String getDescriptionId() {
         return this.getOrCreateDescriptionId();
     }
+
+    @Override
+    public void registerBlocks(Map<Block, Item> map, Item item) {
+        // we don't want this to replace the actual stone_tablet item
+    }
+
 }

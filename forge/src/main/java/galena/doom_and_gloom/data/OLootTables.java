@@ -4,14 +4,17 @@ import galena.doom_and_gloom.content.block.SepulcherBlock;
 import galena.doom_and_gloom.data.provider.OBlockLootProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEntityTypes;
+import galena.doom_and_gloom.index.DGLootInjects;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
@@ -20,16 +23,20 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 public class OLootTables extends LootTableProvider {
 
     public OLootTables(PackOutput output) {
         super(output, Set.of(), List.of(
                 new SubProviderEntry(BlockLoot::new, LootContextParamSets.BLOCK),
-                new SubProviderEntry(EntityLoot::new, LootContextParamSets.ENTITY)
+                new SubProviderEntry(EntityLoot::new, LootContextParamSets.ENTITY),
+                new SubProviderEntry(InjectedLoot::new, LootContextParamSets.BLOCK)
         ));
     }
 
@@ -73,4 +80,21 @@ public class OLootTables extends LootTableProvider {
             return Stream.of(DGEntityTypes.HOLLER.get());
         }
     }
+
+    public static class InjectedLoot implements LootTableSubProvider {
+
+        @Override
+        public void generate(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
+            consumer.accept(DGLootInjects.PYRAMID_BONES, LootTable.lootTable()
+                    .withPool(LootPool.lootPool()
+                            .when(LootItemRandomChanceCondition.randomChance(0.2F))
+                            .add(LootItem.lootTableItem(DGBlocks.BONE_PILE.get())
+                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+                            )
+                    )
+            );
+        }
+
+    }
+
 }

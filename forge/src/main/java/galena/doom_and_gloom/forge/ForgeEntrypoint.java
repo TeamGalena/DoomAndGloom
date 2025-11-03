@@ -4,7 +4,6 @@ import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.compat.AmendmentsCompat;
 import galena.doom_and_gloom.compat.CompatMods;
 import net.minecraft.world.InteractionResult;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;

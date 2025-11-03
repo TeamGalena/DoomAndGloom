@@ -1,26 +1,23 @@
 package galena.doom_and_gloom.index;
 
+import static galena.doom_and_gloom.DoomAndGloom.modLoc;
+import static net.mehvahdjukaar.moonlight.api.platform.RegHelper.*;
+
 import galena.doom_and_gloom.compat.DyeColors;
 import galena.doom_and_gloom.content.block.*;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
-
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static galena.doom_and_gloom.DoomAndGloom.modLoc;
-import static net.mehvahdjukaar.moonlight.api.platform.RegHelper.*;
 
 public class DGBlocks {
 

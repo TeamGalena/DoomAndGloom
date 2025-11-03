@@ -6,6 +6,7 @@ public class CompatMods {
 
     public static final String DYE_DEPOT_NAME = "dye_depot";
     public static final String AMENDMENTS_NAME = "moonlight";
+    public static final String FARMERS_DELIGHT_NAME = "farmersdelight";
     public static final boolean DYE_DEPOT = PlatHelper.isModLoaded(DYE_DEPOT_NAME);
     public static final boolean AMENDMENTS = PlatHelper.isModLoaded(AMENDMENTS_NAME);
 }

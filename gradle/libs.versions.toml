@@ -18,9 +18,6 @@ dye-depot = { group = "com.ninni.dye_depot", name = "dye_depot", version = "1.20
 jei-forge = { group = "mezz.jei", name = "jei-1.20.1-forge", version.ref = "jei" }
 jei-fabric = { group = "mezz.jei", name = "jei-1.20.1-fabric", version.ref = "jei" }
 
-forge-config-api-common = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-common", version.ref = "forge-config-api" }
-forge-config-api-fabric = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-fabric", version.ref = "forge-config-api" }
-
 moonlight-lib-common = { group = "net.mehvahdjukaar", name = "moonlight", version.ref = "moonlight" }
 moonlight-lib-forge = { group = "net.mehvahdjukaar", name = "moonlight-forge", version.ref = "moonlight" }
 moonlight-lib-fabric = { group = "net.mehvahdjukaar", name = "moonlight-fabric", version.ref = "moonlight" }

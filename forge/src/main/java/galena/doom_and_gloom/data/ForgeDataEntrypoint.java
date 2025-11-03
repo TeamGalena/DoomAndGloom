@@ -47,7 +47,6 @@ public class ForgeDataEntrypoint {
         generator.addProvider(server, new ODamageTags(output, lookupProvider, helper));
         generator.addProvider(server, new OMobEffectTags(output, lookupProvider, helper));
         generator.addProvider(server, new DGItemListings(output, helper));
-        generator.addProvider(server, new DGLootModifiers(output));
 
         generator.addProvider(server, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(
                 Component.literal("Doom & Gloom resources"),

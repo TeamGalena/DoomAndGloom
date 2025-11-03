@@ -3,7 +3,6 @@ package galena.doom_and_gloom.forge;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.client.DoomAndGloomClient;
 import galena.doom_and_gloom.client.FogRendering;
-
 import java.awt.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;

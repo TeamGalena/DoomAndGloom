@@ -4,6 +4,8 @@ import galena.doom_and_gloom.content.entity.ISepulcherable;
 import galena.doom_and_gloom.gen.VillageStructureModifier;
 import galena.doom_and_gloom.index.*;
 import galena.doom_and_gloom.network.DGNetwork;
+import java.util.ArrayList;
+import java.util.List;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -15,9 +17,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DoomAndGloom {
     public static final Logger LOGGER = LogManager.getLogger();

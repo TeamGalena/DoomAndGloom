@@ -17,16 +17,15 @@ forge {
     mappingVersion = "2023.09.03-1.20.1"
 
     enableMixins()
+    accessWidener(project(":common"))
 
     dataGen {
         existing("blueprint")
     }
 }
 
-minecraft {
-    // move this to be automatically detected by gradle plugin
-    // or even better, be generated from the access widener
-    accessTransformer(file("src/main/resources/META-INF/accesstransformer.cfg"))
+tasks.compileJava {
+    dependsOn(tasks.getByName("transformAccessWidener"))
 }
 
 configure<MixinExtension> {
@@ -34,9 +33,11 @@ configure<MixinExtension> {
 }
 
 dependencies {
-    // Compatibilities
-    modApi(libs.moonlight.lib.forge)
+    modImplementation(libs.moonlight.lib.forge) {
+        isTransitive = false
+    }
 
+    modImplementation(pack.forge.modrinth.farmers.delight)
     modImplementation(pack.forge.modrinth.supplementaries)
     modImplementation(pack.forge.modrinth.amendments)
 

@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.world.item.DyeColor;
 
 public class DyeColors {

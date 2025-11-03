@@ -1,7 +1,10 @@
 package galena.doom_and_gloom.index;
 
+import static galena.doom_and_gloom.DoomAndGloom.modLoc;
+
 import galena.doom_and_gloom.content.entity.DirtMound;
 import galena.doom_and_gloom.content.entity.holler.Holler;
+import java.util.function.Supplier;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.world.entity.Entity;
@@ -9,10 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
-
-import java.util.function.Supplier;
-
-import static galena.doom_and_gloom.DoomAndGloom.modLoc;
 
 public class DGEntityTypes {
 

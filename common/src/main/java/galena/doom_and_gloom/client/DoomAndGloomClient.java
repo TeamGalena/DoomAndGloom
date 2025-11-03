@@ -14,9 +14,6 @@ import galena.doom_and_gloom.index.DGParticleTypes;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.minecraft.client.particle.SoulParticle;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Block;
-
-import java.util.function.Supplier;
 
 public class DoomAndGloomClient {
 
