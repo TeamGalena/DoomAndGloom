@@ -21,6 +21,7 @@ forge {
 
     dataGen {
         existing("blueprint")
+        splitSourceSet()
     }
 }
 
@@ -41,8 +42,6 @@ dependencies {
     modImplementation(pack.forge.modrinth.supplementaries)
     modImplementation(pack.forge.modrinth.amendments)
 
-    // TODO this is currently only needed for oreganized, but will also be used here soon
-    // side-node, this should not be required to run datagen when depending on oreganized, fix this in oreganized
     modImplementation(libs.multikulti.core)
     modImplementation(libs.multikulti.datagen)
 
