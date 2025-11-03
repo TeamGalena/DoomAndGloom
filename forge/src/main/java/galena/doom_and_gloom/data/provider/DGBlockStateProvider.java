@@ -22,9 +22,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class OBlockStateProvider extends BlockStateProvider {
+public abstract class DGBlockStateProvider extends BlockStateProvider {
 
-    public OBlockStateProvider(PackOutput output, ExistingFileHelper help) {
+    public DGBlockStateProvider(PackOutput output, ExistingFileHelper help) {
         super(output, MOD_ID, help);
     }
 

@@ -1,7 +1,7 @@
 package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.content.block.SepulcherBlock;
-import galena.doom_and_gloom.data.provider.OBlockLootProvider;
+import galena.doom_and_gloom.data.provider.DGBlockLootProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEntityTypes;
 import galena.doom_and_gloom.index.DGLootInjects;
@@ -30,9 +30,9 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCon
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-public class OLootTables extends LootTableProvider {
+public class DGLootTables extends LootTableProvider {
 
-    public OLootTables(PackOutput output) {
+    public DGLootTables(PackOutput output) {
         super(output, Set.of(), List.of(
                 new SubProviderEntry(BlockLoot::new, LootContextParamSets.BLOCK),
                 new SubProviderEntry(EntityLoot::new, LootContextParamSets.ENTITY),
@@ -44,7 +44,7 @@ public class OLootTables extends LootTableProvider {
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext tracker) {
     }
 
-    public static class BlockLoot extends OBlockLootProvider {
+    public static class BlockLoot extends DGBlockLootProvider {
 
         protected void generate() {
             add(DGBlocks.SEPULCHER.get(), it -> createSingleItemTable(it)

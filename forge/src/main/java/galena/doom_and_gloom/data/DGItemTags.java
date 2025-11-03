@@ -14,9 +14,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class OItemTags extends ItemTagsProvider {
+public class DGItemTags extends ItemTagsProvider {
 
-    public OItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> future, CompletableFuture<TagLookup<Block>> provider, @Nullable ExistingFileHelper helper) {
+    public DGItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> future, CompletableFuture<TagLookup<Block>> provider, @Nullable ExistingFileHelper helper) {
         super(output, future, provider, DoomAndGloom.MOD_ID, helper);
     }
 

@@ -1,7 +1,7 @@
 package galena.doom_and_gloom.client.render.entity;
 
 import galena.doom_and_gloom.DoomAndGloom;
-import galena.doom_and_gloom.client.OModelLayers;
+import galena.doom_and_gloom.client.DGModelLayers;
 import galena.doom_and_gloom.client.model.HollerModel;
 import galena.doom_and_gloom.content.entity.holler.Holler;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -14,7 +14,7 @@ public class HollerRender extends MobRenderer<Holler, HollerModel<Holler>> {
     private static final ResourceLocation HOLLER_TEXTURE = DoomAndGloom.modLoc( "textures/entity/holler.png");
 
     public HollerRender(EntityRendererProvider.Context context) {
-            super(context, new HollerModel<>(context.bakeLayer(OModelLayers.HOLLER)), 0.4F);
+            super(context, new HollerModel<>(context.bakeLayer(DGModelLayers.HOLLER)), 0.4F);
     }
 
     @Override

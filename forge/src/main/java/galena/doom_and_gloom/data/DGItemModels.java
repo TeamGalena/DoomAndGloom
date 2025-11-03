@@ -1,15 +1,15 @@
 package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
-import galena.doom_and_gloom.data.provider.OItemModelProvider;
+import galena.doom_and_gloom.data.provider.DGItemModelProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGItems;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class OItemModels extends OItemModelProvider {
+public class DGItemModels extends DGItemModelProvider {
 
-    public OItemModels(PackOutput output, ExistingFileHelper helper) {
+    public DGItemModels(PackOutput output, ExistingFileHelper helper) {
         super(output, helper);
     }
 

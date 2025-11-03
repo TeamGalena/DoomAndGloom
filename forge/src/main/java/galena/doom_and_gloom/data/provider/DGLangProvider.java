@@ -20,7 +20,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public abstract class OLangProvider implements DataProvider {
+public abstract class DGLangProvider implements DataProvider {
     private final Map<String, String> data = new TreeMap<>();
     private final PackOutput output;
     private final String modid;
@@ -28,7 +28,7 @@ public abstract class OLangProvider implements DataProvider {
 
     private final List<Runnable> subProviders = Lists.newArrayList();
 
-    public OLangProvider(PackOutput output, String modid, String locale) {
+    public DGLangProvider(PackOutput output, String modid, String locale) {
         this.output = output;
         this.modid = modid;
         this.locale = locale;

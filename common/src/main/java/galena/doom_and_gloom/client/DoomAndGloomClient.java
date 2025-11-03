@@ -46,8 +46,8 @@ public class DoomAndGloomClient {
     }
 
     public static void registerModelLayers(ClientHelper.ModelLayerEvent event) {
-        event.register(OModelLayers.HOLLER, HollerModel::createBodyLayer);
-        event.register(OModelLayers.DIRT_MOUND, DirtMoundModel::createBodyLayer);
+        event.register(DGModelLayers.HOLLER, HollerModel::createBodyLayer);
+        event.register(DGModelLayers.DIRT_MOUND, DirtMoundModel::createBodyLayer);
     }
 
     private static void registerParticleFactories(ClientHelper.ParticleEvent event) {

@@ -1,15 +1,15 @@
 package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
-import galena.doom_and_gloom.data.provider.OLangProvider;
+import galena.doom_and_gloom.data.provider.DGLangProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEffects;
 import galena.doom_and_gloom.index.DGItems;
 import net.minecraft.data.PackOutput;
 
-public class OLang extends OLangProvider {
+public class DGLang extends DGLangProvider {
 
-    public OLang(PackOutput output) {
+    public DGLang(PackOutput output) {
         super(output, DoomAndGloom.MOD_ID, "en_us");
     }
 

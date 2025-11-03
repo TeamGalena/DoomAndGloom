@@ -10,9 +10,9 @@ import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class OEntityTags extends EntityTypeTagsProvider {
+public class DGEntityTags extends EntityTypeTagsProvider {
 
-    public OEntityTags(PackOutput output, CompletableFuture<HolderLookup.Provider> future, @Nullable ExistingFileHelper help) {
+    public DGEntityTags(PackOutput output, CompletableFuture<HolderLookup.Provider> future, @Nullable ExistingFileHelper help) {
         super(output, future, DoomAndGloom.MOD_ID, help);
     }
 

@@ -1,15 +1,15 @@
 package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
-import galena.doom_and_gloom.data.provider.OBlockStateProvider;
+import galena.doom_and_gloom.data.provider.DGBlockStateProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class OBlockStates extends OBlockStateProvider {
+public class DGBlockStates extends DGBlockStateProvider {
 
-    public OBlockStates(PackOutput output, ExistingFileHelper helper) {
+    public DGBlockStates(PackOutput output, ExistingFileHelper helper) {
         super(output, helper);
     }
 

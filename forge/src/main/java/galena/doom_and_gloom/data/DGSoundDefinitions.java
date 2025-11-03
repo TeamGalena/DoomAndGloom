@@ -7,9 +7,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.SoundDefinition;
 import net.minecraftforge.common.data.SoundDefinitionsProvider;
 
-public class OSoundDefinitions extends SoundDefinitionsProvider {
+public class DGSoundDefinitions extends SoundDefinitionsProvider {
 
-    public OSoundDefinitions(PackOutput output, ExistingFileHelper helper) {
+    public DGSoundDefinitions(PackOutput output, ExistingFileHelper helper) {
         super(output, DoomAndGloom.MOD_ID, helper);
     }
 

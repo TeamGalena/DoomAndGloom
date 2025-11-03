@@ -15,11 +15,11 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 
-public abstract class OBlockLootProvider extends BlockLootSubProvider {
+public abstract class DGBlockLootProvider extends BlockLootSubProvider {
 
     private final Collection<Block> knownBlocks = new HashSet<>();
 
-    protected OBlockLootProvider() {
+    protected DGBlockLootProvider() {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 

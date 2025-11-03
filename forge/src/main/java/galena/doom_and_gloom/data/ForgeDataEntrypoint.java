@@ -30,22 +30,22 @@ public class ForgeDataEntrypoint {
         boolean client = event.includeClient();
         boolean server = event.includeServer();
 
-        var lang = new OLang(output);
+        var lang = new DGLang(output);
 
-        generator.addProvider(client, new OBlockStates(output, helper));
-        generator.addProvider(client, new OItemModels(output, helper));
+        generator.addProvider(client, new DGBlockStates(output, helper));
+        generator.addProvider(client, new DGItemModels(output, helper));
         generator.addProvider(client, lang);
-        generator.addProvider(client, new OSoundDefinitions(output, helper));
+        generator.addProvider(client, new DGSoundDefinitions(output, helper));
 
-        generator.addProvider(server, new ORecipes(output));
-        generator.addProvider(server, new OLootTables(output));
-        OBlockTags blockTags = new OBlockTags(output, future, helper);
+        generator.addProvider(server, new DGRecipes(output));
+        generator.addProvider(server, new DGLootTables(output));
+        DGBlockTags blockTags = new DGBlockTags(output, future, helper);
         generator.addProvider(server, blockTags);
-        generator.addProvider(server, new OItemTags(output, future, blockTags.contentsGetter(), helper));
-        generator.addProvider(server, new OEntityTags(output, future, helper));
+        generator.addProvider(server, new DGItemTags(output, future, blockTags.contentsGetter(), helper));
+        generator.addProvider(server, new DGEntityTags(output, future, helper));
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(server, new ODamageTags(output, lookupProvider, helper));
-        generator.addProvider(server, new OMobEffectTags(output, lookupProvider, helper));
+        generator.addProvider(server, new DGDamageTags(output, lookupProvider, helper));
+        generator.addProvider(server, new DGMobEffectTags(output, lookupProvider, helper));
         generator.addProvider(server, new DGItemListings(output, helper));
 
         generator.addProvider(server, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(

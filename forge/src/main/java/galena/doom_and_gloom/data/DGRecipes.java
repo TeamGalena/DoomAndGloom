@@ -5,7 +5,7 @@ import com.possible_triangle.multikulti.datagen.conditions.ModLoaded;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.compat.CompatMods;
 import galena.doom_and_gloom.compat.DyeColors;
-import galena.doom_and_gloom.data.provider.ORecipeProvider;
+import galena.doom_and_gloom.data.provider.DGRecipeProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGTags;
 import java.util.List;
@@ -33,9 +33,9 @@ import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
-public class ORecipes extends ORecipeProvider {
+public class DGRecipes extends DGRecipeProvider {
 
-    public ORecipes(PackOutput output) {
+    public DGRecipes(PackOutput output) {
         super(output);
     }
 
@@ -108,7 +108,7 @@ public class ORecipes extends ORecipeProvider {
                 .requires(OItems.BUSH_HAMMER.get())
                 .requires(OBlocks.STONE_TABLET.get())
                 .unlockedBy("has_hammer", has(OItems.BUSH_HAMMER.get()))
-                .save(consumer, new ResourceLocation(DoomAndGloom.MOD_ID, "hammer_and_chisel_from_tablet"));
+                .save(consumer, DoomAndGloom.modLoc("hammer_and_chisel_from_tablet"));
 
         smeltingResultFromBase(consumer, OBlocks.CRACKED_STONE_TABLET.get(), OBlocks.STONE_TABLET.get());
         */

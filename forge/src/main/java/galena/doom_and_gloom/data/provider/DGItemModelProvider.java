@@ -12,9 +12,9 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public abstract class OItemModelProvider extends ItemModelProvider {
+public abstract class DGItemModelProvider extends ItemModelProvider {
 
-    public OItemModelProvider(PackOutput output, ExistingFileHelper help) {
+    public DGItemModelProvider(PackOutput output, ExistingFileHelper help) {
         super(output, DoomAndGloom.MOD_ID, help);
     }
 

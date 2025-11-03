@@ -17,9 +17,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
-public class OBlockTags extends IntrinsicHolderTagsProvider<Block> {
+public class DGBlockTags extends IntrinsicHolderTagsProvider<Block> {
 
-    public OBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> future, @Nullable ExistingFileHelper helper) {
+    public DGBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> future, @Nullable ExistingFileHelper helper) {
         super(output, Registries.BLOCK, future, block -> block.builtInRegistryHolder().key(), DoomAndGloom.MOD_ID, helper);
     }
 
