@@ -22,14 +22,13 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.ToolActions;
-import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 public class DGRecipes extends DGRecipeProvider {
@@ -73,7 +72,7 @@ public class DGRecipes extends DGRecipeProvider {
         Conditional.with(this, List.of(new ModLoaded(CompatMods.FARMERS_DELIGHT_NAME)), () -> {
             CuttingBoardRecipeBuilder.cuttingRecipe(
                     Ingredient.of(DGBlocks.STONE_TABLET.get()),
-                    new ToolActionIngredient(ToolActions.PICKAXE_DIG),
+                    Ingredient.of(ItemTags.PICKAXES),
                     DGBlocks.CRACKED_STONE_TABLET.get()
             ).build(consumer, DoomAndGloom.modLoc("cutting/stone_tablet"));
         });
