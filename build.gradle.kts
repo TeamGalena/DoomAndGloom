@@ -29,14 +29,6 @@ subprojects {
                 includeGroup("com.teamabnormals")
             }
         }
-        repositories {
-            maven {
-                url = uri("https://maven.ladysnake.org/releases")
-                content {
-                    includeGroupAndSubgroups("dev.onyxstudios")
-                }
-            }
-        }
     }
 
     upload {

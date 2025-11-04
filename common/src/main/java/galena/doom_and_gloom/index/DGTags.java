@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -27,8 +26,6 @@ public class DGTags {
         public static final TagKey<Item> TOOLS_BUSH_HAMMER = tag("tools/bush_hammer");
 
         public static final TagKey<Item> VIGIL_CANDLES = tag("vigil_candles");
-
-        public static final TagKey<Item> VANILLA_LANTERNS = cTag("lanterns");
 
         public static final Map<DyeColor, TagKey<Item>> DYED = dyedTags(Registries.ITEM);
 
@@ -56,10 +53,6 @@ public class DGTags {
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, DoomAndGloom.modLoc(name));
         }
-
-        private static TagKey<Block> cTag(String name) {
-            return createCTag(Registries.BLOCK, name);
-        }
     }
 
     public static class Entities {
@@ -69,10 +62,6 @@ public class DGTags {
 
         private static TagKey<EntityType<?>> tag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, DoomAndGloom.modLoc(name));
-        }
-
-        private static TagKey<EntityType<?>> cTag(String name) {
-            return createCTag(Registries.ENTITY_TYPE, name);
         }
     }
 
@@ -94,9 +83,8 @@ public class DGTags {
     }
 
     private static <T> TagKey<T> createCTag(ResourceKey<Registry<T>> registry, String name) {
-        var id = new ResourceLocation(PlatHelper.getPlatform().isFabric() ? "c" : "forge", name);
+        var id = new ResourceLocation("c", name);
         return TagKey.create(registry, id);
     }
-
 
 }

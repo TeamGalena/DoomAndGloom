@@ -2,7 +2,6 @@ package galena.doom_and_gloom;
 
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGItems;
-import galena.doom_and_gloom.index.DGTags;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.tags.ItemTags;
@@ -15,7 +14,7 @@ public class DGItemTabContents {
     public static void addItemsToTabs(RegHelper.ItemToTabEvent event) {
         var vigilCandles = DGBlocks.vigilCandles().map(RegSupplier::get).toArray(ItemLike[]::new);
 
-        event.addAfter(CreativeModeTabs.FUNCTIONAL_BLOCKS, stack -> stack.is(DGTags.Items.VANILLA_LANTERNS), vigilCandles);
+        event.addAfter(CreativeModeTabs.FUNCTIONAL_BLOCKS, stack -> stack.is(Items.SOUL_LANTERN), vigilCandles);
         event.addAfter(CreativeModeTabs.COLORED_BLOCKS, stack -> stack.is(ItemTags.CANDLES), vigilCandles);
 
         event.add(CreativeModeTabs.BUILDING_BLOCKS, DGBlocks.BONE_PILE.get());

@@ -23,6 +23,8 @@ moonlight-lib-common = { group = "net.mehvahdjukaar", name = "moonlight", versio
 moonlight-lib-forge = { group = "net.mehvahdjukaar", name = "moonlight-forge", version.ref = "moonlight" }
 moonlight-lib-fabric = { group = "net.mehvahdjukaar", name = "moonlight-fabric", version.ref = "moonlight" }
 
+farmers-delight-fabric = { group = "vectorwing", name = "FarmersDelight", version = "1.20.1-2.4.0+refabricated" }
+
 pathfinding-debug-forge = { group = "com.possible-triangle", name = "pathfinding_renderer-forge", version.ref = "pathfinding-debug" }
 pathfinding-debug-fabric = { group = "com.possible-triangle", name = "pathfinding_renderer-fabric", version.ref = "pathfinding-debug" }
 

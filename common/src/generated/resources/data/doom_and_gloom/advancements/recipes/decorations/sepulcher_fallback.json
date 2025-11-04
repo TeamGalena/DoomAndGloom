@@ -3,7 +3,7 @@
   "conditions": [
     {
       "type": "forge:tag_empty",
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     }
   ],
   "criteria": {
@@ -30,7 +30,7 @@
       "value": {
         "condition": "fabric:tags_populated",
         "values": [
-          "forge:ingots/silver"
+          "c:ingots/silver"
         ]
       }
     }

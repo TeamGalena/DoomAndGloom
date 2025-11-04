@@ -6,7 +6,7 @@
       "type": "forge:not",
       "value": {
         "type": "forge:tag_empty",
-        "tag": "forge:ingots/silver"
+        "tag": "c:ingots/silver"
       }
     }
   ],
@@ -14,13 +14,13 @@
     {
       "condition": "fabric:tags_populated",
       "values": [
-        "forge:ingots/silver"
+        "c:ingots/silver"
       ]
     }
   ],
   "key": {
     "#": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     }
   },
   "pattern": [

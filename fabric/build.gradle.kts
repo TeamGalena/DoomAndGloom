@@ -7,14 +7,51 @@ fabric {
     accessWidener(project(":common"))
 }
 
+repositories {
+    maven {
+        url = uri("https://mvn.devos.one/releases/")
+        content {
+            includeGroup("io.github.fabricators_of_create.Porting-Lib")
+        }
+    }
+    maven {
+        url = uri("https://jitpack.io")
+        content {
+            includeGroup("com.github.Chocohead")
+        }
+    }
+    maven {
+        url = uri("https://maven.jamieswhiteshirt.com/libs-release")
+        content {
+            includeGroup("com.jamieswhiteshirt")
+        }
+    }
+    maven {
+        url = uri("https://maven.greenhouse.lgbt/releases/")
+        content {
+            includeGroup("vectorwing")
+        }
+    }
+}
+
 dependencies {
-    modApi(libs.moonlight.lib.fabric)
+    modApi(libs.moonlight.lib.fabric) {
+        isTransitive = false
+    }
+
+    modImplementation(libs.farmers.delight.fabric) {
+        exclude(group = "net.fabricmc")
+    }
+
+    modImplementation(pack.fabric.modrinth.supplementaries)
+    modImplementation(pack.fabric.modrinth.amendments)
+
+    modImplementation(libs.dye.depot.fabric) {
+        isTransitive = false
+    }
 
     if (!env.isCI) {
         modRuntimeOnly(libs.jei.fabric)
         modRuntimeOnly(libs.pathfinding.debug.fabric)
-        modImplementation(libs.dye.depot.fabric) {
-            isTransitive = false
-        }
     }
 }

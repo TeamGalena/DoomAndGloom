@@ -11,5 +11,6 @@ dependencies {
         isTransitive = false
     }
 
+    // TODO replace with common module
     modImplementation(pack.forge.modrinth.amendments)
 }
