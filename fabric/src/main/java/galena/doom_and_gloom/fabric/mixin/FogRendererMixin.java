@@ -22,7 +22,7 @@ public abstract class FogRendererMixin {
     @Shadow private static float fogBlue;
 
     @Inject(method = "setupFog", at = @At(value = "TAIL"))
-    private static void polytone$modifyFogShape(Camera camera, FogRenderer.FogMode fogMode,
+    private static void dg$modifyFogShape(Camera camera, FogRenderer.FogMode fogMode,
                                                 float farPlaneDistance, boolean shouldCreateFog,
                                                 float partialTick, CallbackInfo ci, @Local FogType fogType) {
         if (fogMode == FogRenderer.FogMode.FOG_TERRAIN && fogType == FogType.NONE) {
