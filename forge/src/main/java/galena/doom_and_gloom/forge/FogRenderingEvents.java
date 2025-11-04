@@ -1,13 +1,7 @@
 package galena.doom_and_gloom.forge;
 
 import galena.doom_and_gloom.DoomAndGloom;
-import galena.doom_and_gloom.client.FogRendering;
-import java.awt.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.LivingEntity;
+import galena.doom_and_gloom.client.fog.FogRendering;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
@@ -19,28 +13,32 @@ public class FogRenderingEvents {
 
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
-        FogRendering.clientTick();
+        if (event.phase == TickEvent.Phase.END) FogRendering.clientTick();
     }
 
     @SubscribeEvent
     public static void fogEffectFog(ViewportEvent.RenderFog event) {
-        FogRendering.activeEffect().flatMap(MobEffectInstance::getFactorData).ifPresent(factorData -> {
-            LivingEntity entity = (LivingEntity) Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
-            float f = Mth.lerp(factorData.getFactor(entity, (float) event.getPartialTick()), event.getFarPlaneDistance(), 15F);
-            event.setNearPlaneDistance(event.getMode() == FogRenderer.FogMode.FOG_SKY ? -2F : f * -0.5F);
-            event.setFarPlaneDistance(f);
+
+        float[] nearFar = FogRendering.modifyPlanes(event.getNearPlaneDistance(), event.getFarPlaneDistance(), //near far wherever we are
+                event.getMode(), event.getFogShape(), event.getType(), (float) event.getPartialTick());
+
+        if (nearFar != null) {
+            event.setNearPlaneDistance(nearFar[0]);
+            event.setFarPlaneDistance(nearFar[1]);
             event.setCanceled(true);
-        });
+        }
+
     }
 
     @SubscribeEvent
     public static void fogEffectColor(ViewportEvent.ComputeFogColor event) {
-        var from = new Color(event.getRed(), event.getGreen(), event.getBlue());
-        FogRendering.fogEffectColor(from, (float) event.getPartialTick()).ifPresent(to -> {
-            event.setRed(to.getRed());
-            event.setGreen(to.getGreen());
-            event.setBlue(to.getBlue());
-        });
+        float[] newColor = FogRendering.modifyFogColor(
+                event.getRed(), event.getGreen(), event.getBlue(), (float) event.getPartialTick());
+        if (newColor != null) {
+            event.setRed(newColor[0]);
+            event.setGreen(newColor[1]);
+            event.setBlue(newColor[2]);
+        }
     }
 
 }

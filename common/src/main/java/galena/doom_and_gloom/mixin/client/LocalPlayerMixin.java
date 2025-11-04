@@ -1,6 +1,6 @@
 package galena.doom_and_gloom.mixin.client;
 
-import galena.doom_and_gloom.client.FogAmbientSoundHandler;
+import galena.doom_and_gloom.client.fog.FogAmbientSoundHandler;
 import net.minecraft.client.ClientRecipeBook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

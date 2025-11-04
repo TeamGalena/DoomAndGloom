@@ -1,4 +1,4 @@
-package galena.doom_and_gloom.client;
+package galena.doom_and_gloom.client.fog;
 
 import galena.doom_and_gloom.index.DGEffects;
 import galena.doom_and_gloom.index.DGSoundEvents;

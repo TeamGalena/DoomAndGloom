@@ -1,18 +1,23 @@
-package galena.doom_and_gloom.client;
+package galena.doom_and_gloom.client.fog;
 
+import com.mojang.blaze3d.shaders.FogShape;
 import galena.doom_and_gloom.index.DGEffects;
 import galena.doom_and_gloom.index.DGParticleTypes;
-import java.awt.*;
-import java.util.Optional;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.FogType;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.*;
+import java.util.Optional;
 
 public class FogRendering {
 
@@ -61,21 +66,32 @@ public class FogRendering {
         }
     }
 
-    public static Optional<Color> fogEffectColor(Color from, float partialTicks) {
+    public static float @Nullable [] modifyFogColor(float r, float g, float b, float partialTicks) {
         return activeEffect()
                 .flatMap(MobEffectInstance::getFactorData)
                 .map(factorData -> {
+                    //TODO: split in channels
                     var color = new Color(0x697180);
                     LivingEntity entity = (LivingEntity) Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
                     float factor = factorData.getFactor(entity, partialTicks);
                     float inverseFactor = 1 - factor;
 
-                    var red = (color.getRed() / 255F * factor + from.getRed() * inverseFactor);
-                    var green = (color.getGreen() / 255F * factor + from.getGreen() * inverseFactor);
-                    var blue = (color.getBlue() / 255F * factor + from.getBlue() * inverseFactor);
+                    float red = (color.getRed() / 255F * factor + r * inverseFactor);
+                    float green = (color.getGreen() / 255F * factor + g * inverseFactor);
+                    float blue = (color.getBlue() / 255F * factor + b * inverseFactor);
 
-                    return new Color(red, green, blue);
-                });
+                    return new float[]{red, green, blue};
+                }).orElse(null);
     }
 
+    public static float @Nullable [] modifyPlanes(float nearPlaneDistance, float farPlaneDistance,
+                                                  FogRenderer.FogMode mode, FogShape fogShape, FogType type,
+                                                  float partialTicks) {
+        return FogRendering.activeEffect().flatMap(MobEffectInstance::getFactorData).map(factorData -> {
+            LivingEntity entity = (LivingEntity) Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
+            float far = Mth.lerp(factorData.getFactor(entity,  partialTicks), farPlaneDistance, 15F);
+            float near = (mode == FogRenderer.FogMode.FOG_SKY ? -2F : far * -0.5F);
+            return new float[]{near, far};
+        }).orElse(null);
+    }
 }
