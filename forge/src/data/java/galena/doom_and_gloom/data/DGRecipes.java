@@ -28,7 +28,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
@@ -60,7 +59,7 @@ public class DGRecipes extends DGRecipeProvider {
             });
         });
 
-        withFallback(DGTags.Items.INGOTS_SILVER, Tags.Items.INGOTS_IRON, ingot ->
+        withFallback(DGTags.Items.INGOTS_SILVER, Items.IRON_INGOT, ingot ->
                 ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DGBlocks.SEPULCHER.get())
                         .pattern("# #")
                         .pattern("# #")
@@ -80,7 +79,7 @@ public class DGRecipes extends DGRecipeProvider {
         });
 
         /*
-        withFallback(OTags.Items.INGOTS_LEAD, Tags.Items.INGOTS_COPPER, ingot ->
+        withFallback(OTags.Items.INGOTS_LEAD, Items.COPPER_INGOT, ingot ->
                 ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, OItems.BUSH_HAMMER.get())
                         .pattern("AA")
                         .pattern("B ")
@@ -114,10 +113,10 @@ public class DGRecipes extends DGRecipeProvider {
         */
     }
 
-    private Consumer<Consumer<FinishedRecipe>> withFallback(TagKey<Item> prefer, TagKey<Item> fallback, Function<TagKey<Item>, RecipeBuilder> builder) {
+    private Consumer<Consumer<FinishedRecipe>> withFallback(TagKey<Item> prefer, Item fallback, Function<Ingredient, RecipeBuilder> builder) {
         return consumer -> {
-            var preferredRecipe = builder.apply(prefer).unlockedBy("has_ingredient", has(prefer));
-            var fallbackRecipe = builder.apply(fallback).unlockedBy("has_ingredient", has(fallback));
+            var preferredRecipe = builder.apply(Ingredient.of(prefer)).unlockedBy("has_ingredient", has(prefer));
+            var fallbackRecipe = builder.apply(Ingredient.of(fallback)).unlockedBy("has_ingredient", has(fallback));
             var id = RecipeBuilder.getDefaultRecipeId(preferredRecipe.getResult());
 
             Conditional.with(this, List.of(new TagPopulated(prefer)), () ->
