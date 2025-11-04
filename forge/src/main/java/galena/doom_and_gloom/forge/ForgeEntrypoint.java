@@ -1,10 +1,12 @@
 package galena.doom_and_gloom.forge;
 
 import galena.doom_and_gloom.DoomAndGloom;
+import galena.doom_and_gloom.client.DoomAndGloomClient;
 import galena.doom_and_gloom.compat.AmendmentsCompat;
 import galena.doom_and_gloom.compat.CompatMods;
 import galena.doom_and_gloom.content.entity.ISepulcherable;
 import galena.doom_and_gloom.forge.compat.OreganizedCompat;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +23,8 @@ public class ForgeEntrypoint {
     public ForgeEntrypoint() {
         DoomAndGloom.init();
 
-        //if(PlatHelper.getPhysicalSide().isClient()) DoomAndGloomClient.init();
+        if(PlatHelper.getPhysicalSide().isClient()) DoomAndGloomClient.init();
+
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         if (CompatMods.AMENDMENTS) {
