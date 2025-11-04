@@ -1,6 +1,6 @@
 package galena.doom_and_gloom.network.packet;
 
-import galena.doom_and_gloom.content.block.SepulcherBlock;
+import galena.doom_and_gloom.client.DoomAndGloomClient;
 import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
 import net.mehvahdjukaar.moonlight.api.platform.network.Message;
 import net.minecraft.network.FriendlyByteBuf;
@@ -15,7 +15,7 @@ public record SepulcherConsumesDeathPacket(Vec3 at) implements Message {
 
     @Override
     public void handle(ChannelHandler.Context context) {
-        SepulcherBlock.spawnConsumeParticles(at);
+        DoomAndGloomClient.spawnConsumeParticles(at);
     }
 
     public static SepulcherConsumesDeathPacket from(FriendlyByteBuf buffer) {
