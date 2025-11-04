@@ -41,12 +41,12 @@ dependencies {
     modImplementation(pack.forge.modrinth.farmers.delight)
     modImplementation(pack.forge.modrinth.supplementaries)
     modImplementation(pack.forge.modrinth.amendments)
+    modImplementation(libs.oreganized)
 
     modImplementation(libs.multikulti.core)
     modImplementation(libs.multikulti.datagen)
 
     if (!env.isCI) {
-        modRuntimeOnly(libs.oreganized)
         // this should be included transient with oreganized on 1.21 neoforge (just not possible with how forge works)
         modRuntimeOnly(libs.blueprint)
         modRuntimeOnly(libs.dye.depot)

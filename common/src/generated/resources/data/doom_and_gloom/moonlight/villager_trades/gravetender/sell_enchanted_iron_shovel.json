@@ -1,18 +1,18 @@
 {
-  "type": "minecraft:simple",
-  "level": 5,
+  "type": "doom_and_gloom:sell_enchanted",
+  "level": 3,
   "max_trades": 3,
   "offer": {
-    "Count": 2,
-    "id": "minecraft:diamond_shovel",
+    "Count": 1,
+    "id": "minecraft:iron_shovel",
     "tag": {
       "Damage": 0
     }
   },
   "price": {
-    "Count": 13,
+    "Count": 1,
     "id": "minecraft:emerald"
   },
   "price_multiplier": 0.2,
-  "xp": 30
+  "xp": 10
 }

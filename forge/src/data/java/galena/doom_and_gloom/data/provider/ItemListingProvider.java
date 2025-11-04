@@ -2,6 +2,7 @@ package galena.doom_and_gloom.data.provider;
 
 import com.mojang.serialization.JsonOps;
 import galena.doom_and_gloom.content.listing.BuyTagListing;
+import galena.doom_and_gloom.content.listing.SellEnchantedListing;
 import galena.doom_and_gloom.content.listing.SellTagListing;
 import java.util.HashMap;
 import java.util.Optional;
@@ -76,6 +77,13 @@ public abstract class ItemListingProvider extends JsonCodecProvider<ModItemListi
             return add("sell_" + name, SimpleItemListing.createDefault(
                     new ItemStack(Items.EMERALD, emeralds), ItemStack.EMPTY, offer,
                     maxTrades, Optional.of(xp), 0.2F, level
+            ));
+        }
+
+        public LevelBuilder sellEnchanted(String name, int emeralds, ItemStack offer, int maxTrades, int xp) {
+            return add("sell_enchanted_" + name, new SellEnchantedListing(
+                    new ItemStack(Items.EMERALD, emeralds), offer,
+                    maxTrades, xp, 0.2F, level
             ));
         }
 

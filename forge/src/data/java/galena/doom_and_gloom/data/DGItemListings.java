@@ -30,8 +30,7 @@ public class DGItemListings extends ItemListingProvider {
                 .sell("poppy", 1, new ItemStack(Items.FLOWER_POT, 8), 12, 5);
 
         builder(DGVillagerTypes.GRAVETENDER.getKey(), 3)
-                // TODO enchant
-                .sell("iron_shovel", 1, new ItemStack(Items.IRON_SHOVEL), 3, 10)
+                .sellEnchanted("iron_shovel", 1, new ItemStack(Items.IRON_SHOVEL), 3, 10)
                 .buy("candles", 2, ItemTags.CANDLES, 6, 12, 2);
 
         builder(DGVillagerTypes.GRAVETENDER.getKey(), 4)
@@ -39,8 +38,7 @@ public class DGItemListings extends ItemListingProvider {
                 .sell("wither_rose", 10, new ItemStack(Items.WITHER_ROSE, 2), 20, 8);
 
         builder(DGVillagerTypes.GRAVETENDER.getKey(), 5)
-                // TODO enchant
-                .sell("diamond_shovel", 13, new ItemStack(Items.DIAMOND_SHOVEL, 2), 3, 30);
+                .sellEnchanted("diamond_shovel", 13, new ItemStack(Items.DIAMOND_SHOVEL, 2), 3, 30);
     }
 
 }

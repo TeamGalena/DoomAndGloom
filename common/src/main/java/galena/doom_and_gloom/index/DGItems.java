@@ -16,7 +16,7 @@ public class DGItems {
     public static final RegSupplier<RecordItem> MUSIC_DISC_AFTERLIFE = register("music_disc_afterlife", () -> PlatHelper.newMusicDisc(13, DGSoundEvents.MUSIC_DISC_AFTERLIFE, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 155));
 
     // Crafting Materials
-    public static final RegSupplier<Item> BUSH_HAMMER = register("bush_hammer", () -> new BushHammerItem(DGItemTiers.LEAD, 2.5F, -2.8F, (new Item.Properties()).stacksTo(1)));
+    public static final RegSupplier<Item> BUSH_HAMMER = register("bush_hammer", () -> new BushHammerItem(DGItemTiers.getHammerTier(), 2.5F, -2.8F, (new Item.Properties()).stacksTo(1)));
     public static final RegSupplier<Item> HAMMER_AND_CHISEL = register("hammer_and_chisel", () -> new HammerAndChiselItem(DGBlocks.STONE_TABLET.get()));
 
     public static final RegSupplier<Item> HOLLER_SPAWN_EGG = register("holler_spawn_egg", () ->
