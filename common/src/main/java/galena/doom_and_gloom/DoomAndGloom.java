@@ -28,6 +28,7 @@ public class DoomAndGloom {
     }
 
     public static void init() {
+
         DGConfig.init();
         DGBlockEntities.init();
         DGBlocks.init();

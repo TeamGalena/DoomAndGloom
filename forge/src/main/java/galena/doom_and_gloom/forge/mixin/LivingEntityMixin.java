@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 
-//TODO:avoid mixin, use services, dep injection instead
+//TODO:avoid mixin, use services or dep injection instead. even through a generic helper method like isSepulchered, or setSepulchered. only advantage to this is that on 1.21 porting will be trivial
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements ISepulcherable {
 
@@ -18,11 +18,11 @@ public abstract class LivingEntityMixin extends Entity implements ISepulcherable
 
     @Override
     public void DG$setSepulchered(boolean sepulchered) {
-        this.getPersistentData().putBoolean(ForgeEntrypoint.DG_TAG_KEY, sepulchered);
+        this.getPersistentData().putBoolean(ISepulcherable.DG_TAG_KEY, sepulchered);
     }
 
     @Override
     public boolean DG$wasSepulchered() {
-        return this.getPersistentData().getBoolean(ForgeEntrypoint.DG_TAG_KEY);
+        return this.getPersistentData().getBoolean(ISepulcherable.DG_TAG_KEY);
     }
 }
