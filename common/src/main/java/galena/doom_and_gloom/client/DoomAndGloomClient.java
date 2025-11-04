@@ -25,7 +25,6 @@ public class DoomAndGloomClient {
 
 
     public static void init() {
-        ClientHelper.addClientSetup(DoomAndGloomClient::setup);
         ClientHelper.addClientReloadListener(DGReloadListener::new, DoomAndGloom.modLoc("tablets_reloader"));
         ClientHelper.addParticleRegistration(DoomAndGloomClient::registerParticleFactories);
         ClientHelper.addEntityRenderersRegistration(DoomAndGloomClient::registerEntityRenderers);
@@ -33,7 +32,7 @@ public class DoomAndGloomClient {
         ClientHelper.addShaderRegistration(DoomAndGloomClient::registerShaders);
     }
 
-    private static void setup() {
+    public static void setup() {
         //render layers
         RenderType cutout = RenderType.cutout();
         ClientHelper.registerRenderType(DGBlocks.SEPULCHER.get(), cutout);
