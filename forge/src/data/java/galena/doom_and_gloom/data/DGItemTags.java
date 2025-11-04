@@ -3,6 +3,7 @@ package galena.doom_and_gloom.data;
 import static galena.doom_and_gloom.index.DGTags.Items.TOOLS_BUSH_HAMMER;
 
 import galena.doom_and_gloom.DoomAndGloom;
+import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGItems;
 import galena.doom_and_gloom.index.DGTags;
 import java.util.concurrent.CompletableFuture;
@@ -32,5 +33,9 @@ public class DGItemTags extends ItemTagsProvider {
         tag(ItemTags.MUSIC_DISCS).add(DGItems.MUSIC_DISC_AFTERLIFE.get());
 
         copy(DGTags.Blocks.VIGIL_CANDLES, DGTags.Items.VIGIL_CANDLES);
+
+        DGBlocks.COLORED_VIGIL_CANDLES.forEach((dye, block) ->
+            tag(DGTags.Items.DYED.get(dye)).addOptional(block.getId())
+        );
     }
 }

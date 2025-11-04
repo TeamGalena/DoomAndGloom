@@ -13,5 +13,8 @@ dependencies {
     if (!env.isCI) {
         modRuntimeOnly(libs.jei.fabric)
         modRuntimeOnly(libs.pathfinding.debug.fabric)
+        modImplementation(libs.dye.depot.fabric) {
+            isTransitive = false
+        }
     }
 }

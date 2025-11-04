@@ -63,5 +63,9 @@ public class DGBlockTags extends IntrinsicHolderTagsProvider<Block> {
                 .addOptionalTag(new ResourceLocation("amendments:skull_candles"));
 
         tag(BlockTags.DIRT).add(DGBlocks.BURIAL_DIRT.get());
+
+        DGBlocks.COLORED_VIGIL_CANDLES.forEach((dye, block) ->
+                tag(DGTags.Blocks.DYED.get(dye)).addOptional(block.getId())
+        );
     }
 }

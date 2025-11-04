@@ -45,11 +45,11 @@ dependencies {
 
     modImplementation(libs.multikulti.core)
     modImplementation(libs.multikulti.datagen)
+    modImplementation(libs.dye.depot.forge)
 
     if (!env.isCI) {
         // this should be included transient with oreganized on 1.21 neoforge (just not possible with how forge works)
         modRuntimeOnly(libs.blueprint)
-        modRuntimeOnly(libs.dye.depot)
         modRuntimeOnly(libs.jei.forge)
         modRuntimeOnly(libs.pathfinding.debug.forge)
     }

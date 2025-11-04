@@ -3,8 +3,8 @@ package galena.doom_and_gloom.index;
 import static galena.doom_and_gloom.DoomAndGloom.modLoc;
 import static net.mehvahdjukaar.moonlight.api.platform.RegHelper.*;
 
-import galena.doom_and_gloom.compat.DyeColors;
 import galena.doom_and_gloom.content.block.*;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -45,7 +45,7 @@ public class DGBlocks {
     }
 
     public static <T extends Block> Map<DyeColor, RegSupplier<T>> registerColored(String baseName, Function<DyeColor, ? extends T> factory) {
-        return DyeColors.supported().collect(Collectors.toMap(
+        return Arrays.stream(DyeColor.values()).collect(Collectors.toMap(
                 it -> it,
                 color -> register(color.getSerializedName() + "_" + baseName, () -> factory.apply(color))
         ));

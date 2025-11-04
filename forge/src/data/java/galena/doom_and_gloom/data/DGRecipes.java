@@ -1,16 +1,17 @@
 package galena.doom_and_gloom.data;
 
+import com.ninni.dye_depot.registry.DDDyes;
 import com.possible_triangle.multikulti.datagen.conditions.Conditional;
 import com.possible_triangle.multikulti.datagen.conditions.ModLoaded;
 import com.possible_triangle.multikulti.datagen.conditions.TagEmpty;
 import com.possible_triangle.multikulti.datagen.conditions.TagPopulated;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.compat.CompatMods;
-import galena.doom_and_gloom.compat.DyeColors;
 import galena.doom_and_gloom.data.provider.DGRecipeProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGTags;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,7 +44,7 @@ public class DGRecipes extends DGRecipeProvider {
         vigilCandle(DGBlocks.VIGIL_CANDLE, Blocks.CANDLE).save(consumer);
 
         DGBlocks.COLORED_VIGIL_CANDLES.forEach((color, block) -> {
-            var namespace = DyeColors.modNamespace(color);
+            var namespace = DDDyes.isModDye(color) ? Optional.of(CompatMods.DYE_DEPOT_NAME) : Optional.<String>empty();
             var conditions = namespace.map(ModLoaded::new).map(List::of).orElseGet(List::of);
 
             Conditional.with(this, conditions, () -> {
