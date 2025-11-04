@@ -4,7 +4,9 @@ import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.data.provider.DGLangProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEffects;
+import galena.doom_and_gloom.index.DGEntityTypes;
 import galena.doom_and_gloom.index.DGItems;
+import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.minecraft.data.PackOutput;
 
 public class DGLang extends DGLangProvider {
@@ -18,6 +20,20 @@ public class DGLang extends DGLangProvider {
         addDisc(DGItems.MUSIC_DISC_AFTERLIFE, "Firch", "afterlife");
 
         addBlock(DGBlocks.BONE_PILE, "Pile of Bones");
+        add(DGBlocks.SEPULCHER.getHolder());
+        add(DGBlocks.ROTTING_FLESH.getHolder());
+        add(DGBlocks.STONE_TABLET.getHolder());
+        add(DGBlocks.ENGRAVED_STONE_TABLET.getHolder());
+        add(DGBlocks.CRACKED_STONE_TABLET.getHolder());
+        DGBlocks.vigilCandles().map(RegSupplier::getHolder).forEach(this::add);
+        add(DGBlocks.BURIAL_DIRT.getHolder());
+
+        add(DGItems.BUSH_HAMMER.getHolder());
+        add(DGItems.HOLLER_SPAWN_EGG.getHolder());
+        add(DGItems.HAMMER_AND_CHISEL.getHolder());
+
+        add(DGEntityTypes.DIRT_MOUND.getHolder());
+        add(DGEntityTypes.HOLLER.getHolder());
 
         addEffect(DGEffects.FOG, "Fog");
         addEffect(DGEffects.WARDING, "Warding");
@@ -36,31 +52,12 @@ public class DGLang extends DGLangProvider {
         addSubtitle("entity", "holler_death", "Holler dies");
         addSubtitle("entity", "holler_hurt", "Holler hurts");
         addSubtitle("entity", "holler_shrieks", "Holler shrieks");
-        addSubtitle("entity", "holler_hollers", "Holler wails"); //howls? howls? whispers?
+        addSubtitle("entity", "holler_hollers", "Holler wails");
 
         add("entity.minecraft.villager." + DoomAndGloom.MOD_ID + ".gravetender", "Gravetender");
 
         add("gui.doom_and_gloom.stone_tablet.engrave", "Engrave");
         add("gui.doom_and_gloom.stone_tablet.cancel", "Cancel");
-
-        /*
-            Automatically create translations for blocks and items based on their registry name.
-
-            This must be at the very bottom to avoid overwriting errors. These functions ignore objects
-            that have already been translated above.
-         */
-
-        // TODO do this differently
-        /*
-        for (Supplier<? extends Block> blocks : DoomAndGloom.REGISTRY_HELPER.getBlockSubHelper().getDeferredRegister().getEntries()) {
-            tryBlock(blocks);
-        }
-        for (Supplier<? extends Item> items : DoomAndGloom.REGISTRY_HELPER.getItemSubHelper().getDeferredRegister().getEntries()) {
-            tryItem(items);
-        }
-        for (Supplier<? extends EntityType<?>> entities : DGEntityTypes.ENTITIES.getEntries()) {
-            tryEntity(entities);
-        }
-         */
     }
+
 }

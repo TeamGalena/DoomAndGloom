@@ -1,6 +1,5 @@
 package galena.doom_and_gloom;
 
-import galena.doom_and_gloom.content.entity.ISepulcherable;
 import galena.doom_and_gloom.gen.VillageStructureModifier;
 import galena.doom_and_gloom.index.*;
 import galena.doom_and_gloom.network.DGNetwork;
@@ -9,9 +8,6 @@ import java.util.List;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -74,15 +70,6 @@ public class DoomAndGloom {
 
     public static void onServerAboutToStart(MinecraftServer server) {
         VillageStructureModifier.setup(server.registryAccess());
-    }
-
-    //TODO: fabric
-    public static boolean onItemDrop(Entity entity) {
-        if (entity instanceof Player) return false;
-        if (entity instanceof LivingEntity le) {
-            return ISepulcherable.cast(le).DG$wasSepulchered();
-        }
-        return false;
     }
 
 }

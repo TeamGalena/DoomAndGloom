@@ -3,7 +3,10 @@ package galena.doom_and_gloom.forge;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.compat.AmendmentsCompat;
 import galena.doom_and_gloom.compat.CompatMods;
+import galena.doom_and_gloom.content.entity.ISepulcherable;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -29,7 +32,6 @@ public class ForgeEntrypoint {
     }
 
 
-
     private void onBlockInteract(PlayerInteractEvent.RightClickBlock event) {
         if (AmendmentsCompat.onBlockInteract(event.getLevel(), event.getPos(),
                 event.getEntity(),
@@ -45,8 +47,11 @@ public class ForgeEntrypoint {
     }
 
     private void onLivingDrops(LivingDropsEvent event) {
-        if (DoomAndGloom.onItemDrop(event.getEntity())) {
-            event.setCanceled(true);
+        if (event.getEntity() instanceof Player) return;
+        if (event.getEntity() instanceof LivingEntity le) {
+            if (ISepulcherable.cast(le).DG$wasSepulchered()) {
+                event.setCanceled(true);
+            }
         }
     }
 
