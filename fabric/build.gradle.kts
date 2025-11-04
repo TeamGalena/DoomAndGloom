@@ -12,5 +12,6 @@ dependencies {
 
     if (!env.isCI) {
         modRuntimeOnly(libs.jei.fabric)
+        modRuntimeOnly(libs.pathfinding.debug.fabric)
     }
 }

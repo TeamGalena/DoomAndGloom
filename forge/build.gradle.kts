@@ -51,5 +51,6 @@ dependencies {
         modRuntimeOnly(libs.blueprint)
         modRuntimeOnly(libs.dye.depot)
         modRuntimeOnly(libs.jei.forge)
+        modRuntimeOnly(libs.pathfinding.debug.forge)
     }
 }

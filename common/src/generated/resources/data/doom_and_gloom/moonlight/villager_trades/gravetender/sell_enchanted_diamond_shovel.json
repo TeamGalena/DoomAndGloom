@@ -3,7 +3,7 @@
   "level": 5,
   "max_trades": 3,
   "offer": {
-    "Count": 2,
+    "Count": 1,
     "id": "minecraft:diamond_shovel",
     "tag": {
       "Damage": 0

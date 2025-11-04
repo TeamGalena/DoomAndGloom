@@ -34,6 +34,11 @@ public record SellEnchantedListing(ItemStack want, ItemStack offer, int maxTrade
     }
 
     @Override
+    public int getLevel() {
+        return level;
+    }
+
+    @Override
     public MerchantOffer getOffer(Entity entity, RandomSource random) {
         int level = 5 + random.nextInt(15);
         var  enchanted = EnchantmentHelper.enchantItem(random, offer.copy(), level, false);

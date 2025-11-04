@@ -35,6 +35,11 @@ public record BuyTagListing(TagKey<Item> want, int count, ItemStack offer, int m
     }
 
     @Override
+    public int getLevel() {
+        return level;
+    }
+
+    @Override
     public MerchantOffer getOffer(Entity entity, RandomSource random) {
         var registry = entity.level().registryAccess().registryOrThrow(Registries.ITEM);
         return registry.getOrCreateTag(want)

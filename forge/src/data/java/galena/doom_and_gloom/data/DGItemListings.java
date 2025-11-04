@@ -38,7 +38,7 @@ public class DGItemListings extends ItemListingProvider {
                 .sell("wither_rose", 10, new ItemStack(Items.WITHER_ROSE, 2), 20, 8);
 
         builder(DGVillagerTypes.GRAVETENDER.getKey(), 5)
-                .sellEnchanted("diamond_shovel", 13, new ItemStack(Items.DIAMOND_SHOVEL, 2), 3, 30);
+                .sellEnchanted("diamond_shovel", 13, new ItemStack(Items.DIAMOND_SHOVEL), 3, 30);
     }
 
 }
