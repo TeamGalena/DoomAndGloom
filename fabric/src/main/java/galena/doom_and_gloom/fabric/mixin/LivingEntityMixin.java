@@ -16,9 +16,9 @@ public class LivingEntityMixin implements ISepulcherable {
     @Unique
     private boolean dg$sepulchered = false;
 
-    @Inject(method = "dropAllDeathLoot", at = @At("TAIL"))
+    @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
     public void DG$cancelDrops(DamageSource damageSource, CallbackInfo ci) {
-        //TODO: aa help
+       ci.cancel();
     }
 
     @Override
@@ -32,15 +32,13 @@ public class LivingEntityMixin implements ISepulcherable {
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    public void dg$readSepulchered(CompoundTag compoundTag, CallbackInfo ci) {
-
-        if (compoundTag.contains(ISepulcherable.DG_TAG_KEY))
-            dg$sepulchered = compoundTag.getBoolean(ISepulcherable.DG_TAG_KEY);
+    public void dg$readSepulchered(CompoundTag nbt, CallbackInfo ci) {
+        if (nbt.contains(ISepulcherable.DG_TAG_KEY))
+            dg$sepulchered = nbt.getBoolean(ISepulcherable.DG_TAG_KEY);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    public void dg$addSepulchered(CompoundTag compoundTag, CallbackInfo ci) {
-
-        if (dg$sepulchered) compoundTag.putBoolean(ISepulcherable.DG_TAG_KEY, dg$sepulchered);
+    public void dg$addSepulchered(CompoundTag nbt, CallbackInfo ci) {
+        if (dg$sepulchered) nbt.putBoolean(ISepulcherable.DG_TAG_KEY, dg$sepulchered);
     }
 }

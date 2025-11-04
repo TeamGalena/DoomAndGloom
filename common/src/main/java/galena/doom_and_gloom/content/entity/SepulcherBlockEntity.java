@@ -1,7 +1,6 @@
 package galena.doom_and_gloom.content.entity;
 
 import galena.doom_and_gloom.DGConfig;
-import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.block.SepulcherBlock;
 import galena.doom_and_gloom.index.DGBlockEntities;
 import galena.doom_and_gloom.index.DGBlocks;

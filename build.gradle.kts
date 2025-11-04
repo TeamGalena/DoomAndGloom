@@ -24,13 +24,6 @@ subprojects {
             }
         }
         maven {
-            url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
-            content {
-                includeGroup("net.minecraftforge")
-                includeGroup("fuzs.forgeconfigapiport")
-            }
-        }
-        maven {
             url = uri("https://maven.teamabnormals.com/")
             content {
                 includeGroup("com.teamabnormals")

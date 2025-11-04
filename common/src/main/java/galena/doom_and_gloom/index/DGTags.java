@@ -1,15 +1,20 @@
 package galena.doom_and_gloom.index;
 
 import galena.doom_and_gloom.DoomAndGloom;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.NotNull;
 
 public class DGTags {
 
@@ -22,14 +27,14 @@ public class DGTags {
 
         public static final TagKey<Item> VIGIL_CANDLES = tag("vigil_candles");
 
-        public static final TagKey<Item> VANILLA_LANTERNS = cTag("lanterns");
+        public static final Map<DyeColor, TagKey<Item>> DYED = dyedTags(Registries.ITEM);
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, DoomAndGloom.modLoc(name));
         }
 
         private static TagKey<Item> cTag(String name) {
-            return TagKey.create(Registries.ITEM, cLoc(name));
+            return createCTag(Registries.ITEM, name);
         }
     }
 
@@ -43,13 +48,10 @@ public class DGTags {
         public static final TagKey<Block> CAN_TURN_INTO_BURIAL_DIRT = tag("burial_dirt_convertible");
         public static final TagKey<Block> GRAVETENDER_LIGHTABLE = tag("gravetender_lightables");
 
+        public static final Map<DyeColor, TagKey<Block>> DYED = dyedTags(Registries.BLOCK);
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, DoomAndGloom.modLoc(name));
-        }
-
-        private static TagKey<Block> cTag(String name) {
-            return TagKey.create(Registries.BLOCK, cLoc(name));
         }
     }
 
@@ -60,10 +62,6 @@ public class DGTags {
 
         private static TagKey<EntityType<?>> tag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, DoomAndGloom.modLoc(name));
-        }
-
-        private static TagKey<EntityType<?>> cTag(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, cLoc(name));
         }
     }
 
@@ -77,7 +75,16 @@ public class DGTags {
 
     }
 
-    private static @NotNull ResourceLocation cLoc(String name) {
-        return new ResourceLocation(PlatHelper.getPlatform().isFabric() ? "c" : "forge", name);
+    private static <T> Map<DyeColor, TagKey<T>> dyedTags(ResourceKey<Registry<T>> registry) {
+        return Arrays.stream(DyeColor.values()).collect(Collectors.toMap(
+                Function.identity(),
+                color -> createCTag(registry, "dyed/" + color)
+        ));
     }
+
+    private static <T> TagKey<T> createCTag(ResourceKey<Registry<T>> registry, String name) {
+        var id = new ResourceLocation("c", name);
+        return TagKey.create(registry, id);
+    }
+
 }

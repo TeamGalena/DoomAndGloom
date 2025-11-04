@@ -1,7 +1,6 @@
 package galena.doom_and_gloom.forge.mixin;
 
 import galena.doom_and_gloom.content.entity.ISepulcherable;
-import galena.doom_and_gloom.forge.ForgeEntrypoint;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

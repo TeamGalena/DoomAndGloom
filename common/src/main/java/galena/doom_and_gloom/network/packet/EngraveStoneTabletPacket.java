@@ -1,6 +1,6 @@
 package galena.doom_and_gloom.network.packet;
 
-import galena.doom_and_gloom.content.block.StoneTabletBlock;
+import galena.doom_and_gloom.client.DoomAndGloomClient;
 import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
 import net.mehvahdjukaar.moonlight.api.platform.network.Message;
 import net.minecraft.core.BlockPos;
@@ -15,7 +15,7 @@ public record EngraveStoneTabletPacket(BlockPos pos) implements Message {
 
     @Override
     public void handle(ChannelHandler.Context context) {
-        StoneTabletBlock.openScreen(pos);
+        DoomAndGloomClient.openStoneTabletScreen(pos);
     }
 
     public static EngraveStoneTabletPacket from(FriendlyByteBuf buffer) {

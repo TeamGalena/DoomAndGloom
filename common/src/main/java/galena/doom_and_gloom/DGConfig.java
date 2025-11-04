@@ -1,10 +1,9 @@
 package galena.doom_and_gloom;
 
+import java.util.function.Supplier;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
-
-import java.util.function.Supplier;
 
 //TODO: add mod menu compat
 public class DGConfig {

@@ -1,13 +1,11 @@
 package galena.doom_and_gloom.content.block;
 
-import galena.doom_and_gloom.client.screen.StoneTabletScreen;
 import galena.doom_and_gloom.index.DGBlockEntities;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.EngraveStoneTabletPacket;
 import java.util.Arrays;
 import java.util.UUID;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -224,16 +222,6 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
     private boolean otherPlayerIsEditingSign(Player player, StoneTabletBlockEntity signEntity) {
         UUID id = signEntity.getPlayerWhoMayEdit();
         return id != null && !id.equals(player.getUUID());
-    }
-
-    public static void openScreen(BlockPos pos) {
-        Minecraft mc = Minecraft.getInstance();
-        var level = mc.level;
-        var player = mc.player;
-        if (level != null && player != null && level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
-            var stack = player.getItemInHand(player.getUsedItemHand());
-            mc.setScreen(new StoneTabletScreen(tile, stack, mc.isTextFilteringEnabled()));
-        }
     }
 
     @Override

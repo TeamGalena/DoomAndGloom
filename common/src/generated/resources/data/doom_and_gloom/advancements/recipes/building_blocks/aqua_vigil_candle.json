@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/silver"
+            "tag": "c:ingots/silver"
           }
         ]
       },

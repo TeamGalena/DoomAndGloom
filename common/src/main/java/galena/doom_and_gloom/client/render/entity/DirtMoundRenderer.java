@@ -3,7 +3,7 @@ package galena.doom_and_gloom.client.render.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import galena.doom_and_gloom.DoomAndGloom;
-import galena.doom_and_gloom.client.OModelLayers;
+import galena.doom_and_gloom.client.DGModelLayers;
 import galena.doom_and_gloom.client.model.DirtMoundModel;
 import galena.doom_and_gloom.content.entity.DirtMound;
 import net.minecraft.client.model.EntityModel;
@@ -15,13 +15,13 @@ import net.minecraft.resources.ResourceLocation;
 
 public class DirtMoundRenderer extends EntityRenderer<DirtMound> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(DoomAndGloom.MOD_ID, "textures/entity/dirt_mound.png");
+    private static final ResourceLocation TEXTURE = DoomAndGloom.modLoc("textures/entity/dirt_mound.png");
 
     private final EntityModel<DirtMound> model;
 
     public DirtMoundRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new DirtMoundModel(context.bakeLayer(OModelLayers.DIRT_MOUND));
+        this.model = new DirtMoundModel(context.bakeLayer(DGModelLayers.DIRT_MOUND));
     }
 
     @Override

@@ -21,7 +21,7 @@
       "item": "dye_depot:coral_candle"
     },
     "S": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     }
   },
   "pattern": [

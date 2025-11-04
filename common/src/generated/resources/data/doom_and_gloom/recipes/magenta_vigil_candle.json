@@ -7,7 +7,7 @@
       "item": "minecraft:magenta_candle"
     },
     "S": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     }
   },
   "pattern": [

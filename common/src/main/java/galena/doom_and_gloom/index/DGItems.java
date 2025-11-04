@@ -22,7 +22,7 @@ public class DGItems {
 
     // Crafting Materials
     public static final RegSupplier<Item> BUSH_HAMMER = register("bush_hammer", () ->
-            new BushHammerItem(DGItemTiers.LEAD, 2.5F, -2.8F, (new Item.Properties()).stacksTo(1)));
+            new BushHammerItem(DGItemTiers.getHammerTier(), 2.5F, -2.8F, (new Item.Properties()).stacksTo(1)));
     public static final RegSupplier<Item> HAMMER_AND_CHISEL = register("hammer_and_chisel", () ->
             new HammerAndChiselItem(DGBlocks.STONE_TABLET.get()));
 

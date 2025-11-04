@@ -7,7 +7,6 @@ import galena.doom_and_gloom.index.DGSoundEvents;
 import java.awt.*;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.TerrainParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -117,18 +116,6 @@ public class SepulcherBlock extends Block implements TickingEntityBlock<Sepulche
         }
 
         clear(user, state, level, pos);
-    }
-
-    public static void spawnConsumeParticles(Vec3 at) {
-        var level = Minecraft.getInstance().level;
-        if (level == null) return;
-
-        var particles = Minecraft.getInstance().particleEngine;
-        var state = DGBlocks.ROTTING_FLESH.get().defaultBlockState();
-        for (int i = 0; i < 20; i++) {
-            var vec = at.add(level.random.nextDouble() - 0.5, level.random.nextDouble() * 2, level.random.nextDouble() - 0.5);
-            particles.add(new TerrainParticle(level, vec.x, vec.y, vec.z, 0.0, 0.0, 0.0, state));
-        }
     }
 
     public static void spawnRottingParticles(BlockPos at) {

@@ -8,21 +8,23 @@ import galena.doom_and_gloom.client.particle.BoneFragmentParticle;
 import galena.doom_and_gloom.client.particle.FogParticle;
 import galena.doom_and_gloom.client.render.entity.DirtMoundRenderer;
 import galena.doom_and_gloom.client.render.entity.HollerRender;
+import galena.doom_and_gloom.client.screen.StoneTabletScreen;
+import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEntityTypes;
 import galena.doom_and_gloom.index.DGParticleTypes;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.SoulParticle;
+import net.minecraft.client.particle.TerrainParticle;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Block;
-
-import java.util.function.Supplier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 public class DoomAndGloomClient {
 
 
     public static void init() {
-        ClientHelper.addClientSetup(DoomAndGloomClient::setup);
         ClientHelper.addClientReloadListener(DGReloadListener::new, DoomAndGloom.modLoc("tablets_reloader"));
         ClientHelper.addParticleRegistration(DoomAndGloomClient::registerParticleFactories);
         ClientHelper.addEntityRenderersRegistration(DoomAndGloomClient::registerEntityRenderers);
@@ -30,7 +32,7 @@ public class DoomAndGloomClient {
         ClientHelper.addShaderRegistration(DoomAndGloomClient::registerShaders);
     }
 
-    private static void setup() {
+    public static void setup() {
         //render layers
         RenderType cutout = RenderType.cutout();
         ClientHelper.registerRenderType(DGBlocks.SEPULCHER.get(), cutout);
@@ -49,8 +51,8 @@ public class DoomAndGloomClient {
     }
 
     public static void registerModelLayers(ClientHelper.ModelLayerEvent event) {
-        event.register(OModelLayers.HOLLER, HollerModel::createBodyLayer);
-        event.register(OModelLayers.DIRT_MOUND, DirtMoundModel::createBodyLayer);
+        event.register(DGModelLayers.HOLLER, HollerModel::createBodyLayer);
+        event.register(DGModelLayers.DIRT_MOUND, DirtMoundModel::createBodyLayer);
     }
 
     private static void registerParticleFactories(ClientHelper.ParticleEvent event) {
@@ -60,5 +62,26 @@ public class DoomAndGloomClient {
         event.register(DGParticleTypes.HOLLERING_SOUL.get(), SoulParticle.Provider::new);
     }
 
+    public static void spawnConsumeParticles(Vec3 at) {
+        var level = Minecraft.getInstance().level;
+        if (level == null) return;
+
+        var particles = Minecraft.getInstance().particleEngine;
+        var state = DGBlocks.ROTTING_FLESH.get().defaultBlockState();
+        for (int i = 0; i < 20; i++) {
+            var vec = at.add(level.random.nextDouble() - 0.5, level.random.nextDouble() * 2, level.random.nextDouble() - 0.5);
+            particles.add(new TerrainParticle(level, vec.x, vec.y, vec.z, 0.0, 0.0, 0.0, state));
+        }
+    }
+
+    public static void openStoneTabletScreen(BlockPos pos) {
+        Minecraft mc = Minecraft.getInstance();
+        var level = mc.level;
+        var player = mc.player;
+        if (level != null && player != null && level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
+            var stack = player.getItemInHand(player.getUsedItemHand());
+            mc.setScreen(new StoneTabletScreen(tile, stack, mc.isTextFilteringEnabled()));
+        }
+    }
 
 }
