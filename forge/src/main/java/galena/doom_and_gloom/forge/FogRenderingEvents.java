@@ -1,5 +1,6 @@
 package galena.doom_and_gloom.forge;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.client.fog.FogRendering;
 import net.minecraftforge.api.distmarker.Dist;
@@ -33,7 +34,8 @@ public class FogRenderingEvents {
     @SubscribeEvent
     public static void fogEffectColor(ViewportEvent.ComputeFogColor event) {
         float[] newColor = FogRendering.modifyFogColor(
-                event.getRed(), event.getGreen(), event.getBlue(), (float) event.getPartialTick());
+                event.getRed(), event.getGreen(), event.getBlue(),
+                (float) event.getPartialTick());
         if (newColor != null) {
             event.setRed(newColor[0]);
             event.setGreen(newColor[1]);

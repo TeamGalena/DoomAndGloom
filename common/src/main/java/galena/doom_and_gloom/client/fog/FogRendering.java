@@ -3,8 +3,6 @@ package galena.doom_and_gloom.client.fog;
 import com.mojang.blaze3d.shaders.FogShape;
 import galena.doom_and_gloom.index.DGEffects;
 import galena.doom_and_gloom.index.DGParticleTypes;
-import java.awt.*;
-import java.util.Optional;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
@@ -18,6 +16,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FogType;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class FogRendering {
 
@@ -71,7 +71,7 @@ public class FogRendering {
                 .flatMap(MobEffectInstance::getFactorData)
                 .map(factorData -> {
                     Entity cameraEntity = Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
-                    if(!(cameraEntity instanceof LivingEntity le))return null;
+                    if (!(cameraEntity instanceof LivingEntity le)) return null;
                     float factor = factorData.getFactor(le, partialTicks);
                     // target color components (0x697180)
                     float targetR = 0x69 / 255f;
@@ -87,8 +87,9 @@ public class FogRendering {
     }
 
     public static float @Nullable [] modifyPlanes(float start, float end,
-                                                  FogRenderer.FogMode mode, FogShape fogShape, FogType type,
+                                                  FogRenderer.FogMode mode, FogShape fogShape, FogType fogType,
                                                   float partialTicks) {
+        if (fogType != FogType.NONE) return null;
         return FogRendering.activeEffect().flatMap(MobEffectInstance::getFactorData).map(factorData -> {
             Entity camE = Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
             if (!(camE instanceof LivingEntity le)) return null;

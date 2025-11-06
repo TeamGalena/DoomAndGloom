@@ -14,15 +14,6 @@ public class FabricClientEntrypoint implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         DoomAndGloomClient.init();
-        DoomAndGloomClient.setup();
-
-        var particleRegistry = ParticleFactoryRegistry.getInstance();
-        DoomAndGloomClient.registerParticleFactories(new ClientHelper.ParticleEvent() {
-            @Override
-            public <P extends ParticleType<T>, T extends ParticleOptions> void register(P type, ClientHelper.ParticleFactory<T> factory) {
-                particleRegistry.register(type, factory::create);
-            }
-        });
 
         ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
             FogRendering.clientTick();

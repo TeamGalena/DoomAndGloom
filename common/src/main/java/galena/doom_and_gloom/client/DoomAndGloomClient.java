@@ -29,6 +29,8 @@ public class DoomAndGloomClient {
         ClientHelper.addEntityRenderersRegistration(DoomAndGloomClient::registerEntityRenderers);
         ClientHelper.addModelLayerRegistration(DoomAndGloomClient::registerModelLayers);
         ClientHelper.addShaderRegistration(DoomAndGloomClient::registerShaders);
+        ClientHelper.addClientSetup(DoomAndGloomClient::setup);
+        ClientHelper.addParticleRegistration(DoomAndGloomClient::registerParticleFactories);
     }
 
     public static void setup() {

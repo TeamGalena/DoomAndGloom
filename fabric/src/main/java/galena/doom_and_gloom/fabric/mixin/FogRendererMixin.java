@@ -1,5 +1,6 @@
 package galena.doom_and_gloom.fabric.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -31,14 +32,6 @@ public abstract class FogRendererMixin {
                                           float renderDistance, boolean shouldCreateFog,
                                           float partialTick, CallbackInfo ci, @Local FogType fogType) {
 
-        float[] newColor = FogRendering.modifyFogColor(
-                fogRed, fogGreen, fogBlue, partialTick);
-        if (newColor != null) {
-            fogRed = newColor[0];
-            fogGreen = newColor[1];
-            fogBlue = newColor[2];
-        }
-
         float start = RenderSystem.getShaderFogStart();
         float end = RenderSystem.getShaderFogEnd();
         FogShape fogShape = RenderSystem.getShaderFogShape();
@@ -52,9 +45,9 @@ public abstract class FogRendererMixin {
         }
     }
 
-    @Inject(method = "setupColor", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;clearColor(FFFF)V",
-    shift = At.Shift.BEFORE, ordinal = 1))
-    private static void dg$modifyFogColor(Camera camera, float partialTick, ClientLevel clientLevel, int i, float g, CallbackInfo ci, @Local FogType fogType) {
+    //not ideal. should happen before set clear color but just setting it again should do the trick too
+    @Inject(method = "setupColor", at = @At(value = "TAIL"))
+    private static void dg$modifyFogColor(Camera camera, float partialTick, ClientLevel clientLevel, int i, float g, CallbackInfo ci) {
 
         float[] newColor = FogRendering.modifyFogColor(
                 fogRed, fogGreen, fogBlue, partialTick);
@@ -62,6 +55,7 @@ public abstract class FogRendererMixin {
             fogRed = newColor[0];
             fogGreen = newColor[1];
             fogBlue = newColor[2];
+            RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0.0F);
         }
     }
 }
