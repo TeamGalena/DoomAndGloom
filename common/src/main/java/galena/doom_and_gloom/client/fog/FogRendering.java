@@ -3,6 +3,7 @@ package galena.doom_and_gloom.client.fog;
 import com.mojang.blaze3d.shaders.FogShape;
 import galena.doom_and_gloom.index.DGEffects;
 import galena.doom_and_gloom.index.DGParticleTypes;
+import java.util.Optional;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
@@ -16,8 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FogType;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 public class FogRendering {
 

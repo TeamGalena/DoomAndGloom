@@ -1,6 +1,5 @@
 package galena.doom_and_gloom.forge;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.client.fog.FogRendering;
 import net.minecraftforge.api.distmarker.Dist;
