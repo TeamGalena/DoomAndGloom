@@ -5,6 +5,7 @@ import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import galena.doom_and_gloom.client.fog.FogRendering;
 import net.minecraft.client.Camera;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.world.level.material.FogType;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,5 +50,19 @@ public abstract class FogRendererMixin {
             RenderSystem.setShaderFogStart(nearFar[0]);
             RenderSystem.setShaderFogEnd(nearFar[1]);
         }
+    }
+
+    @Inject(method = "setupColor", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;clearColor(FFFF)V",
+    shift = At.Shift.BEFORE))
+    private static void dg$modifyFogColor(Camera camera, float partialTick, ClientLevel clientLevel, int i, float g, CallbackInfo ci, @Local FogType fogType) {
+
+        float[] newColor = FogRendering.modifyFogColor(
+                fogRed, fogGreen, fogBlue, partialTick);
+        if (newColor != null) {
+            fogRed = newColor[0];
+            fogGreen = newColor[1];
+            fogBlue = newColor[2];
+        }
+
     }
 }
