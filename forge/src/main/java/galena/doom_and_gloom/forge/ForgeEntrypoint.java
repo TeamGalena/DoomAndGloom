@@ -26,6 +26,7 @@ public class ForgeEntrypoint {
 
         if(PlatHelper.getPhysicalSide().isClient()) {
             DoomAndGloomClient.init();
+            ClientHelper.addParticleRegistration(DoomAndGloomClient::registerParticleFactories);
             ClientHelper.addClientSetup(DoomAndGloomClient::setup);
         }
 

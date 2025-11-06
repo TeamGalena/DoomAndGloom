@@ -26,7 +26,6 @@ public class DoomAndGloomClient {
 
     public static void init() {
         ClientHelper.addClientReloadListener(DGReloadListener::new, DoomAndGloom.modLoc("tablets_reloader"));
-        ClientHelper.addParticleRegistration(DoomAndGloomClient::registerParticleFactories);
         ClientHelper.addEntityRenderersRegistration(DoomAndGloomClient::registerEntityRenderers);
         ClientHelper.addModelLayerRegistration(DoomAndGloomClient::registerModelLayers);
         ClientHelper.addShaderRegistration(DoomAndGloomClient::registerShaders);
@@ -55,7 +54,7 @@ public class DoomAndGloomClient {
         event.register(DGModelLayers.DIRT_MOUND, DirtMoundModel::createBodyLayer);
     }
 
-    private static void registerParticleFactories(ClientHelper.ParticleEvent event) {
+    public static void registerParticleFactories(ClientHelper.ParticleEvent event) {
         event.register(DGParticleTypes.BONE_FRAGMENT.get(), BoneFragmentParticle.Provider::new);
         event.register(DGParticleTypes.FOG.get(), sprites -> new FogParticle.Provider(sprites, 200));
         event.register(DGParticleTypes.FOG_WATER.get(), sprites -> new FogParticle.Provider(sprites, 100));
