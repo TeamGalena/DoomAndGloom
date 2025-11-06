@@ -27,7 +27,7 @@ public abstract class FogRendererMixin {
 
     @Inject(method = "setupFog", at = @At(value = "TAIL"))
     private static void dg$modifyFogShape(Camera camera, FogRenderer.FogMode fogMode,
-                                          float farPlaneDistance, boolean shouldCreateFog,
+                                          float renderDistance, boolean shouldCreateFog,
                                           float partialTick, CallbackInfo ci, @Local FogType fogType) {
 
         float[] newColor = FogRendering.modifyFogColor(

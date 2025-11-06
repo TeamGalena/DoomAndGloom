@@ -10,6 +10,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -84,12 +85,18 @@ public class FogRendering {
                 }).orElse(null);
     }
 
-    public static float @Nullable [] modifyPlanes(float nearPlaneDistance, float farPlaneDistance,
+    public static float @Nullable [] modifyPlanes(float start, float end,
                                                   FogRenderer.FogMode mode, FogShape fogShape, FogType type,
                                                   float partialTicks) {
+        if (true) {
+            float far = 15;
+            float near = (mode == FogRenderer.FogMode.FOG_SKY ? -2F : far * -0.5F);
+            return new float[]{near, far};
+        }
         return FogRendering.activeEffect().flatMap(MobEffectInstance::getFactorData).map(factorData -> {
-            LivingEntity entity = (LivingEntity) Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
-            float far = Mth.lerp(factorData.getFactor(entity,  partialTicks), farPlaneDistance, 15F);
+            Entity camE = Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
+            if (!(camE instanceof LivingEntity le)) return null;
+            float far = Mth.lerp(factorData.getFactor(le, partialTicks), end, 15F);
             float near = (mode == FogRenderer.FogMode.FOG_SKY ? -2F : far * -0.5F);
             return new float[]{near, far};
         }).orElse(null);
