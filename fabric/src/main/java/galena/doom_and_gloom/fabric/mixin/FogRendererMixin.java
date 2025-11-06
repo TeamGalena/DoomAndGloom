@@ -53,7 +53,7 @@ public abstract class FogRendererMixin {
     }
 
     @Inject(method = "setupColor", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;clearColor(FFFF)V",
-    shift = At.Shift.BEFORE))
+    shift = At.Shift.BEFORE, ordinal = 1))
     private static void dg$modifyFogColor(Camera camera, float partialTick, ClientLevel clientLevel, int i, float g, CallbackInfo ci, @Local FogType fogType) {
 
         float[] newColor = FogRendering.modifyFogColor(
@@ -63,6 +63,5 @@ public abstract class FogRendererMixin {
             fogGreen = newColor[1];
             fogBlue = newColor[2];
         }
-
     }
 }
