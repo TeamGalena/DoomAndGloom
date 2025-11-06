@@ -7,7 +7,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 public class FogEffect extends MobEffect {
 
     public FogEffect() {
-        super(MobEffectCategory.HARMFUL, 2696993);
+        super(MobEffectCategory.HARMFUL, 0x514AA1);
         this.setFactorDataFactory(() -> new MobEffectInstance.FactorData(22));
     }
 

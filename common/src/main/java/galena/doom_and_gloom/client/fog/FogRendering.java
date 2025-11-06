@@ -74,9 +74,9 @@ public class FogRendering {
                     if (!(cameraEntity instanceof LivingEntity le)) return null;
                     float factor = factorData.getFactor(le, partialTicks);
                     // target color components (0x697180)
-                    float targetR = 0x69 / 255f;
-                    float targetG = 0x71 / 255f;
-                    float targetB = 0x80 / 255f;
+                    float targetR = 0x85 / 255f;
+                    float targetG = 0x90 / 255f;
+                    float targetB = 0xA0 / 255f;
 
                     float red = Mth.lerp(factor, r, targetR);
                     float green = Mth.lerp(factor, g, targetG);

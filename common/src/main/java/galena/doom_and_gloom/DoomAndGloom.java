@@ -20,14 +20,14 @@ public class DoomAndGloom {
     public static void init() {
 
         DGConfig.init();
-        DGBlockEntities.init();
+        DGSoundEvents.init();
         DGBlocks.init();
+        DGBlockEntities.init();
         DGEffects.init();
         DGEntityTypes.init();
         DGItems.init();
         DGParticleTypes.init();
         DGPoi.init();
-        DGSoundEvents.init();
         DGVillagerTypes.init();
         DGItemListings.init();
         DGLootInjects.init();
