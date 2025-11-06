@@ -46,9 +46,7 @@ dependencies {
     modImplementation(pack.fabric.modrinth.supplementaries)
     modImplementation(pack.fabric.modrinth.amendments)
 
-    modImplementation(libs.dye.depot.fabric) {
-        isTransitive = false
-    }
+    modImplementation(libs.dye.depot.fabric)
 
     if (!env.isCI) {
         modRuntimeOnly(libs.jei.fabric)

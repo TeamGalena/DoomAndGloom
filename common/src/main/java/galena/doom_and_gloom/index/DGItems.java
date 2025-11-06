@@ -1,17 +1,16 @@
 package galena.doom_and_gloom.index;
 
+import static galena.doom_and_gloom.DoomAndGloom.modLoc;
+
 import galena.doom_and_gloom.content.item.BushHammerItem;
 import galena.doom_and_gloom.content.item.HammerAndChiselItem;
+import java.util.function.Supplier;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
-
-import java.util.function.Supplier;
-
-import static galena.doom_and_gloom.DoomAndGloom.modLoc;
 
 public class DGItems {
 
