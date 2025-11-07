@@ -40,10 +40,12 @@ subprojects {
             includeKotlinDependency = false
 
             dependencies {
-                required("moonlight")
                 optional("oreganized")
             }
         }
+
+        modrinth.dependencies.required("moonlight")
+        curseforge.dependencies.required("selene")
     }
 }
 
