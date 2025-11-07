@@ -1,0 +1,13 @@
+{
+  "type": "doom_and_gloom:buy_tag",
+  "count": 6,
+  "level": 3,
+  "max_trades": 12,
+  "offer": {
+    "Count": 2,
+    "id": "minecraft:emerald"
+  },
+  "price": "minecraft:candles",
+  "price_multiplier": 0.2,
+  "xp": 2
+}

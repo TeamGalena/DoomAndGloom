@@ -1,8 +1,24 @@
 pluginManagement {
     repositories {
-        maven { url = uri("https://maven.minecraftforge.net/") }
-        maven { url = uri("https://repo.spongepowered.org/repository/maven-public/") }
-        maven { url = uri("https://maven.parchmentmc.org") }
         gradlePluginPortal()
+        mavenLocal()
+    }
+}
+
+plugins {
+    id("com.possible-triangle.helper") version ("1.2")
+    id("com.possible-triangle.packwiz") version ("1.1.60")
+}
+
+include("common")
+loader("forge")
+loader("fabric")
+
+fun loader(name: String) {
+    include(name)
+    packwiz {
+        packs.create(name) {
+            from = file("$name/pack")
+        }
     }
 }

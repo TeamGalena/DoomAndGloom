@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:simple",
+  "level": 2,
+  "max_trades": 12,
+  "offer": {
+    "Count": 8,
+    "id": "minecraft:flower_pot"
+  },
+  "price": {
+    "Count": 1,
+    "id": "minecraft:emerald"
+  },
+  "price_multiplier": 0.2,
+  "xp": 5
+}

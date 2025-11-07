@@ -1,0 +1,63 @@
+package galena.doom_and_gloom.content.block;
+
+import galena.doom_and_gloom.index.DGParticleTypes;
+import galena.doom_and_gloom.index.DGSoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+public class BonePileBlock extends FallingBlock {
+
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
+
+    private static final StatePredicate ALWAYS = (s, l, p) -> true;
+
+    public BonePileBlock(Properties properties) {
+        super(properties.isRedstoneConductor(ALWAYS).isSuffocating(ALWAYS).isViewBlocking(ALWAYS).noParticlesOnBreak());
+    }
+
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        // For particles
+        if(context instanceof EntityCollisionContext ec && (ec.getEntity() == null || ec.getEntity() instanceof FallingBlockEntity)) return Shapes.block();
+        return SHAPE;
+    }
+
+    public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
+        return Shapes.block();
+    }
+
+    public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return Shapes.block();
+    }
+
+    @Override
+    public void onLand(Level level, BlockPos pos, BlockState state, BlockState other, FallingBlockEntity entity) {
+        super.onLand(level, pos, state, other, entity);
+        if (!entity.isSilent())
+            level.playSound(null, pos, DGSoundEvents.BONE_PILE_FALL.get(), SoundSource.BLOCKS, 1F, 1F);
+        particles(level, Vec3.atCenterOf(pos), 20);
+    }
+
+    public void particles(Level level, Vec3 vec, int numberOfParticles) {
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(DGParticleTypes.BONE_FRAGMENT.get(), vec.x, vec.y, vec.z, numberOfParticles, 0.35, 0.35, 0.35, 0.1);
+        } else for (int i = 0; i < numberOfParticles; i++) {
+            level.addParticle(DGParticleTypes.BONE_FRAGMENT.get(),
+                    vec.x + level.random.nextDouble() - 0.5, vec.y + level.random.nextDouble() - 0.5, vec.z + level.random.nextDouble() - 0.5,
+                    level.random.nextDouble() * 0.3 - 0.15, level.random.nextDouble() * 0.3 - 0.15, level.random.nextDouble() * 0.3 - 0.15
+            );
+        }
+    }
+
+}

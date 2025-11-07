@@ -1,0 +1,13 @@
+name = "Amendments"
+filename = "amendments-1.20-2.2.2.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/6iTJugQR/versions/NCs7sRuH/amendments-1.20-2.2.2.jar"
+hash-format = "sha512"
+hash = "ed6ebc3ead0481c7e195ec39cc34a38470a572f5f24825a6599245da2513a6a0bce96f4b6e461e6f0ded2b5029d2179a2e62be5518aed49d4f54c420ca4471d0"
+
+[update]
+[update.modrinth]
+mod-id = "6iTJugQR"
+version = "NCs7sRuH"

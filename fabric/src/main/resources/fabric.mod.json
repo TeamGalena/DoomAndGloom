@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "An addon-mod for Oreganized adding Halloween-themed content",
+  "authors": [
+    "${mod_author}"
+  ],
+  "contact": {
+    "sources": "https://github.com/${repository}",
+    "issues": "https://github.com/${repository}/issues"
+  },
+  "license": "https://github.com/${repository}/blob/1.20.x/LICENSE.txt",
+  "environment": "*",
+  "accessWidener": "${mod_id}.accesswidener",
+  "entrypoints": {
+    "main": [
+      "galena.doom_and_gloom.fabric.FabricEntrypoint"
+    ],
+    "client": [
+      "galena.doom_and_gloom.fabric.FabricClientEntrypoint"
+    ]
+  },
+  "mixins": [
+    "${mod_id}.mixins.json",
+    "${mod_id}.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16",
+    "fabric-api": "*",
+    "minecraft": ">=1.20.1",
+    "moonlight": "*",
+    "java": ">=17"
+  }
+}
