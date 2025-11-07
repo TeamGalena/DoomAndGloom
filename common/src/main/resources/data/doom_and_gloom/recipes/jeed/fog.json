@@ -7,5 +7,19 @@
     {
       "item": "doom_and_gloom:holler_spawn_egg"
     }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "jeed"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "jeed"
+      ]
+    }
   ]
 }
