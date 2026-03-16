@@ -1,7 +1,7 @@
 # <meta>
 #    <source>@pssbletrngle/github-meta-generator</source>
 #    <version>0.0.0-dev</version>
-#    <timestamp>2026-03-11T14:43:43.540Z</timestamp>
+#    <timestamp>2026-03-16T10:46:03.894Z</timestamp>
 # </meta>
 
 name: Bug Report
@@ -26,6 +26,7 @@ body:
       options:
         - "fabric"
         - "forge"
+        - "neoforge"
     validations:
       required: true
 
