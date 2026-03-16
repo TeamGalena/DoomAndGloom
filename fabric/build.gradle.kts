@@ -2,6 +2,10 @@ plugins {
     id("com.possible-triangle.fabric")
 }
 
+mod {
+    mods.include(libs.galena.hats.fabric)
+}
+
 fabric {
     dependOn(project(":common"))
     accessWidener(project(":common"))

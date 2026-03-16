@@ -6,7 +6,7 @@ plugins {
 }
 
 mod {
-    mods.include(libs.galena.hats)
+    mods.include(libs.galena.hats.forge)
     mods.include(libs.multikulti.datagen.fix)
 }
 
