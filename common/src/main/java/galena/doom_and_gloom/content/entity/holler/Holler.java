@@ -291,9 +291,11 @@ public class Holler extends PathfinderMob {
 
     public static boolean checkHollerSpawnRules(EntityType<Holler> entityType, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         if (!Monster.isDarkEnoughToSpawn(level, pos, random)) return false;
-        if(pos.getY() < (level.getSeaLevel() - 10)) return false;
-        var spawnRate = isHalloween() ? 8 : 5;
-        if (random.nextInt(10) > spawnRate) return false;
+        if (spawnType != MobSpawnType.SPAWNER && spawnType != MobSpawnType.SPAWN_EGG) {
+            if (pos.getY() < (level.getSeaLevel() - 10)) return false;
+            var spawnRate = isHalloween() ? 8 : 5;
+            if (random.nextInt(10) > spawnRate) return false;
+        }
         return checkMobSpawnRules(entityType, level, spawnType, pos, random);
     }
 
