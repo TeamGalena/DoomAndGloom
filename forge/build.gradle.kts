@@ -25,10 +25,6 @@ forge {
     }
 }
 
-tasks.compileJava {
-    dependsOn(tasks.getByName("transformAccessWidener"))
-}
-
 configure<MixinExtension> {
     config("${mod.id.get()}.forge.mixins.json")
 }

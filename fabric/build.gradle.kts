@@ -18,8 +18,7 @@ repositories {
             includeGroup("io.github.fabricators_of_create.Porting-Lib")
         }
     }
-    maven {
-        url = uri("https://jitpack.io")
+    nexus("jitpack") {
         content {
             includeGroup("com.github.Chocohead")
         }
