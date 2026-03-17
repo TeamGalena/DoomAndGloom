@@ -2,15 +2,10 @@ hash-format = "sha256"
 
 [[files]]
 file = "mods/amendments.pw.toml"
-hash = "deba8bfb9a55d3a857079d3da87b24ece7223eeb3934e5cc028df48c1a7123c7"
-metafile = true
-
-[[files]]
-file = "mods/moonlight.pw.toml"
-hash = "9830d4b93e2fea7e398078143efdb7a271b04a4f23565dd9b02744f2aca23647"
+hash = "48768390d0ed8904ef38ffb095ff612b1f6b28d2a8300b1d3e4c67d02a2caf53"
 metafile = true
 
 [[files]]
 file = "mods/supplementaries.pw.toml"
-hash = "3135bb6ec401e951d248de79dbdf40608e362e64b89fe9e7d2e74399f3b49375"
+hash = "a0ff1e6d6842d3508510d29d97d1fbf8ef0f6b4c2b7b0a874cba1ba3c7021b90"
 metafile = true

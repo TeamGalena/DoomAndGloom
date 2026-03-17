@@ -2,18 +2,18 @@ package galena.doom_and_gloom.forge;
 
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.client.fog.FogRendering;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ViewportEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.ViewportEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.FORGE, modid = DoomAndGloom.MOD_ID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = DoomAndGloom.MOD_ID, value = Dist.CLIENT)
 public class FogRenderingEvents {
 
     @SubscribeEvent
-    public static void clientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) FogRendering.clientTick();
+    public static void clientTick(ClientTickEvent.Post event) {
+        FogRendering.clientTick();
     }
 
     @SubscribeEvent

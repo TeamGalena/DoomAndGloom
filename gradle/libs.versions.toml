@@ -1,35 +1,30 @@
 [versions]
-multikulti = "1.20.1-1.1.6"
-jei = "15.20.0.106"
-moonlight = "1.20-2.16.16"
-pathfinding-debug = "1.20.1-1.1.0"
-galena-hats = "1.20.1-1.2.2"
+multikulti = "1.21.1-1.2.3"
+jei = "19.27.0.340"
+moonlight = "1.21-2.29.20"
+pathfinding-debug = "1.21.1-1.1.0"
+galena-hats = "1.21.1-1.2.5"
 
 [libraries]
-multikulti-core = { group = "com.possible-triangle", name = "multikulti-core-forge", version.ref = "multikulti" }
-multikulti-datagen = { group = "com.possible-triangle", name = "multikulti-datagen-forge", version.ref = "multikulti" }
-multikulti-datagen-fix = { group = "com.possible-triangle", name = "multikulti-datagen-forge-fix", version.ref = "multikulti" }
+multikulti-core = { group = "com.possible-triangle", name = "multikulti-core-neoforge", version.ref = "multikulti" }
+multikulti-datagen = { group = "com.possible-triangle", name = "multikulti-datagen-neoforge", version.ref = "multikulti" }
 
-galena-hats-forge = { "group" = "dev.galena", name = "hats-forge", version.ref = "galena-hats" }
+galena-hats-neoforge = { "group" = "dev.galena", name = "hats-neoforge", version.ref = "galena-hats" }
 galena-hats-fabric = { "group" = "dev.galena", name = "hats-fabric", version.ref = "galena-hats" }
 
-oreganized = { "group" = "dev.galena", name = "oreganized", version = "4.3.1" }
-blueprint = { group = "com.teamabnormals", name = "blueprint", version = "1.20.1-7.1.0" }
+oreganized = { "group" = "dev.galena", name = "oreganized", version = "5.1.2" }
 
-dye-depot-forge = { group = "com.ninni.dye_depot", name = "dye_depot", version = "1.20.1-1.2.3-forge" }
-dye-depot-fabric = { group = "com.ninni.dye_depot", name = "dye_depot", version = "1.20.1-1.2.2-fabric" }
+dye-depot-neoforge = { group = "com.ninni.dye_depot", name = "dye_depot", version = "1.21.1-2.0.2-neoforge" }
+dye-depot-fabric = { group = "com.ninni.dye_depot", name = "dye_depot", version = "1.21.1-2.0.2-fabric" }
 
-jei-forge = { group = "mezz.jei", name = "jei-1.20.1-forge", version.ref = "jei" }
-jei-fabric = { group = "mezz.jei", name = "jei-1.20.1-fabric", version.ref = "jei" }
+jei-neoforge = { group = "mezz.jei", name = "jei-1.21.1-neoforge", version.ref = "jei" }
+jei-fabric = { group = "mezz.jei", name = "jei-1.21.1-fabric", version.ref = "jei" }
 
 moonlight-lib-common = { group = "net.mehvahdjukaar", name = "moonlight", version.ref = "moonlight" }
-moonlight-lib-forge = { group = "net.mehvahdjukaar", name = "moonlight-forge", version.ref = "moonlight" }
+moonlight-lib-neoforge = { group = "net.mehvahdjukaar", name = "moonlight-neoforge", version.ref = "moonlight" }
 moonlight-lib-fabric = { group = "net.mehvahdjukaar", name = "moonlight-fabric", version.ref = "moonlight" }
 
-farmers-delight-fabric = { group = "vectorwing", name = "FarmersDelight", version = "1.20.1-2.4.0+refabricated" }
+farmers-delight-fabric = { group = "vectorwing", name = "FarmersDelight", version = "1.20.1-2.4.1+refabricated" }
 
-pathfinding-debug-forge = { group = "com.possible-triangle", name = "pathfinding_renderer-forge", version.ref = "pathfinding-debug" }
+pathfinding-debug-neoforge = { group = "com.possible-triangle", name = "pathfinding_renderer-neoforge", version.ref = "pathfinding-debug" }
 pathfinding-debug-fabric = { group = "com.possible-triangle", name = "pathfinding_renderer-fabric", version.ref = "pathfinding-debug" }
-
-[plugins]
-parchment = { id = "org.parchmentmc.librarian.forgegradle", version = "1.+" }

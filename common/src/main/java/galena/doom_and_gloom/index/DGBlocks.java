@@ -23,7 +23,7 @@ import net.minecraft.world.level.material.PushReaction;
 public class DGBlocks {
 
     public static final RegSupplier<Block> SEPULCHER = register("sepulcher", () -> new SepulcherBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON).sound(DGSoundTypes.SEPULCHER)));
-    public static final RegSupplier<Block> BONE_PILE = register("bone_pile", () -> new BonePileBlock(BlockBehaviour.Properties.copy(Blocks.BONE_BLOCK).sound(DGSoundTypes.BONE_PILE).strength(1F)));
+    public static final RegSupplier<BonePileBlock> BONE_PILE = register("bone_pile", () -> new BonePileBlock(BlockBehaviour.Properties.copy(Blocks.BONE_BLOCK).sound(DGSoundTypes.BONE_PILE).strength(1F)));
     public static final RegSupplier<Block> ROTTING_FLESH = registerBlock(modLoc("rotting_flesh"), () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
     public static final RegSupplier<Block> STONE_TABLET = register("stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.DEFAULT));
     public static final RegSupplier<Block> ENGRAVED_STONE_TABLET = register("engraved_stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.ENGRAVED));

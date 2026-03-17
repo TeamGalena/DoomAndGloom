@@ -1,13 +1,13 @@
 name = "Farmer's Delight"
-filename = "FarmersDelight-1.20.1-1.2.9.jar"
+filename = "FarmersDelight-1.21.1-1.2.10.jar"
 side = "both"
 
 [download]
-url = "https://cdn.modrinth.com/data/R2OftAxM/versions/8rPF1pFi/FarmersDelight-1.20.1-1.2.9.jar"
+url = "https://cdn.modrinth.com/data/R2OftAxM/versions/EVaDSbPj/FarmersDelight-1.21.1-1.2.10.jar"
 hash-format = "sha512"
-hash = "b628f9818301788dfba535615dde964e1727b8b3b22884f26df1f8a2b5a11a063f3803de00bc6eb8d148440286d43a29b98352afb33bd447b847c21b870442cb"
+hash = "9c7bf1df38efe6167622938ecd9fcc9d2fb38de7457f3ef4ec189409a2268fd783c2e4a64c3da80ba67a463bb72c841f6510a57eadc88a078e44a085c299fa62"
 
 [update]
 [update.modrinth]
 mod-id = "R2OftAxM"
-version = "8rPF1pFi"
+version = "EVaDSbPj"

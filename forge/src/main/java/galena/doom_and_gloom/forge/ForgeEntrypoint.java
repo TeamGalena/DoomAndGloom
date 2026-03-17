@@ -9,12 +9,12 @@ import galena.doom_and_gloom.forge.compat.OreganizedCompat;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
 @Mod(DoomAndGloom.MOD_ID)
 public class ForgeEntrypoint {
@@ -26,7 +26,7 @@ public class ForgeEntrypoint {
             DoomAndGloomClient.init();
         }
 
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        IEventBus forgeBus = NeoForge.EVENT_BUS;
 
         if (CompatMods.AMENDMENTS) {
             forgeBus.addListener(this::onBlockInteract);

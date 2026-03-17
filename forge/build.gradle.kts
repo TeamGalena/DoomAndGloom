@@ -1,22 +1,18 @@
-import org.spongepowered.asm.gradle.plugins.MixinExtension
-
 plugins {
-    id("com.possible-triangle.forge")
-    alias(libs.plugins.parchment)
+    id("com.possible-triangle.neoforge")
+    // alias(libs.plugins.parchment)
 }
 
 mod {
-    mods.include(libs.galena.hats.forge)
-    mods.include(libs.multikulti.datagen.fix)
+    mods.include(libs.galena.hats.neoforge)
 }
 
-forge {
+neoforge {
     dependOn(project(":common"))
 
-    mappingChannel = "parchment"
-    mappingVersion = "2023.09.03-1.20.1"
+//    mappingChannel = "parchment"
+//    mappingVersion = "2023.09.03-1.20.1"
 
-    enableMixins()
     accessWidener(project(":common"))
 
     dataGen {
@@ -25,16 +21,8 @@ forge {
     }
 }
 
-tasks.compileJava {
-    dependsOn(tasks.getByName("transformAccessWidener"))
-}
-
-configure<MixinExtension> {
-    config("${mod.id.get()}.forge.mixins.json")
-}
-
 dependencies {
-    modImplementation(libs.moonlight.lib.forge) {
+    modImplementation(libs.moonlight.lib.neoforge) {
         isTransitive = false
     }
 
@@ -45,12 +33,10 @@ dependencies {
 
     modImplementation(libs.multikulti.core)
     modImplementation(libs.multikulti.datagen)
-    modImplementation(libs.dye.depot.forge)
+    modImplementation(libs.dye.depot.neoforge)
 
     if (!env.isCI) {
-        // this should be included transient with oreganized on 1.21 neoforge (just not possible with how forge works)
-        modRuntimeOnly(libs.blueprint)
-        modRuntimeOnly(libs.jei.forge)
-        modRuntimeOnly(libs.pathfinding.debug.forge)
+        modRuntimeOnly(libs.jei.neoforge)
+        modRuntimeOnly(libs.pathfinding.debug.neoforge)
     }
 }

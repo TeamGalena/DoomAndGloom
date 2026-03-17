@@ -1,6 +1,7 @@
 package galena.doom_and_gloom.content.listing;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.mehvahdjukaar.moonlight.api.misc.StrOpt;
 import net.mehvahdjukaar.moonlight.api.trades.ModItemListing;
@@ -30,7 +31,7 @@ public record BuyTagListing(TagKey<Item> want, int count, ItemStack offer, int m
     );
 
     @Override
-    public Codec<? extends ModItemListing> getCodec() {
+    public MapCodec<? extends ModItemListing> getCodec() {
         return CODEC;
     }
 
