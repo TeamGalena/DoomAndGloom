@@ -1,7 +1,7 @@
 # <meta>
 #    <source>@pssbletrngle/github-meta-generator</source>
 #    <version>0.0.0-dev</version>
-#    <timestamp>2026-03-11T14:43:43.540Z</timestamp>
+#    <timestamp>2026-03-17T23:39:27.867Z</timestamp>
 # </meta>
 
 name: Bug Report
@@ -26,6 +26,7 @@ body:
       options:
         - "fabric"
         - "forge"
+        - "neoforge"
     validations:
       required: true
 
@@ -33,6 +34,17 @@ body:
     id: version-version
     attributes:
       label: Mod Version
+    validations:
+      required: true
+
+  - type: dropdown
+    id: minecraft-version
+    attributes:
+      label: Minecraft Version
+      multiple: false
+      options:
+        - "1.21"
+        - "1.20"
     validations:
       required: true
 
