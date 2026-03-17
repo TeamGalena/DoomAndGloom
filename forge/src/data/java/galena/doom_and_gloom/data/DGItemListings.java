@@ -4,20 +4,23 @@ import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.data.provider.ItemListingProvider;
 import galena.doom_and_gloom.index.DGTags;
 import galena.doom_and_gloom.index.DGVillagerTypes;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+
+import java.util.concurrent.CompletableFuture;
 
 public class DGItemListings extends ItemListingProvider {
 
-    public DGItemListings(PackOutput output, ExistingFileHelper fileHelper) {
-        super(output, fileHelper, DoomAndGloom.MOD_ID);
+    public DGItemListings(PackOutput output, ExistingFileHelper fileHelper, CompletableFuture<HolderLookup.Provider> lookup) {
+        super(output, fileHelper, DoomAndGloom.MOD_ID, lookup);
     }
 
     @Override
-    protected void run() {
+    protected void gather() {
         builder(DGVillagerTypes.GRAVETENDER.getKey(), 1)
                 .sell("stone_shovel", 1, new ItemStack(Items.STONE_SHOVEL), 12, 1)
                 .sell("rose_bush", 1, new ItemStack(Items.ROSE_BUSH), 8, 2)

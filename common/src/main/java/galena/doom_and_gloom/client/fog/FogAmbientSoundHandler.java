@@ -38,7 +38,7 @@ public class FogAmbientSoundHandler implements AmbientSoundHandler {
             sound = null;
         }
 
-        if (player.hasEffect(DGEffects.FOG.get())) {
+        if (player.hasEffect(DGEffects.FOG)) {
             startPlaying();
         } else {
             stopPlaying();

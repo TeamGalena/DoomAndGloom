@@ -1,7 +1,12 @@
 package galena.doom_and_gloom.data.provider;
 
 import galena.doom_and_gloom.index.DGTags;
+
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
+
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -10,12 +15,11 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public abstract class DGRecipeProvider extends RecipeProvider {
 
-    public DGRecipeProvider(PackOutput output) {
-        super(output);
+    public DGRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+        super(output, provider);
     }
 
     public ShapedRecipeBuilder compact(Item itemOut, Item itemIn) {
@@ -24,13 +28,13 @@ public abstract class DGRecipeProvider extends RecipeProvider {
                 .pattern("AAA")
                 .pattern("AAA")
                 .define('A', itemIn)
-                .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(itemIn).getPath(), has(itemIn));
+                .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(itemIn).getPath(), has(itemIn));
     }
 
     public ShapelessRecipeBuilder unCompact(Item itemOut, Item itemIn) {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, itemOut, 9)
                 .requires(itemIn)
-                .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(itemIn).getPath(), has(itemIn));
+                .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(itemIn).getPath(), has(itemIn));
     }
 
     public ShapedRecipeBuilder vigilCandle(Supplier<? extends Block> block, ItemLike candle) {

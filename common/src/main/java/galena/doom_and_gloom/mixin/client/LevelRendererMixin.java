@@ -24,44 +24,44 @@ public class LevelRendererMixin {
     private static final ResourceLocation SUN_LOCATION = DoomAndGloom.modLoc("textures/environment/sun_fog.png");
 
     @Inject(
-            method = "renderClouds(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;FDDD)V",
+            method = "renderClouds(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FDDD)V",
             cancellable = true,
             at = @At("HEAD")
     )
-    private void disableClouds(PoseStack pose, Matrix4f matrix, float p_254364_, double p_253843_, double p_253663_, double p_253795_, CallbackInfo ci) {
+    private void disableClouds(PoseStack poseStack, Matrix4f matrix4f, Matrix4f matrix4f2, float f, double d, double e, double g, CallbackInfo ci) {
         var player = Minecraft.getInstance().player;
-        if (player != null && player.hasEffect(DGEffects.FOG.get())) {
+        if (player != null && player.hasEffect(DGEffects.FOG)) {
             ci.cancel();
         }
     }
 
     @ModifyExpressionValue(
-            method = "renderSky(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;FLnet/minecraft/client/Camera;ZLjava/lang/Runnable;)V",
+            method = "renderSky(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FLnet/minecraft/client/Camera;ZLjava/lang/Runnable;)V",
             at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/LevelRenderer;SUN_LOCATION:Lnet/minecraft/resources/ResourceLocation;")
     )
     private ResourceLocation replaceSun(ResourceLocation original) {
         var player = Minecraft.getInstance().player;
-        if (player != null && player.hasEffect(DGEffects.FOG.get())) return SUN_LOCATION;
+        if (player != null && player.hasEffect(DGEffects.FOG)) return SUN_LOCATION;
         else return original;
     }
 
     @ModifyExpressionValue(
-            method = "renderSky(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;FLnet/minecraft/client/Camera;ZLjava/lang/Runnable;)V",
+            method = "renderSky(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FLnet/minecraft/client/Camera;ZLjava/lang/Runnable;)V",
             at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/LevelRenderer;MOON_LOCATION:Lnet/minecraft/resources/ResourceLocation;")
     )
     private ResourceLocation replaceMoon(ResourceLocation original) {
         var player = Minecraft.getInstance().player;
-        if (player != null && player.hasEffect(DGEffects.FOG.get())) return MOON_LOCATION;
+        if (player != null && player.hasEffect(DGEffects.FOG)) return MOON_LOCATION;
         else return original;
     }
 
     @ModifyExpressionValue(
-            method = "renderSky(Lcom/mojang/blaze3d/vertex/PoseStack;Lorg/joml/Matrix4f;FLnet/minecraft/client/Camera;ZLjava/lang/Runnable;)V",
+            method = "renderSky(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FLnet/minecraft/client/Camera;ZLjava/lang/Runnable;)V",
             at =@At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientLevel;getStarBrightness(F)F")
     )
     private float hideStars(float original) {
         var player = Minecraft.getInstance().player;
-        if (player != null && player.hasEffect(DGEffects.FOG.get())) return 0F;
+        if (player != null && player.hasEffect(DGEffects.FOG)) return 0F;
         else return original;
     }
 

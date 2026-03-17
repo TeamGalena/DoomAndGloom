@@ -22,18 +22,18 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class DGBlocks {
 
-    public static final RegSupplier<Block> SEPULCHER = register("sepulcher", () -> new SepulcherBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON).sound(DGSoundTypes.SEPULCHER)));
-    public static final RegSupplier<BonePileBlock> BONE_PILE = register("bone_pile", () -> new BonePileBlock(BlockBehaviour.Properties.copy(Blocks.BONE_BLOCK).sound(DGSoundTypes.BONE_PILE).strength(1F)));
-    public static final RegSupplier<Block> ROTTING_FLESH = registerBlock(modLoc("rotting_flesh"), () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT)));
-    public static final RegSupplier<Block> STONE_TABLET = register("stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.DEFAULT));
-    public static final RegSupplier<Block> ENGRAVED_STONE_TABLET = register("engraved_stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.ENGRAVED));
-    public static final RegSupplier<Block> CRACKED_STONE_TABLET = register("cracked_stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.copy(Blocks.STONE), StoneTabletBlock.Type.ENGRAVED));
+    public static final RegSupplier<Block> SEPULCHER = register("sepulcher", () -> new SepulcherBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON).sound(DGSoundTypes.SEPULCHER)));
+    public static final RegSupplier<BonePileBlock> BONE_PILE = register("bone_pile", () -> new BonePileBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).sound(DGSoundTypes.BONE_PILE).strength(1F)));
+    public static final RegSupplier<Block> ROTTING_FLESH = registerBlock(modLoc("rotting_flesh"), () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
+    public static final RegSupplier<Block> STONE_TABLET = register("stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE), StoneTabletBlock.Type.DEFAULT));
+    public static final RegSupplier<Block> ENGRAVED_STONE_TABLET = register("engraved_stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE), StoneTabletBlock.Type.ENGRAVED));
+    public static final RegSupplier<Block> CRACKED_STONE_TABLET = register("cracked_stone_tablet", () -> new StoneTabletBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE), StoneTabletBlock.Type.ENGRAVED));
 
     private static final Supplier<BlockBehaviour.Properties> VIGIL_CANDLE_PROPERTIES = () -> BlockBehaviour.Properties.of().noOcclusion().lightLevel(VigilCandleBlock.LIGHT_EMISSION).sound(SoundType.METAL).pushReaction(PushReaction.DESTROY);
     public static final RegSupplier<Block> VIGIL_CANDLE = register("vigil_candle", () -> new VigilCandleBlock(VIGIL_CANDLE_PROPERTIES.get()));
     public static final Map<DyeColor, RegSupplier<Block>> COLORED_VIGIL_CANDLES = registerColored("vigil_candle", color -> new VigilCandleBlock(VIGIL_CANDLE_PROPERTIES.get().mapColor(color)));
 
-    public static final RegSupplier<Block> BURIAL_DIRT = register("burial_dirt", () -> new BurialDirtBlock(BlockBehaviour.Properties.copy(Blocks.DIRT)));
+    public static final RegSupplier<Block> BURIAL_DIRT = register("burial_dirt", () -> new BurialDirtBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)));
 
     public static Stream<RegSupplier<Block>> vigilCandles() {
         return Stream.of(
@@ -62,7 +62,7 @@ public class DGBlocks {
     }
 
     public static <T extends Block> RegSupplier<T> register(String name, Supplier<T> block, Item.Properties prop) {
-        return registerBlockWithItem(modLoc(name), block, prop, 0);
+        return registerBlockWithItem(modLoc(name), block, prop);
     }
 
     public static void init() {

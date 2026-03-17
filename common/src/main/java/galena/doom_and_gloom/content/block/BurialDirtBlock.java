@@ -38,7 +38,7 @@ public class BurialDirtBlock extends Block {
             monster.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
             monster.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 14, 2, false, false));
             serverLevel.addFreshEntity(monster);
-            monster.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.NATURAL, null, null);
+            monster.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.NATURAL, null);
             monster.spawnAnim();
         }
     }

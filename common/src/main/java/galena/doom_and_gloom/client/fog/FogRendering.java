@@ -29,7 +29,7 @@ public class FogRendering {
 
     public static void clientTick() {
         if (!(Minecraft.getInstance().gameRenderer.getMainCamera().getEntity() instanceof Player player)) return;
-        fogEffect = player.getEffect(DGEffects.FOG.get());
+        fogEffect = player.getEffect(DGEffects.FOG);
 
         if (fogEffect == null) return;
         if (Minecraft.getInstance().isPaused()) return;
@@ -67,11 +67,10 @@ public class FogRendering {
 
     public static float @Nullable [] modifyFogColor(float r, float g, float b, float partialTicks) {
         return activeEffect()
-                .flatMap(MobEffectInstance::getFactorData)
-                .map(factorData -> {
+                .map(effect -> {
                     Entity cameraEntity = Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
                     if (!(cameraEntity instanceof LivingEntity le)) return null;
-                    float factor = factorData.getFactor(le, partialTicks);
+                    float factor = effect.getBlendFactor(le, partialTicks);
                     // target color components (0x697180)
                     float targetR = 0x85 / 255f;
                     float targetG = 0x90 / 255f;
@@ -89,10 +88,10 @@ public class FogRendering {
                                                   FogRenderer.FogMode mode, FogShape fogShape, FogType fogType,
                                                   float partialTicks) {
         if (fogType != FogType.NONE) return null;
-        return FogRendering.activeEffect().flatMap(MobEffectInstance::getFactorData).map(factorData -> {
+        return FogRendering.activeEffect().map(effect -> {
             Entity camE = Minecraft.getInstance().gameRenderer.getMainCamera().getEntity();
             if (!(camE instanceof LivingEntity le)) return null;
-            float far = Mth.lerp(factorData.getFactor(le, partialTicks), end, 15F);
+            float far = Mth.lerp(effect.getBlendFactor(le, partialTicks), end, 15F);
             float near = (mode == FogRenderer.FogMode.FOG_SKY ? -2F : far * -0.5F);
             return new float[]{near, far};
         }).orElse(null);

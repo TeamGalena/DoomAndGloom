@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.RecordItem;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 public abstract class DGLangProvider extends LanguageProvider {
 
@@ -16,12 +16,12 @@ public abstract class DGLangProvider extends LanguageProvider {
         super(output, modid, locale);
     }
 
-    protected void addDisc(Supplier<? extends RecordItem> disc, String desc) {
+    protected void addDisc(Supplier<? extends Item> disc, String desc) {
         addItem(disc, "Music Disc");
         add(disc.get().getDescriptionId() + ".desc", desc);
     }
 
-    protected void addDisc(Supplier<? extends RecordItem> disc, String artist, String song) {
+    protected void addDisc(Supplier<? extends Item> disc, String artist, String song) {
         addDisc(disc, artist + " - " + song);
     }
 

@@ -23,7 +23,8 @@ public class DGItemTabContents {
 
         event.add(CreativeModeTabs.SPAWN_EGGS, DGItems.HOLLER_SPAWN_EGG.get());
 
-        event.addAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, stack -> stack.is(ItemTags.MUSIC_DISCS), DGItems.MUSIC_DISC_AFTERLIFE.get());
+        // TODO port
+        event.addAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, stack -> stack.is(Items.MUSIC_DISC_13), DGItems.MUSIC_DISC_AFTERLIFE.get());
 
         //if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
         //    event.accept(new ItemStack(OItems.BUSH_HAMMER.get()));

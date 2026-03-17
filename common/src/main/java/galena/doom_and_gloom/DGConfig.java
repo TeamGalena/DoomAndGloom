@@ -2,16 +2,16 @@ package galena.doom_and_gloom;
 
 import java.util.function.Supplier;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
-import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;
+import net.mehvahdjukaar.moonlight.api.platform.configs.ModConfigHolder;
 
 //TODO: add mod menu compat
 public class DGConfig {
     public static final Common COMMON;
-    private static final ConfigSpec COMMON_SPEC;
+    private static final ModConfigHolder COMMON_SPEC;
 
     public static final Client CLIENT;
-    private static final ConfigSpec CLIENT_SPEC;
+    private static final ModConfigHolder CLIENT_SPEC;
 
     public static void init() {
         //just classloads this
@@ -50,11 +50,11 @@ public class DGConfig {
         ConfigBuilder commonBuilder = ConfigBuilder.create(DoomAndGloom.MOD_ID, ConfigType.COMMON);
 
         COMMON = new Common(commonBuilder);
-        COMMON_SPEC = commonBuilder.buildAndRegister();
+        COMMON_SPEC = commonBuilder.build();
 
         ConfigBuilder clientBuilder = ConfigBuilder.create(DoomAndGloom.MOD_ID, ConfigType.CLIENT);
         CLIENT = new Client(clientBuilder);
-        CLIENT_SPEC = clientBuilder.buildAndRegister();
+        CLIENT_SPEC = clientBuilder.build();
     }
 
 }

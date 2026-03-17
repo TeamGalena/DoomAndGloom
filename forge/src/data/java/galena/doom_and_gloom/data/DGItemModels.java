@@ -5,7 +5,7 @@ import galena.doom_and_gloom.data.provider.DGItemModelProvider;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGItems;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class DGItemModels extends DGItemModelProvider {
 
@@ -13,7 +13,6 @@ public class DGItemModels extends DGItemModelProvider {
         super(output, helper);
     }
 
-    @Override
     public String getName() {
         return DoomAndGloom.MOD_ID + " Item Models";
     }

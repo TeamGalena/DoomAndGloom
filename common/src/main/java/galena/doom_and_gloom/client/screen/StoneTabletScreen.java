@@ -8,9 +8,9 @@ import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.content.block.StoneTabletText;
 import galena.doom_and_gloom.index.DGItems;
-import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.StoneTabletUpdatePacket;
 import java.util.stream.IntStream;
+import net.mehvahdjukaar.moonlight.api.platform.network.NetworkHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.font.TextFieldHelper;
@@ -124,7 +124,7 @@ public class StoneTabletScreen extends Screen {
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Lighting.setupForFlatItems();
-        this.renderBackground(guiGraphics);
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, 40, 16777215);
         this.renderSign(guiGraphics);
         Lighting.setupFor3DItems();
@@ -139,7 +139,7 @@ public class StoneTabletScreen extends Screen {
     @Override
     public void removed() {
         if (engraveOnClose) {
-            DGNetwork.CHANNEL.sendToServer(new StoneTabletUpdatePacket(tablet.getBlockPos(), messages));
+            NetworkHelper.sendToServer(new StoneTabletUpdatePacket(tablet.getBlockPos(), messages));
         }
     }
 

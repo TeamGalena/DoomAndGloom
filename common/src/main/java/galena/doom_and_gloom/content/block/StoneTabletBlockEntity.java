@@ -10,6 +10,7 @@ import java.util.function.UnaryOperator;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
@@ -54,15 +55,15 @@ public class StoneTabletBlockEntity extends BlockEntity implements Ticking {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         StoneTabletText.DIRECT_CODEC.encodeStart(NbtOps.INSTANCE, this.frontText)
                 .resultOrPartial(DoomAndGloom.LOGGER::error).ifPresent(tagx -> tag.put("front_text", tagx));
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
 
         if (tag.contains("text")) {
             StoneTabletText.DIRECT_CODEC
@@ -144,8 +145,8 @@ public class StoneTabletBlockEntity extends BlockEntity implements Ticking {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     @Override

@@ -1,7 +1,8 @@
 package galena.doom_and_gloom.data.provider;
 
 import static galena.doom_and_gloom.DoomAndGloom.MOD_ID;
-import static net.minecraftforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
+import static galena.doom_and_gloom.content.block.StoneTabletBlock.Attachment;
+import static net.neoforged.neoforge.client.model.generators.ModelProvider.BLOCK_FOLDER;
 
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.block.SepulcherBlock;
@@ -10,16 +11,16 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.AbstractCandleBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class DGBlockStateProvider extends BlockStateProvider {
@@ -33,7 +34,7 @@ public abstract class DGBlockStateProvider extends BlockStateProvider {
     }
 
     protected String name(Block block) {
-        return ForgeRegistries.BLOCKS.getKey(block).getPath();
+        return BuiltInRegistries.BLOCK.getKey(block).getPath();
     }
 
     protected String name(Supplier<? extends Block> block) {
@@ -161,12 +162,12 @@ public abstract class DGBlockStateProvider extends BlockStateProvider {
             var attachment = state.getValue(StoneTabletBlock.ATTACHMENT);
 
             var suffix = switch (attachment) {
-                case WALL -> "_wall";
-                case CEILING, FLOOR -> "_floor";
+                case Attachment.WALL -> "_wall";
+                case Attachment.CEILING, Attachment.FLOOR -> "_floor";
                 default -> "";
             };
 
-            var xRot = attachment == StoneTabletBlock.Attachment.FLOOR ? 180 : 0;
+            var xRot = attachment == Attachment.FLOOR ? 180 : 0;
             var yRot = switch (state.getValue(StoneTabletBlock.FACING)) {
                 case EAST -> 90;
                 case SOUTH -> 180;

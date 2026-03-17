@@ -42,7 +42,7 @@ public class HollerAvoidGoal extends Goal {
         }
 
         if (avoid != null) {
-            disapearAfterwards = avoid.hasEffect(DGEffects.WARDING.get());
+            disapearAfterwards = avoid.hasEffect(DGEffects.WARDING);
             var target = mob.position().subtract(avoid.position());
             var radius = disapearAfterwards ? 24 : 4;
             var away = AirRandomPos.getPosTowards(mob, radius, 1, 0, target, 1F);

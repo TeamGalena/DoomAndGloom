@@ -8,12 +8,16 @@ import java.awt.*;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -61,7 +65,7 @@ public class SepulcherBlock extends Block implements TickingEntityBlock<Sepulche
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         int fillLevel = state.getValue(LEVEL);
 
         if (fillLevel == READY) {
@@ -69,24 +73,30 @@ public class SepulcherBlock extends Block implements TickingEntityBlock<Sepulche
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        var held = player.getItemInHand(hand);
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack held, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        var extraction = useWithoutItem(state, level, pos, player, hit);
+        if (extraction.indicateItemUse()) return ItemInteractionResult.sidedSuccess(level.isClientSide());
 
         if (tryInsert(held, player, state, level, pos, false)) {
             player.awardStat(Stats.ITEM_USED.get(held.getItem()));
             if (!player.getAbilities().instabuild) {
                 held.shrink(1);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     public static boolean tryInsert(ItemStack stack, @Nullable Player player, BlockState state, Level level, BlockPos pos, boolean simulate) {
         int fillLevel = state.getValue(LEVEL);
-        var food = stack.getItem().getFoodProperties();
+        var food = stack.get(DataComponents.FOOD);
 
-        if (fillLevel < MAX_LEVEL && food != null && food.isMeat()) {
+        if (fillLevel < MAX_LEVEL && food != null && stack.is(ItemTags.MEAT)) {
             if (!simulate) insert(player, state, level, pos, level.random.nextIntBetweenInclusive(1, 2));
             return true;
         }
@@ -99,7 +109,7 @@ public class SepulcherBlock extends Block implements TickingEntityBlock<Sepulche
         level.setBlock(pos, newState, 3);
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(user, newState));
 
-        if(level instanceof ServerLevel serverLevel) {
+        if (level instanceof ServerLevel serverLevel) {
             var vec = Vec3.atCenterOf(pos);
             serverLevel.sendParticles(ParticleTypes.COMPOSTER, vec.x, vec.y, vec.z, 10, 0.3, 0.3, 0.3, 0.0);
         }
@@ -122,10 +132,10 @@ public class SepulcherBlock extends Block implements TickingEntityBlock<Sepulche
         var level = Minecraft.getInstance().level;
         if (level == null) return;
 
-        var effectColor = new Color(8889187);
         for (int i = 0; i < 20; i++) {
             var vec = Vec3.atBottomCenterOf(at).add(level.random.nextDouble() - 0.5, 0.8, level.random.nextDouble() - 0.5);
-            level.addParticle(ParticleTypes.ENTITY_EFFECT, vec.x, vec.y, vec.z, effectColor.getRed() / 255D, effectColor.getGreen() / 255D, effectColor.getBlue() / 255D);
+            // TODO port
+            level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 0x87A363), vec.x, vec.y, vec.z, 0, 0, 0);
         }
     }
 

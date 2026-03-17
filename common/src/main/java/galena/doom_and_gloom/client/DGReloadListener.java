@@ -1,6 +1,7 @@
 package galena.doom_and_gloom.client;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import galena.doom_and_gloom.DoomAndGloom;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class DGReloadListener extends SimplePreparableReloadListener<List<Intege
     @Override
     protected List<Integer> prepare(ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         return parsePaletteStrip(pResourceManager,
-                new ResourceLocation("doom_and_gloom:textures/misc/stone_tablet_text_colors.png"),
+                DoomAndGloom.modLoc("textures/misc/stone_tablet_text_colors.png"),
                 3);
     }
 

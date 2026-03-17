@@ -77,7 +77,7 @@ public class Holler extends PathfinderMob {
         goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 16.0F));
         goalSelector.addGoal(9, new HollerStrollGoal(this, 1F));
 
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false, it -> !it.hasEffect(DGEffects.WARDING.get())));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false, it -> !it.hasEffect(DGEffects.WARDING)));
     }
 
     @Override
@@ -99,12 +99,12 @@ public class Holler extends PathfinderMob {
         var applied = level.getPlayers(player ->
                 player.gameMode.isSurvival()
                         && pos.closerThan(player.position(), radius)
-                        && (!player.hasEffect(DGEffects.FOG.get()) || player.getEffect(DGEffects.FOG.get()).endsWithin(duration - 1))
-                        && !player.hasEffect(DGEffects.WARDING.get())
+                        && (!player.hasEffect(DGEffects.FOG) || player.getEffect(DGEffects.FOG).endsWithin(duration - 1))
+                        && !player.hasEffect(DGEffects.WARDING)
         );
 
         applied.forEach(it -> {
-            it.addEffect(new MobEffectInstance(DGEffects.FOG.get(), 260, 0, false, false), source);
+            it.addEffect(new MobEffectInstance(DGEffects.FOG, 260, 0, false, false), source);
             level.playSound(it, source, DGSoundEvents.HOLLER_SHRIEKS.get(), source.getSoundSource(), 1F, 1F);
         });
     }
@@ -179,7 +179,7 @@ public class Holler extends PathfinderMob {
     }
 
     @Override
-    public boolean canBeLeashed(Player player) {
+    public boolean canBeLeashed() {
         return false;
     }
 
@@ -255,7 +255,7 @@ public class Holler extends PathfinderMob {
 
             level.getBlockEntity(blockPosition(), BlockEntityType.JUKEBOX).ifPresent(jukebox -> {
                 var stack = new ItemStack(DGItems.MUSIC_DISC_AFTERLIFE.get());
-                jukebox.setFirstItem(stack);
+                jukebox.setTheItem(stack);
             });
         } else {
             curseGround(level, blockPosition());

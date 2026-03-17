@@ -14,7 +14,7 @@ public class DoomAndGloom {
     public static final String MOD_ID = "doom_and_gloom";
 
     public static ResourceLocation modLoc(String location) {
-        return new ResourceLocation(MOD_ID, location);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, location);
     }
 
     public static void init() {

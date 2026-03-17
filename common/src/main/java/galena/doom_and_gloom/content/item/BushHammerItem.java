@@ -6,7 +6,7 @@ import net.minecraft.world.item.*;
 public class BushHammerItem extends DiggerItem {
 
     public BushHammerItem(Tier tier, float attack, float modifier, Item.Properties properties) {
-        super(attack, modifier, tier, DGTags.Blocks.MINEABLE_WITH_BUSH_HAMMER, properties);
+        super(tier, DGTags.Blocks.MINEABLE_WITH_BUSH_HAMMER, properties.attributes(createAttributes(tier, attack, modifier)));
     }
 
 }

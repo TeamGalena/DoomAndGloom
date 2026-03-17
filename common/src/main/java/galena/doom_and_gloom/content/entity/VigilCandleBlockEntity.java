@@ -31,13 +31,11 @@ public class VigilCandleBlockEntity extends BlockEntity implements Ticking {
         var shouldClear = effects.getTagOrEmpty(DGTags.Effects.VIGIL_CANDLE_CLEARS);
 
         entities.forEach(entity -> {
-            shouldClear.forEach(effect -> {
-                entity.removeEffect(effect.value());
-            });
+            shouldClear.forEach(entity::removeEffect);
 
             var duration = 20 * 5;
-            if (!entity.hasEffect(DGEffects.WARDING.get()) || entity.getEffect(DGEffects.WARDING.get()).endsWithin(duration - 1)) {
-                entity.addEffect(new MobEffectInstance(DGEffects.WARDING.get(), duration, 0, false, false, false));
+            if (!entity.hasEffect(DGEffects.WARDING) || entity.getEffect(DGEffects.WARDING).endsWithin(duration - 1)) {
+                entity.addEffect(new MobEffectInstance(DGEffects.WARDING, duration, 0, false, false, false));
             }
         });
     }

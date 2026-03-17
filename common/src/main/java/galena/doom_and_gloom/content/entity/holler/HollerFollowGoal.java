@@ -38,7 +38,7 @@ public class HollerFollowGoal extends Goal {
         if(target == null) return false;
         var distanceSquared = mob.distanceToSqr(target);
 
-        if(target.hasEffect(DGEffects.FOG.get())) {
+        if(target.hasEffect(DGEffects.FOG)) {
             return false;
         }
 

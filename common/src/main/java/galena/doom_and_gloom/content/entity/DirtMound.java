@@ -3,6 +3,7 @@ package galena.doom_and_gloom.content.entity;
 import galena.doom_and_gloom.index.DGTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -32,7 +33,7 @@ public class DirtMound extends Entity {
             monster.moveTo(pos.getX() + 0.5, pos.getY() - 1, pos.getZ() + 0.5, 0, 0);
             monster.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 14, 2, false, false));
             serverLevel.addFreshEntity(monster);
-            monster.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.NATURAL, null, null);
+            monster.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.NATURAL, null);
             monster.spawnAnim();
         }
     }
@@ -56,7 +57,7 @@ public class DirtMound extends Entity {
     }
 
     @Override
-    protected void defineSynchedData() {
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
 
     }
 

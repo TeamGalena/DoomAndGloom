@@ -43,3 +43,8 @@ An addon-mod for Oreganized adding Halloween-themed content
     versionRange="*"
     ordering="AFTER"
     side="BOTH"
+
+[[mixins]]
+    config="${mod_id}.mixins.json"
+[[mixins]]
+    config="${mod_id}.forge.mixins.json"

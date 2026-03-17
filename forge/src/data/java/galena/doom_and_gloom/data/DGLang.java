@@ -6,7 +6,6 @@ import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGEffects;
 import galena.doom_and_gloom.index.DGEntityTypes;
 import galena.doom_and_gloom.index.DGItems;
-import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.minecraft.data.PackOutput;
 
 public class DGLang extends DGLangProvider {
@@ -20,20 +19,20 @@ public class DGLang extends DGLangProvider {
         addDisc(DGItems.MUSIC_DISC_AFTERLIFE, "Firch", "afterlife");
 
         addBlock(DGBlocks.BONE_PILE, "Pile of Bones");
-        add(DGBlocks.SEPULCHER.getHolder());
-        add(DGBlocks.ROTTING_FLESH.getHolder());
-        add(DGBlocks.STONE_TABLET.getHolder());
-        add(DGBlocks.ENGRAVED_STONE_TABLET.getHolder());
-        add(DGBlocks.CRACKED_STONE_TABLET.getHolder());
-        DGBlocks.vigilCandles().map(RegSupplier::getHolder).forEach(this::add);
-        add(DGBlocks.BURIAL_DIRT.getHolder());
+        add(DGBlocks.SEPULCHER);
+        add(DGBlocks.ROTTING_FLESH);
+        add(DGBlocks.STONE_TABLET);
+        add(DGBlocks.ENGRAVED_STONE_TABLET);
+        add(DGBlocks.CRACKED_STONE_TABLET);
+        DGBlocks.vigilCandles().forEach(this::add);
+        add(DGBlocks.BURIAL_DIRT);
 
-        add(DGItems.BUSH_HAMMER.getHolder());
-        add(DGItems.HOLLER_SPAWN_EGG.getHolder());
-        add(DGItems.HAMMER_AND_CHISEL.getHolder());
+        add(DGItems.BUSH_HAMMER);
+        add(DGItems.HOLLER_SPAWN_EGG);
+        add(DGItems.HAMMER_AND_CHISEL);
 
-        add(DGEntityTypes.DIRT_MOUND.getHolder());
-        add(DGEntityTypes.HOLLER.getHolder());
+        add(DGEntityTypes.DIRT_MOUND);
+        add(DGEntityTypes.HOLLER);
 
         addEffect(DGEffects.FOG, "Fog");
         addEffect(DGEffects.WARDING, "Warding");

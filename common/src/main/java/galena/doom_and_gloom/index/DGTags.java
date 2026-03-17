@@ -43,7 +43,7 @@ public class DGTags {
         public static final TagKey<Block> MINEABLE_WITH_BUSH_HAMMER = tag("mineable/bush_hammer");
         public static final TagKey<Block> ENGRAVABLE = tag("engravable");
         public static final TagKey<Block> ENGRAVABLE_NEEDS_PLATE = tag("engravable/needs_plate");
-        public static final TagKey<Block> HEAT_SOURCE = TagKey.create(Registries.BLOCK, new ResourceLocation("oreganized", "fire_source"));
+        public static final TagKey<Block> HEAT_SOURCE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("oreganized", "fire_source"));
         public static final TagKey<Block> VIGIL_CANDLES = tag("vigil_candles");
         public static final TagKey<Block> CAN_TURN_INTO_BURIAL_DIRT = tag("burial_dirt_convertible");
         public static final TagKey<Block> GRAVETENDER_LIGHTABLE = tag("gravetender_lightables");
@@ -83,7 +83,7 @@ public class DGTags {
     }
 
     private static <T> TagKey<T> createCTag(ResourceKey<Registry<T>> registry, String name) {
-        var id = new ResourceLocation("c", name);
+        var id = ResourceLocation.fromNamespaceAndPath("c", name);
         return TagKey.create(registry, id);
     }
 

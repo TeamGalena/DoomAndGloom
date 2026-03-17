@@ -1,16 +1,17 @@
 package galena.doom_and_gloom.network.packet;
 
+import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGSoundEvents;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
-import net.mehvahdjukaar.moonlight.api.platform.network.ChannelHandler;
 import net.mehvahdjukaar.moonlight.api.platform.network.Message;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.FilteredText;
 import net.minecraft.sounds.SoundSource;
@@ -20,8 +21,13 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 public record StoneTabletUpdatePacket(BlockPos pos, String[] lines) implements Message {
 
+    public static final TypeAndCodec<RegistryFriendlyByteBuf, SepulcherConsumesDeathPacket> TYPE = Message.makeType(
+            DoomAndGloom.modLoc("stone_tablet_update"),
+            SepulcherConsumesDeathPacket::from
+    );
+
     @Override
-    public void writeToBuffer(FriendlyByteBuf buffer) {
+    public void write(RegistryFriendlyByteBuf buffer) {
         buffer.writeBlockPos(pos);
         buffer.writeVarInt(lines.length);
         for (var line : lines) {
@@ -30,8 +36,8 @@ public record StoneTabletUpdatePacket(BlockPos pos, String[] lines) implements M
     }
 
     @Override
-    public void handle(ChannelHandler.Context context) {
-        if (!(context.getSender() instanceof ServerPlayer sender)) return;
+    public void handle(Context context) {
+        if (!(context.getPlayer() instanceof ServerPlayer sender)) return;
 
         // text filtering yay
         CompletableFuture.supplyAsync(() ->
@@ -68,7 +74,7 @@ public record StoneTabletUpdatePacket(BlockPos pos, String[] lines) implements M
     }
 
 
-    public static StoneTabletUpdatePacket from(FriendlyByteBuf buffer) {
+    public static StoneTabletUpdatePacket from(RegistryFriendlyByteBuf buffer) {
         var pos = buffer.readBlockPos();
         var lines = new String[buffer.readVarInt()];
         for (int i = 0; i < lines.length; i++) {
@@ -77,4 +83,8 @@ public record StoneTabletUpdatePacket(BlockPos pos, String[] lines) implements M
         return new StoneTabletUpdatePacket(pos, lines);
     }
 
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE.type();
+    }
 }

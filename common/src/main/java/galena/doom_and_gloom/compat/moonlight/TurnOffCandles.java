@@ -131,7 +131,7 @@ public class TurnOffCandles extends Behavior<Villager> {
                     var player = FakePlayerManager.get(GRAVETENDER, pLevel);
                     player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
                     BlockHitResult hit = new BlockHitResult(Vec3.atBottomCenterOf(pos), Direction.UP, pos, false);
-                    state.use(pLevel, player, InteractionHand.MAIN_HAND, hit);
+                    state.useWithoutItem(pLevel, player, hit);
                 }
             }
 

@@ -26,7 +26,7 @@ public record BonePileClientProperties(BonePileBlock block) implements IClientBl
     @SubscribeEvent
     public static void register(RegisterClientExtensionsEvent event) {
         var block = DGBlocks.BONE_PILE.get();
-        event.registerBlock(new BonePileBlock(block), block);
+        event.registerBlock(new BonePileClientProperties(block), block);
     }
 
 }

@@ -106,7 +106,7 @@ public class LightUpCandles extends Behavior<Villager> {
                     BlockHitResult hit = new BlockHitResult(Vec3.atBottomCenterOf(pos), Direction.UP, pos, false);
 
                     if (!itemStack.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, hit)).consumesAction()) {
-                        state.use(level, player, InteractionHand.MAIN_HAND, hit);
+                        state.useWithoutItem(level, player, hit);
                     }
                     pOwner.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);
                 }

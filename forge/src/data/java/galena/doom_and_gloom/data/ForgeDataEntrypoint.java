@@ -1,10 +1,13 @@
 package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
+
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -13,12 +16,12 @@ import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@EventBusSubscriber(modid = DoomAndGloom.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = DoomAndGloom.MOD_ID)
 public class ForgeDataEntrypoint {
 
     @SubscribeEvent
@@ -37,8 +40,8 @@ public class ForgeDataEntrypoint {
         generator.addProvider(client, lang);
         generator.addProvider(client, new DGSoundDefinitions(output, helper));
 
-        generator.addProvider(server, new DGRecipes(output));
-        generator.addProvider(server, new DGLootTables(output));
+        generator.addProvider(server, new DGRecipes(output, future));
+        generator.addProvider(server, new DGLootTables(output, future));
         DGBlockTags blockTags = new DGBlockTags(output, future, helper);
         generator.addProvider(server, blockTags);
         generator.addProvider(server, new DGItemTags(output, future, blockTags.contentsGetter(), helper));
@@ -46,12 +49,12 @@ public class ForgeDataEntrypoint {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(server, new DGDamageTags(output, lookupProvider, helper));
         generator.addProvider(server, new DGMobEffectTags(output, lookupProvider, helper));
-        generator.addProvider(server, new DGItemListings(output, helper));
+        generator.addProvider(server, new DGItemListings(output, helper, future));
 
         generator.addProvider(server, new PackMetadataGenerator(output).add(PackMetadataSection.TYPE, new PackMetadataSection(
                 Component.literal("Doom & Gloom resources"),
                 DetectedVersion.BUILT_IN.getPackVersion(PackType.CLIENT_RESOURCES),
-                Arrays.stream(PackType.values()).collect(Collectors.toMap(Function.identity(), DetectedVersion.BUILT_IN::getPackVersion))
+                Optional.empty()
         )));
     }
 

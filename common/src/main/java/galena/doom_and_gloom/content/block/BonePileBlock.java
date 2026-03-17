@@ -1,5 +1,6 @@
 package galena.doom_and_gloom.content.block;
 
+import com.mojang.serialization.MapCodec;
 import galena.doom_and_gloom.index.DGParticleTypes;
 import galena.doom_and_gloom.index.DGSoundEvents;
 import net.minecraft.core.BlockPos;
@@ -19,17 +20,25 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BonePileBlock extends FallingBlock {
 
+    private static final MapCodec<BonePileBlock> CODEC = simpleCodec(BonePileBlock::new);
+
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
 
     private static final StatePredicate ALWAYS = (s, l, p) -> true;
 
     public BonePileBlock(Properties properties) {
-        super(properties.isRedstoneConductor(ALWAYS).isSuffocating(ALWAYS).isViewBlocking(ALWAYS).noParticlesOnBreak());
+        super(properties.isRedstoneConductor(ALWAYS).isSuffocating(ALWAYS).isViewBlocking(ALWAYS).noTerrainParticles());
+    }
+
+    @Override
+    protected MapCodec<? extends FallingBlock> codec() {
+        return CODEC;
     }
 
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         // For particles
-        if(context instanceof EntityCollisionContext ec && (ec.getEntity() == null || ec.getEntity() instanceof FallingBlockEntity)) return Shapes.block();
+        if (context instanceof EntityCollisionContext ec && (ec.getEntity() == null || ec.getEntity() instanceof FallingBlockEntity))
+            return Shapes.block();
         return SHAPE;
     }
 

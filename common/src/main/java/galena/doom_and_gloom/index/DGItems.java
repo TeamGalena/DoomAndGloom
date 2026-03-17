@@ -10,14 +10,17 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
 
 public class DGItems {
 
     // Discs
-    public static final RegSupplier<RecordItem> MUSIC_DISC_AFTERLIFE = register("music_disc_afterlife", () ->
-            PlatHelper.newMusicDisc(13, DGSoundEvents.MUSIC_DISC_AFTERLIFE, new Item.Properties()
-                    .stacksTo(1).rarity(Rarity.RARE), 155));
+    public static final RegSupplier<Item> MUSIC_DISC_AFTERLIFE = register("music_disc_afterlife", () ->
+            new Item(new Item.Properties()
+                    .jukeboxPlayable(DGRecords.AFTERLIFE.unwrapKey().get())
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)
+            )
+    );
 
     // Crafting Materials
     public static final RegSupplier<Item> BUSH_HAMMER = register("bush_hammer", () ->

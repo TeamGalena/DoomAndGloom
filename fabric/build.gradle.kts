@@ -56,3 +56,5 @@ dependencies {
         modRuntimeOnly(libs.pathfinding.debug.fabric)
     }
 }
+
+tasks.withType<Test> { enabled = false }

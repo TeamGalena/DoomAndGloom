@@ -3,8 +3,10 @@ package galena.doom_and_gloom.data;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGTags;
+
 import java.util.concurrent.CompletableFuture;
 import javax.annotation.Nullable;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -14,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class DGBlockTags extends IntrinsicHolderTagsProvider<Block> {
@@ -60,7 +62,7 @@ public class DGBlockTags extends IntrinsicHolderTagsProvider<Block> {
 
         tag(DGTags.Blocks.GRAVETENDER_LIGHTABLE)
                 .addTag(BlockTags.CANDLES)
-                .addOptionalTag(new ResourceLocation("amendments:skull_candles"));
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("amendments", "skull_candles"));
 
         tag(BlockTags.DIRT).add(DGBlocks.BURIAL_DIRT.get());
 

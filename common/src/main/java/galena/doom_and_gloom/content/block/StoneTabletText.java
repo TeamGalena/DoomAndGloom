@@ -9,8 +9,8 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.chat.Style;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 public class StoneTabletText {
     public static final int LINES = 13;
 
-    private static final Codec<Component[]> LINES_CODEC = ExtraCodecs.FLAT_COMPONENT
+    private static final Codec<Component[]> LINES_CODEC = ComponentSerialization.FLAT_CODEC
             .listOf()
             .comapFlatMap(
                     list -> Util.fixedSize(list, LINES)

@@ -2,20 +2,20 @@ package galena.doom_and_gloom.content.block;
 
 import galena.doom_and_gloom.index.DGBlockEntities;
 import galena.doom_and_gloom.index.DGBlocks;
-import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.EngraveStoneTabletPacket;
 import java.util.Arrays;
 import java.util.UUID;
+import net.mehvahdjukaar.moonlight.api.platform.network.NetworkHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -149,29 +149,34 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
-            if (player instanceof ServerPlayer serverPlayer) {
-                if (clear(level, pos, serverPlayer, hand)) {
-                    return InteractionResult.SUCCESS;
-                }
-                if (openTextEdit(serverPlayer, tile)) {
-                    return InteractionResult.SUCCESS;
-                } else {
-                    return InteractionResult.PASS;
-                }
-            } else {
-                return InteractionResult.CONSUME;
-            }
+    protected ItemInteractionResult useItemOn(ItemStack held, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!(level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile))
+            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        if (!(player instanceof ServerPlayer serverPlayer)) return ItemInteractionResult.CONSUME;
+
+        if (clear(level, pos, player, state, held, hand)) return ItemInteractionResult.SUCCESS;
+
+        if (openTextEdit(serverPlayer, tile)) {
+            return ItemInteractionResult.SUCCESS;
+        } else {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult blockHitResult) {
+        if (!(level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile))
+            return InteractionResult.PASS;
+        if (!(player instanceof ServerPlayer serverPlayer)) return InteractionResult.CONSUME;
+
+        if (openTextEdit(serverPlayer, tile)) {
+            return InteractionResult.SUCCESS;
         } else {
             return InteractionResult.PASS;
         }
     }
 
-    private boolean clear(Level level, BlockPos pos, ServerPlayer player, InteractionHand hand) {
-        var held = player.getItemInHand(hand);
-        var state = level.getBlockState(pos);
-
+    private boolean clear(Level level, BlockPos pos, Player player, BlockState state, ItemStack held, InteractionHand hand) {
         if (!held.is(ItemTags.PICKAXES)) return false;
         if (type != Type.ENGRAVED) return false;
 
@@ -187,26 +192,12 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
     private boolean hasEditableText(Player player, StoneTabletBlockEntity signEntity) {
         StoneTabletText signText = signEntity.getText();
         return Arrays.stream(signText.getMessages(player.isTextFilteringEnabled()))
-                .allMatch((p) -> p.equals(CommonComponents.EMPTY) || p.getContents() instanceof LiteralContents);
+                .allMatch((p) -> p.equals(CommonComponents.EMPTY) || p.getContents() instanceof PlainTextContents);
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    @Override
-    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-        if (level.getBlockEntity(pos) instanceof StoneTabletBlockEntity tile) {
-            var stack = this.asItem().getDefaultInstance();
-            var tag = new CompoundTag();
-            tag.put("BlockEntityTag", tile.saveWithoutMetadata());
-            var stateTag = new CompoundTag();
-            tag.put("BlockStateTag", stateTag);
-            stack.setTag(tag);
-            return stack;
-        }
-        return super.getCloneItemStack(level, pos, state);
     }
 
     public boolean openTextEdit(ServerPlayer player, StoneTabletBlockEntity blockEntity) {
@@ -215,7 +206,7 @@ public class StoneTabletBlock extends Block implements SimpleWaterloggedBlock, T
         if (!hasEditableText(player, blockEntity)) return false;
 
         blockEntity.setAllowedPlayerEditor(player.getUUID());
-        DGNetwork.CHANNEL.sendToClientPlayer(player, new EngraveStoneTabletPacket(blockEntity.getBlockPos()));
+        NetworkHelper.sendToClientPlayer(player, new EngraveStoneTabletPacket(blockEntity.getBlockPos()));
 
         return true;
     }

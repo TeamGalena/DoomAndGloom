@@ -32,7 +32,7 @@ public class DirtMoundRenderer extends EntityRenderer<DirtMound> {
         VertexConsumer vertexconsumer = buffer.getBuffer(rendertype);
         pose.scale(-1.0F, -1.0F, 1.0F);
         pose.translate(0.0F, -1.501F, 0.0F);
-        this.model.renderToBuffer(pose, vertexconsumer, packedLight, 655360, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.renderToBuffer(pose, vertexconsumer, packedLight, 655360, 0xFFFFFFFF);
 
         pose.popPose();
     }

@@ -11,6 +11,7 @@ import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
@@ -28,7 +29,7 @@ public class HollerModel<T extends Holler> extends EntityModel<T> implements Hea
 
     public HollerModel(ModelPart root) {
         // fancy render type. Needst more experimentation. Try me out
-        super(true ?  DGRenderTypes.ADDITIVE_TRANSLUCENCY :
+        super(true ? DGRenderTypes.ADDITIVE_TRANSLUCENCY :
                 DGRenderTypes.ENTITY_TRANSLUCENT_NO_ALPHA_CUTOFF);
         //super();
         this.head = root.getChild("head");
@@ -98,7 +99,7 @@ public class HollerModel<T extends Holler> extends EntityModel<T> implements Hea
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight,
-                               int packedOverlay, float red, float green, float blue, float alpha) {
+                               int packedOverlay, int color) {
 
         double alphaDecayFactor = prevPosDelta.lengthSqr() * 100f;
         alphaDecayFactor = Math.min(alphaDecayFactor, 1);
@@ -108,12 +109,9 @@ public class HollerModel<T extends Holler> extends EntityModel<T> implements Hea
         //renders back to front so first one rendes last
         for (int i = step - 1; i >= 0; i--) {
             float fract = i / (float) step;
-            float actualAlpha = alpha * alphaMult * (i == 0 ? 1 :
-                    (float) ((1 - fract * (1 / alphaDecayFactor))));
-
-            if (actualAlpha <= 0) continue;
-            //cubic decay
-            actualAlpha = actualAlpha * actualAlpha * actualAlpha;
+            var alphaFactor = alphaMult * (i == 0 ? 1 : (float) ((1 - fract * (1 / alphaDecayFactor))));
+            if (alphaFactor <= 0) continue;
+            var actualColor = multiplyAlpha(color, alphaFactor * alphaFactor * alphaFactor);
 
             poseStack.pushPose();
             //scale trail further back
@@ -128,13 +126,21 @@ public class HollerModel<T extends Holler> extends EntityModel<T> implements Hea
             poseStack.scale(scale, scale, scale);
             poseStack.translate(0, -1, 0);
 
-            head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, actualAlpha);
-            body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, actualAlpha);
-            left_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, actualAlpha);
-            right_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, actualAlpha);
+            head.render(poseStack, vertexConsumer, packedLight, packedOverlay, actualColor);
+            body.render(poseStack, vertexConsumer, packedLight, packedOverlay, actualColor);
+            left_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, actualColor);
+            right_arm.render(poseStack, vertexConsumer, packedLight, packedOverlay, actualColor);
 
             poseStack.popPose();
         }
+    }
+
+    private int multiplyAlpha(int color, float factor) {
+        var red = FastColor.ARGB32.red(color);
+        var green = FastColor.ARGB32.green(color);
+        var blue = FastColor.ARGB32.blue(color);
+        var alpha = FastColor.ARGB32.alpha(color);
+        return FastColor.ARGB32.color(red, green, blue, (int) (alpha * factor));
     }
 
     @Override

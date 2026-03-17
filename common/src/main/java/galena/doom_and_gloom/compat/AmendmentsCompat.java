@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,9 +35,7 @@ public class AmendmentsCompat {
             level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
             lantern.setHeldBlock(state.setValue(CandleBlock.LIT, true));
             if (player != null) {
-                held.hurtAndBreak(1, player, it ->
-                        it.broadcastBreakEvent(hand)
-                );
+                held.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
             }
 
             return true;

@@ -12,13 +12,16 @@ import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGTags;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -33,12 +36,12 @@ import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 public class DGRecipes extends DGRecipeProvider {
 
-    public DGRecipes(PackOutput output) {
-        super(output);
+    public DGRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+        super(output, provider);
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(RecipeOutput consumer) {
         vigilCandle(DGBlocks.VIGIL_CANDLE, Blocks.CANDLE).save(consumer);
 
         DGBlocks.COLORED_VIGIL_CANDLES.forEach((color, block) -> {
@@ -46,7 +49,7 @@ public class DGRecipes extends DGRecipeProvider {
             var conditions = namespace.map(ModLoaded::new).map(List::of).orElseGet(List::of);
 
             Conditional.with(this, conditions, () -> {
-                var candle = BuiltInRegistries.BLOCK.get(new ResourceLocation(namespace.orElse(ResourceLocation.DEFAULT_NAMESPACE), color.getSerializedName() + "_candle"));
+                var candle = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(namespace.orElse(ResourceLocation.DEFAULT_NAMESPACE), color.getSerializedName() + "_candle"));
                 vigilCandle(block, candle).save(consumer);
 
                 ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, block.get())
@@ -112,7 +115,7 @@ public class DGRecipes extends DGRecipeProvider {
         */
     }
 
-    private Consumer<Consumer<FinishedRecipe>> withFallback(TagKey<Item> prefer, Item fallback, Function<Ingredient, RecipeBuilder> builder) {
+    private Consumer<RecipeOutput> withFallback(TagKey<Item> prefer, Item fallback, Function<Ingredient, RecipeBuilder> builder) {
         return consumer -> {
             var preferredRecipe = builder.apply(Ingredient.of(prefer)).unlockedBy("has_ingredient", has(prefer));
             var fallbackRecipe = builder.apply(Ingredient.of(fallback)).unlockedBy("has_ingredient", has(fallback));

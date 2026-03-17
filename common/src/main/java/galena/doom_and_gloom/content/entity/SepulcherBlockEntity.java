@@ -6,11 +6,13 @@ import galena.doom_and_gloom.index.DGBlockEntities;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGSoundEvents;
 import galena.doom_and_gloom.index.DGTags;
-import galena.doom_and_gloom.network.DGNetwork;
 import galena.doom_and_gloom.network.packet.SepulcherConsumesDeathPacket;
 import galena.doom_and_gloom.network.packet.SepulcherRotsPacket;
 import java.util.function.Supplier;
+import net.mehvahdjukaar.moonlight.api.platform.network.NetworkHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -30,7 +32,7 @@ import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.phys.Vec3;
 
-public class SepulcherBlockEntity extends BlockEntity implements Ticking, Container, GameEventListener.Holder<SepulcherBlockEntity.DeathListener> {
+public class SepulcherBlockEntity extends BlockEntity implements Ticking, Container, GameEventListener.Provider<SepulcherBlockEntity.DeathListener> {
 
     private final DeathListener listener;
     private int progress = 0;
@@ -73,8 +75,8 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
             sound(DGSoundEvents.SEPULCHER_ROTTING, 0.5F);
         }
 
-        if (!level.isClientSide()) {
-            DGNetwork.CHANNEL.sendToAllClientPlayersInRange(level, pos, 16.0, new SepulcherRotsPacket(pos));
+        if (level instanceof ServerLevel serverLevel) {
+            NetworkHelper.sendToAllClientPlayersInRange(serverLevel, pos, 16.0, new SepulcherRotsPacket(pos));
         }
     }
 
@@ -90,15 +92,15 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
     }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
+    protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.saveAdditional(nbt, provider);
         nbt.putInt("progress", progress);
         nbt.putBoolean("heated", heated);
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider provider) {
+        super.loadAdditional(nbt, provider);
         progress = nbt.getInt("progress");
         heated = nbt.getBoolean("heated");
     }
@@ -128,8 +130,8 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
         }
 
         @Override
-        public boolean handleGameEvent(ServerLevel level, GameEvent event, GameEvent.Context context, Vec3 vec) {
-            if (event != GameEvent.ENTITY_DIE) return false;
+        public boolean handleGameEvent(ServerLevel level, Holder<GameEvent> event, GameEvent.Context context, Vec3 vec) {
+            if (!GameEvent.ENTITY_DIE.is(event)) return false;
 
             Entity entity = context.sourceEntity();
             if (!(entity instanceof LivingEntity living)) return false;
@@ -153,8 +155,7 @@ public class SepulcherBlockEntity extends BlockEntity implements Ticking, Contai
 
             sound(DGSoundEvents.SEPULCHER_CORPSE_STUFFED, 1F);
 
-            DGNetwork.CHANNEL.sendToAllClientPlayersInRange(entity.level(), BlockPos.containing(vec), 16.0, new SepulcherConsumesDeathPacket(vec)
-            );
+            NetworkHelper.sendToAllClientPlayersInRange(level, BlockPos.containing(vec), 16.0, new SepulcherConsumesDeathPacket(vec));
 
             entity.setPos(Vec3.atCenterOf(getBlockPos()));
             if (entity.getPose() == Pose.DYING) entity.setPose(Pose.STANDING);

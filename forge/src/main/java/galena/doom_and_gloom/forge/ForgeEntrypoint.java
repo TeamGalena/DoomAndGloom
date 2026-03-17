@@ -40,7 +40,6 @@ public class ForgeEntrypoint {
         forgeBus.addListener(this::onLivingDrops);
     }
 
-
     private void onBlockInteract(PlayerInteractEvent.RightClickBlock event) {
         if (AmendmentsCompat.onBlockInteract(event.getLevel(), event.getPos(),
                 event.getEntity(),
