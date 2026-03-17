@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "dye_depot"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "vigil_candle",
+  "key": {
+    "C": {
+      "item": "dye_depot:rose_candle"
+    },
+    "S": {
+      "tag": "c:ingots/silver"
+    }
+  },
+  "pattern": [
+    "S",
+    "C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "doom_and_gloom:rose_vigil_candle"
+  }
+}

@@ -3,14 +3,11 @@
   "level": 3,
   "max_trades": 3,
   "offer": {
-    "Count": 1,
-    "id": "minecraft:iron_shovel",
-    "tag": {
-      "Damage": 0
-    }
+    "count": 1,
+    "id": "minecraft:iron_shovel"
   },
   "price": {
-    "Count": 1,
+    "count": 1,
     "id": "minecraft:emerald"
   },
   "price_multiplier": 0.2,

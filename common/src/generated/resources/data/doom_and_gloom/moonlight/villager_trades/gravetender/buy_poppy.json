@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:simple",
+  "type": "moonlight:simple",
   "max_trades": 12,
   "offer": {
-    "Count": 1,
+    "count": 1,
     "id": "minecraft:emerald"
   },
   "price": {
-    "Count": 8,
+    "count": 8,
     "id": "minecraft:poppy"
   },
   "price_multiplier": 0.2,

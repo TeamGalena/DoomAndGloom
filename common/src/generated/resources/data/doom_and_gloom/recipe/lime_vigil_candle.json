@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "vigil_candle",
+  "key": {
+    "C": {
+      "item": "minecraft:lime_candle"
+    },
+    "S": {
+      "tag": "c:ingots/silver"
+    }
+  },
+  "pattern": [
+    "S",
+    "C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "doom_and_gloom:lime_vigil_candle"
+  }
+}

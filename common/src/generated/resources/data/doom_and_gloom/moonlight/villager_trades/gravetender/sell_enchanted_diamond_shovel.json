@@ -3,14 +3,11 @@
   "level": 5,
   "max_trades": 3,
   "offer": {
-    "Count": 1,
-    "id": "minecraft:diamond_shovel",
-    "tag": {
-      "Damage": 0
-    }
+    "count": 1,
+    "id": "minecraft:diamond_shovel"
   },
   "price": {
-    "Count": 13,
+    "count": 13,
     "id": "minecraft:emerald"
   },
   "price_multiplier": 0.2,

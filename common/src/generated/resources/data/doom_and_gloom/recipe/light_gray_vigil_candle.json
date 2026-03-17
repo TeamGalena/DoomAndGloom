@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "vigil_candle",
+  "key": {
+    "C": {
+      "item": "minecraft:light_gray_candle"
+    },
+    "S": {
+      "tag": "c:ingots/silver"
+    }
+  },
+  "pattern": [
+    "S",
+    "C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "doom_and_gloom:light_gray_vigil_candle"
+  }
+}

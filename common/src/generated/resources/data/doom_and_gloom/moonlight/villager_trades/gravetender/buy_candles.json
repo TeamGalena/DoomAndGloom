@@ -4,7 +4,7 @@
   "level": 3,
   "max_trades": 12,
   "offer": {
-    "Count": 2,
+    "count": 2,
     "id": "minecraft:emerald"
   },
   "price": "minecraft:candles",

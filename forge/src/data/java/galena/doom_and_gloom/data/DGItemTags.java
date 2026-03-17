@@ -12,6 +12,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class DGItemTags extends ItemTagsProvider {
@@ -29,8 +30,7 @@ public class DGItemTags extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(TOOLS_BUSH_HAMMER).add(DGItems.BUSH_HAMMER.get());
 
-        // TODO port
-        //tag(ItemTags.MUSIC_DISCS).add(DGItems.MUSIC_DISC_AFTERLIFE.get());
+        tag(Tags.Items.MUSIC_DISCS).add(DGItems.MUSIC_DISC_AFTERLIFE.get());
 
         copy(DGTags.Blocks.VIGIL_CANDLES, DGTags.Items.VIGIL_CANDLES);
 

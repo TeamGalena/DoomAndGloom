@@ -1,8 +1,6 @@
 {
   "pack": {
-    "description": {
-      "text": "Doom & Gloom resources"
-    },
-    "pack_format": 15
+    "description": "Doom & Gloom resources",
+    "pack_format": 34
   }
 }

@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_custom_data",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Pixels",
+                  "target": "BlockEntityTag.text"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "doom_and_gloom:cracked_stone_tablet"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "doom_and_gloom:blocks/cracked_stone_tablet"
+}

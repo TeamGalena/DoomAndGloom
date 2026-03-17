@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "doom_and_gloom:bone_pile"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:bone"
+  }
+}

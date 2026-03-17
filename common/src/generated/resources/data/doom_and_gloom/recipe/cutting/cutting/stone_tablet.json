@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "doom_and_gloom:stone_tablet"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "doom_and_gloom:cracked_stone_tablet"
+      }
+    }
+  ],
+  "tool": {
+    "tag": "minecraft:pickaxes"
+  }
+}

@@ -4,7 +4,7 @@
   "max_trades": 12,
   "offer": "doom_and_gloom:vigil_candles",
   "price": {
-    "Count": 2,
+    "count": 2,
     "id": "minecraft:emerald"
   },
   "price_multiplier": 0.2,

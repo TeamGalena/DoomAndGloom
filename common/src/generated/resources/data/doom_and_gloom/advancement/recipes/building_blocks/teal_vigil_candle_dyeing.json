@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "dye_depot"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "doom_and_gloom:teal_vigil_candle_dyeing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vigil_candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "doom_and_gloom:vigil_candle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_vigil_candle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "doom_and_gloom:teal_vigil_candle_dyeing"
+    ]
+  }
+}

@@ -1,13 +1,13 @@
 {
-  "type": "minecraft:simple",
+  "type": "moonlight:simple",
   "level": 4,
   "max_trades": 8,
   "offer": {
-    "Count": 2,
+    "count": 2,
     "id": "minecraft:emerald"
   },
   "price": {
-    "Count": 1,
+    "count": 1,
     "id": "minecraft:lantern"
   },
   "price_multiplier": 0.2,

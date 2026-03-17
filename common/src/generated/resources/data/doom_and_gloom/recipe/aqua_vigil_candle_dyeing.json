@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "dye_depot"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "vigil_candle",
+  "ingredients": [
+    {
+      "item": "doom_and_gloom:vigil_candle"
+    },
+    {
+      "item": "dye_depot:aqua_dye"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "doom_and_gloom:aqua_vigil_candle"
+  }
+}
