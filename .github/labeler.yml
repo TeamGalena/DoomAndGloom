@@ -1,8 +1,8 @@
 # <meta>
 #    <source>@pssbletrngle/github-meta-generator</source>
-#    <version>1.0.21</version>
-#    <timestamp>2026-03-21T08:38:36.703Z</timestamp>
-#    <hash>1532a170d9acec88</hash>
+#    <version>1.0.22</version>
+#    <timestamp>2026-03-21T08:56:04.903Z</timestamp>
+#    <hash>a8ae56f8fbeece83</hash>
 # </meta>
 
 fabric:
@@ -11,3 +11,8 @@ forge:
   - "/^forge$/m"
 neoforge:
   - "/^neoforge$/m"
+
+1.21.x:
+  - "/^1.21$/m"
+1.20.x:
+  - "/^1.20$/m"
