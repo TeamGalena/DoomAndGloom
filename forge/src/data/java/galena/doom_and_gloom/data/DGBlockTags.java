@@ -3,10 +3,8 @@ package galena.doom_and_gloom.data;
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGTags;
-
 import java.util.concurrent.CompletableFuture;
 import javax.annotation.Nullable;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

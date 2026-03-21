@@ -27,6 +27,8 @@ public class DGTags {
 
         public static final TagKey<Item> VIGIL_CANDLES = tag("vigil_candles");
 
+        public static final TagKey<Item> MUSIC_DISCS = cTag("music_discs");
+
         public static final Map<DyeColor, TagKey<Item>> DYED = dyedTags(Registries.ITEM);
 
         private static TagKey<Item> tag(String name) {

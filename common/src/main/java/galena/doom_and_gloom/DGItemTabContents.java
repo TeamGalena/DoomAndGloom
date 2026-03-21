@@ -2,6 +2,7 @@ package galena.doom_and_gloom;
 
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGItems;
+import galena.doom_and_gloom.index.DGTags;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.tags.ItemTags;
@@ -23,8 +24,7 @@ public class DGItemTabContents {
 
         event.add(CreativeModeTabs.SPAWN_EGGS, DGItems.HOLLER_SPAWN_EGG.get());
 
-        // TODO port
-        event.addAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, stack -> stack.is(Items.MUSIC_DISC_13), DGItems.MUSIC_DISC_AFTERLIFE.get());
+        event.addAfter(CreativeModeTabs.TOOLS_AND_UTILITIES, stack -> stack.is(DGTags.Items.MUSIC_DISCS), DGItems.MUSIC_DISC_AFTERLIFE.get());
 
         //if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
         //    event.accept(new ItemStack(OItems.BUSH_HAMMER.get()));

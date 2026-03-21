@@ -1,10 +1,8 @@
 package galena.doom_and_gloom.data.provider;
 
 import galena.doom_and_gloom.index.DGTags;
-
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;

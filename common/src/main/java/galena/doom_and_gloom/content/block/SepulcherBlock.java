@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -134,8 +135,7 @@ public class SepulcherBlock extends Block implements TickingEntityBlock<Sepulche
 
         for (int i = 0; i < 20; i++) {
             var vec = Vec3.atBottomCenterOf(at).add(level.random.nextDouble() - 0.5, 0.8, level.random.nextDouble() - 0.5);
-            // TODO port
-            level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 0x87A363), vec.x, vec.y, vec.z, 0, 0, 0);
+            level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, FastColor.ARGB32.color(255, 0x87A363)), vec.x, vec.y, vec.z, 0, 0, 0);
         }
     }
 

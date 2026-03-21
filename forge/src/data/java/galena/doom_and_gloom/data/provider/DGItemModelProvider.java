@@ -3,7 +3,6 @@ package galena.doom_and_gloom.data.provider;
 import galena.doom_and_gloom.DoomAndGloom;
 import java.util.Objects;
 import java.util.function.Supplier;
-
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;

@@ -4,6 +4,7 @@ import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.data.provider.ItemListingProvider;
 import galena.doom_and_gloom.index.DGTags;
 import galena.doom_and_gloom.index.DGVillagerTypes;
+import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
@@ -11,8 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-
-import java.util.concurrent.CompletableFuture;
 
 public class DGItemListings extends ItemListingProvider {
 

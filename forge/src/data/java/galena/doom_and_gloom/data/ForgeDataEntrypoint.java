@@ -1,13 +1,8 @@
 package galena.doom_and_gloom.data;
 
 import galena.doom_and_gloom.DoomAndGloom;
-
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;

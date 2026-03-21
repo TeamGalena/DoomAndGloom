@@ -1,14 +1,10 @@
 package galena.doom_and_gloom.data.provider;
 
-import com.mojang.serialization.JsonOps;
 import galena.doom_and_gloom.content.listing.BuyTagListing;
 import galena.doom_and_gloom.content.listing.SellEnchantedListing;
 import galena.doom_and_gloom.content.listing.SellTagListing;
-
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-
 import net.mehvahdjukaar.moonlight.api.trades.ModItemListing;
 import net.mehvahdjukaar.moonlight.api.trades.SimpleItemListing;
 import net.minecraft.core.HolderLookup;

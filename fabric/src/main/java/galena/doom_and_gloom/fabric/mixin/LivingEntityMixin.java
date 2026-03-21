@@ -2,6 +2,7 @@ package galena.doom_and_gloom.fabric.mixin;
 
 import galena.doom_and_gloom.content.entity.ISepulcherable;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +18,7 @@ public class LivingEntityMixin implements ISepulcherable {
     private boolean dg$sepulchered = false;
 
     @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
-    public void DG$cancelDrops(DamageSource damageSource, CallbackInfo ci) {
+    public void DG$cancelDrops(ServerLevel level, DamageSource damageSource, CallbackInfo ci) {
        ci.cancel();
     }
 

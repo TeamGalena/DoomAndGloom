@@ -1,6 +1,7 @@
 package galena.doom_and_gloom.forge;
 
 import galena.doom_and_gloom.DoomAndGloom;
+import galena.doom_and_gloom.index.DGBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -20,7 +21,7 @@ public class DGCapabilities {
 
     @SubscribeEvent
     public static void register(RegisterCapabilitiesEvent event) {
-        event.registerBlock(Capabilities.ItemHandler.BLOCK, DGCapabilities::wrapContainer);
+        event.registerBlock(Capabilities.ItemHandler.BLOCK, DGCapabilities::wrapContainer, DGBlocks.SEPULCHER.get());
     }
 
     @Nullable
