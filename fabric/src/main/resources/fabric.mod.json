@@ -29,7 +29,7 @@
   "depends": {
     "fabricloader": ">=0.16",
     "fabric-api": "*",
-    "minecraft": ">=1.21.1",
+    "minecraft": "${mc_version}",
     "moonlight": "*",
     "java": ">=21"
   }

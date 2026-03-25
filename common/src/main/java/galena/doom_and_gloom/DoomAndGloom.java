@@ -18,7 +18,6 @@ public class DoomAndGloom {
     }
 
     public static void init() {
-
         DGConfig.init();
         DGSoundEvents.init();
         DGBlocks.init();

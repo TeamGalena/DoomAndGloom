@@ -27,7 +27,7 @@ An addon-mod for Oreganized adding Halloween-themed content
 
 [[dependencies.${mod_id}]]
     modId="minecraft"
-    versionRange = "[1.21.1,)"
+    versionRange = "${mc_version_range}"
     ordering="NONE"
     side="BOTH"
 

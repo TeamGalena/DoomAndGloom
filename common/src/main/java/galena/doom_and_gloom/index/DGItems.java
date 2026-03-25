@@ -16,7 +16,7 @@ public class DGItems {
     // Discs
     public static final RegSupplier<Item> MUSIC_DISC_AFTERLIFE = register("music_disc_afterlife", () ->
             new Item(new Item.Properties()
-                    .jukeboxPlayable(DGRecords.AFTERLIFE.unwrapKey().get())
+                    .jukeboxPlayable(DGRecords.AFTERLIFE)
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
             )

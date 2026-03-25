@@ -1,6 +1,5 @@
 plugins {
     id("com.possible-triangle.neoforge")
-    // alias(libs.plugins.parchment)
 }
 
 mod {
@@ -9,9 +8,6 @@ mod {
 
 neoforge {
     dependOn(project(":common"))
-
-//    mappingChannel = "parchment"
-//    mappingVersion = "2023.09.03-1.20.1"
 
     accessWidener(project(":common"))
 

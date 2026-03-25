@@ -1,23 +1,18 @@
 package galena.doom_and_gloom.index;
 
-import static galena.doom_and_gloom.DoomAndGloom.modLoc;
-
-import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
-import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.minecraft.core.Holder;
+import galena.doom_and_gloom.DoomAndGloom;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.JukeboxSong;
 
 public class DGRecords {
 
-    public static final RegSupplier<JukeboxSong> AFTERLIFE = register("afterlife", DGSoundEvents.MUSIC_DISC_AFTERLIFE, 155F, 13);
+    public static final ResourceKey<JukeboxSong> AFTERLIFE = ResourceKey.create(Registries.JUKEBOX_SONG, DoomAndGloom.modLoc("afterlife"));
 
-    private static RegSupplier<JukeboxSong> register(String name, Holder<SoundEvent> sound, float ticks, int level) {
-        var id = modLoc(name);
-        var translation = Component.translatable(id.toLanguageKey("item", "desc"));
-        return RegHelper.register(id, () -> new JukeboxSong(sound, translation, ticks, level), Registries.JUKEBOX_SONG);
+    public static void bootstrap(BootstrapContext<JukeboxSong> context) {
+        context.register(AFTERLIFE,  new JukeboxSong(DGSoundEvents.MUSIC_DISC_AFTERLIFE, Component.translatable("item.doom_and_gloom.music_disc_afterlife.desc"), 155F, 13));
     }
 
 }

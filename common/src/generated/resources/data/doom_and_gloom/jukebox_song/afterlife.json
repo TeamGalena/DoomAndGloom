@@ -1,0 +1,8 @@
+{
+  "comparator_output": 13,
+  "description": {
+    "translate": "item.doom_and_gloom.music_disc_afterlife.desc"
+  },
+  "length_in_seconds": 155.0,
+  "sound_event": "doom_and_gloom:music.disc.afterlife"
+}
