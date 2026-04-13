@@ -2,10 +2,6 @@ plugins {
     id("com.possible-triangle.fabric")
 }
 
-mod {
-    mods.include(libs.galena.hats.fabric)
-}
-
 fabric {
     dependOn(project(":common"))
     accessWidener(project(":common"))
@@ -38,6 +34,8 @@ repositories {
 }
 
 dependencies {
+    modInclude(libs.galena.hats.fabric)
+
     modApi(libs.moonlight.lib.fabric) {
         isTransitive = false
     }

@@ -2,10 +2,6 @@ plugins {
     id("com.possible-triangle.neoforge")
 }
 
-mod {
-    mods.include(libs.galena.hats.neoforge)
-}
-
 neoforge {
     dependOn(project(":common"))
 
@@ -18,6 +14,8 @@ neoforge {
 }
 
 dependencies {
+    modInclude(libs.galena.hats.neoforge)
+
     modImplementation(libs.moonlight.lib.neoforge) {
         isTransitive = false
     }
