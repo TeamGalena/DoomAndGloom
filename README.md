@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/TeamGalena/DoomAndGloom/refs/heads/main/1.20.x/common/src/main/resources/assets/doom_and_gloom/logo.png">
+    <img src="common/src/main/resources/assets/doom_and_gloom/logo.png">
 </p>
 
 <p align="center">
