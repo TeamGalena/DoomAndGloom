@@ -30,6 +30,3 @@ farmers-delight-fabric = { group = "vectorwing", name = "FarmersDelight", versio
 
 pathfinding-debug-forge = { group = "com.possible-triangle", name = "pathfinding_renderer-forge", version.ref = "pathfinding-debug" }
 pathfinding-debug-fabric = { group = "com.possible-triangle", name = "pathfinding_renderer-fabric", version.ref = "pathfinding-debug" }
-
-[plugins]
-parchment = { id = "org.parchmentmc.librarian.forgegradle", version = "1.+" }

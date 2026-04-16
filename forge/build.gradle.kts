@@ -1,20 +1,9 @@
-import org.spongepowered.asm.gradle.plugins.MixinExtension
-
 plugins {
     id("com.possible-triangle.forge")
-    alias(libs.plugins.parchment)
-}
-
-mod {
-    mods.include(libs.galena.hats.forge)
-    mods.include(libs.multikulti.datagen.fix)
 }
 
 forge {
     dependOn(project(":common"))
-
-    mappingChannel = "parchment"
-    mappingVersion = "2023.09.03-1.20.1"
 
     enableMixins()
     accessWidener(project(":common"))
@@ -25,11 +14,14 @@ forge {
     }
 }
 
-configure<MixinExtension> {
+mixin {
     config("${mod.id.get()}.forge.mixins.json")
 }
 
 dependencies {
+    modInclude(libs.galena.hats.forge)
+    modInclude(libs.multikulti.datagen.fix)
+
     modImplementation(libs.moonlight.lib.forge) {
         isTransitive = false
     }
