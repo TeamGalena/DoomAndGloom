@@ -36,16 +36,14 @@ repositories {
 dependencies {
     modInclude(libs.galena.hats.fabric)
 
-    modApi(libs.moonlight.lib.fabric) {
-        isTransitive = false
-    }
+    modApi(libs.moonlight.lib.fabric)
+    modImplementation(libs.amendments.fabric)
 
     modImplementation(libs.farmers.delight.fabric) {
         exclude(group = "net.fabricmc")
     }
 
     modImplementation(pack.fabric.modrinth.supplementaries)
-    modImplementation(pack.fabric.modrinth.amendments)
 
     modImplementation(libs.dye.depot.fabric)
 
@@ -54,5 +52,3 @@ dependencies {
         modRuntimeOnly(libs.pathfinding.debug.fabric)
     }
 }
-
-tasks.withType<Test> { enabled = false }

@@ -16,13 +16,12 @@ neoforge {
 dependencies {
     modInclude(libs.galena.hats.neoforge)
 
-    modImplementation(libs.moonlight.lib.neoforge) {
-        isTransitive = false
-    }
+    modApi(libs.moonlight.lib.neoforge)
+    accessTransformers(libs.moonlight.lib.neoforge)
+    modImplementation(libs.amendments.neoforge)
 
     modImplementation(pack.forge.modrinth.farmers.delight)
     modImplementation(pack.forge.modrinth.supplementaries)
-    modImplementation(pack.forge.modrinth.amendments)
     modImplementation(libs.oreganized)
 
     modImplementation(libs.multikulti.core)
