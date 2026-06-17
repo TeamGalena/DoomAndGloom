@@ -42,9 +42,9 @@ public class ForgeEntrypoint {
 
     private void onBlockInteract(PlayerInteractEvent.RightClickBlock event) {
         if (AmendmentsCompat.onBlockInteract(event.getLevel(), event.getPos(),
-                event.getEntity(),
-                event.getHand(),
-                event.getItemStack())) {
+            event.getEntity(),
+            event.getHand(),
+            event.getItemStack())) {
             event.setCancellationResult(InteractionResult.sidedSuccess(event.getLevel().isClientSide));
             event.setCanceled(true);
         }

@@ -15,11 +15,8 @@ import net.minecraft.world.level.block.CandleBlock;
 
 public class AmendmentsCompat {
 
-
     //TODO: add better amendments API to register interactions on wall lanterns
-    public static boolean onBlockInteract(Level level, BlockPos pos,
-                                          Player player, InteractionHand hand, ItemStack held) {
-
+    public static boolean onBlockInteract(Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack held) {
         var be = level.getBlockEntity(pos);
 
         if (!(be instanceof WallLanternBlockTile lantern)) return false;
@@ -27,9 +24,8 @@ public class AmendmentsCompat {
         var state = lantern.getHeldBlock();
         if (!state.hasProperty(CandleBlock.LIT)) return false;
 
-        boolean lit = state.getValue(CandleBlock.LIT);
-
-        InteractionResult result = InteractionResult.PASS;
+        var lit = state.getValue(CandleBlock.LIT);
+        var result = InteractionResult.PASS;
 
         if (held.is(Items.FLINT_AND_STEEL) && !lit) {
             level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
@@ -48,6 +44,5 @@ public class AmendmentsCompat {
 
         return false;
     }
-
 
 }

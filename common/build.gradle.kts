@@ -10,4 +10,6 @@ dependencies {
     modImplementation(libs.moonlight.lib.common)
     modImplementation(libs.moonlight.lib.common)
     modImplementation(libs.amendments.common)
+
+    accessTransformers(libs.multikulti.core.common)
 }

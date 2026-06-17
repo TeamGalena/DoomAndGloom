@@ -24,8 +24,8 @@ dependencies {
     modImplementation(pack.forge.modrinth.supplementaries)
     modImplementation(libs.oreganized)
 
-    modImplementation(libs.multikulti.core)
-    modImplementation(libs.multikulti.datagen)
+    modImplementation(libs.multikulti.core.neoforge)
+    modImplementation(libs.multikulti.datagen.neoforge)
     modImplementation(libs.dye.depot.neoforge)
 
     if (!env.isCI) {
