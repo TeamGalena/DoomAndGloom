@@ -37,9 +37,9 @@ public class DGLootTables extends LootTableProvider {
 
     public DGLootTables(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
         super(output, Set.of(), List.of(
-                new SubProviderEntry(BlockLoot::new, LootContextParamSets.BLOCK),
-                new SubProviderEntry(EntityLoot::new, LootContextParamSets.ENTITY),
-                new SubProviderEntry($ -> new InjectedLoot(), LootContextParamSets.BLOCK)
+            new SubProviderEntry(BlockLoot::new, LootContextParamSets.BLOCK),
+            new SubProviderEntry(EntityLoot::new, LootContextParamSets.ENTITY),
+            new SubProviderEntry($ -> new InjectedLoot(), LootContextParamSets.BLOCK)
         ), provider);
     }
 
@@ -55,11 +55,11 @@ public class DGLootTables extends LootTableProvider {
 
         protected void generate() {
             add(DGBlocks.SEPULCHER.get(), it -> createSingleItemTable(it)
-                    .withPool(LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
-                            .add(LootItem.lootTableItem(DGBlocks.BONE_PILE.get()))
-                            .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(it).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SepulcherBlock.LEVEL, SepulcherBlock.READY)))
-                    )
+                .withPool(LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(1.0F))
+                    .add(LootItem.lootTableItem(DGBlocks.BONE_PILE.get()))
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(it).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SepulcherBlock.LEVEL, SepulcherBlock.READY)))
+                )
             );
             dropSelf(DGBlocks.BONE_PILE);
             dropNothing(DGBlocks.ROTTING_FLESH);
@@ -67,7 +67,10 @@ public class DGLootTables extends LootTableProvider {
             stoneTablet(DGBlocks.ENGRAVED_STONE_TABLET);
             stoneTablet(DGBlocks.CRACKED_STONE_TABLET);
             dropOther(DGBlocks.BURIAL_DIRT, Blocks.DIRT);
-            DGBlocks.vigilCandles().forEach(this::vigilCandle);
+            vigilCandle(DGBlocks.VIGIL_CANDLE, null);
+            DGBlocks.COLORED_VIGIL_CANDLES.forEach((color, block) ->
+                vigilCandle(block, color)
+            );
         }
     }
 
@@ -93,12 +96,12 @@ public class DGLootTables extends LootTableProvider {
         @Override
         public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
             consumer.accept(DGLootInjects.PYRAMID_BONES, LootTable.lootTable()
-                    .withPool(LootPool.lootPool()
-                            .when(LootItemRandomChanceCondition.randomChance(0.2F))
-                            .add(LootItem.lootTableItem(DGBlocks.BONE_PILE.get())
-                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
-                            )
+                .withPool(LootPool.lootPool()
+                    .when(LootItemRandomChanceCondition.randomChance(0.2F))
+                    .add(LootItem.lootTableItem(DGBlocks.BONE_PILE.get())
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                     )
+                )
             );
         }
 
