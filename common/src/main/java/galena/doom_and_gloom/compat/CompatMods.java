@@ -5,7 +5,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 public class CompatMods {
 
     public static final String DYE_DEPOT_NAME = "dye_depot";
-    public static final String AMENDMENTS_NAME = "moonlight";
+    public static final String AMENDMENTS_NAME = "amendments";
     public static final String FARMERS_DELIGHT_NAME = "farmersdelight";
     public static final String OREGANIZED_NAME = "oreganized";
 
