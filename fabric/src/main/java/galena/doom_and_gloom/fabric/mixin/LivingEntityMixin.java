@@ -19,7 +19,7 @@ public class LivingEntityMixin implements ISepulcherable {
 
     @Inject(method = "dropAllDeathLoot", at = @At("HEAD"), cancellable = true)
     public void DG$cancelDrops(ServerLevel level, DamageSource damageSource, CallbackInfo ci) {
-       ci.cancel();
+       if(DG$wasSepulchered()) ci.cancel();
     }
 
     @Override
