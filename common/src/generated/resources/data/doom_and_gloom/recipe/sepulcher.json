@@ -10,6 +10,14 @@
   ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "values": [
+        "c:ingots/silver"
+      ]
+    }
+  ],
   "key": {
     "#": {
       "tag": "c:ingots/silver"

@@ -24,6 +24,17 @@
       "trigger": "minecraft:recipe_unlocked"
     }
   },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "fabric:tags_populated",
+        "values": [
+          "c:ingots/silver"
+        ]
+      }
+    }
+  ],
   "requirements": [
     [
       "has_the_recipe",
