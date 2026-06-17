@@ -49,11 +49,16 @@ public class DGTags {
         public static final TagKey<Block> VIGIL_CANDLES = tag("vigil_candles");
         public static final TagKey<Block> CAN_TURN_INTO_BURIAL_DIRT = tag("burial_dirt_convertible");
         public static final TagKey<Block> GRAVETENDER_LIGHTABLE = tag("gravetender_lightables");
+        public static final TagKey<Block> STORAGE_BLOCKS_BONE = cTag("storage_blocks/bone");
 
         public static final Map<DyeColor, TagKey<Block>> DYED = dyedTags(Registries.BLOCK);
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, DoomAndGloom.modLoc(name));
+        }
+
+        private static TagKey<Block> cTag(String name) {
+            return createCTag(Registries.BLOCK, name);
         }
     }
 

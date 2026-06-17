@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +40,9 @@ public class DGBlockTags extends IntrinsicHolderTagsProvider<Block> {
         );
 
         var vigilCandles = tag(DGTags.Blocks.VIGIL_CANDLES);
+
+        tag(DGTags.Blocks.STORAGE_BLOCKS_BONE).add(DGBlocks.BONE_PILE.get());
+        tag(Tags.Blocks.STORAGE_BLOCKS).addTag(DGTags.Blocks.STORAGE_BLOCKS_BONE);
 
         DGBlocks.vigilCandles().forEach(block -> {
             var id = BuiltInRegistries.BLOCK.getKey(block.get());
