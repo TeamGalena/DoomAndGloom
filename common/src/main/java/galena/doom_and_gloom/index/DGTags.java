@@ -23,7 +23,7 @@ public class DGTags {
         public static final TagKey<Item> INGOTS_SILVER = cTag("ingots/silver");
         public static final TagKey<Item> INGOTS_LEAD = cTag("ingots/lead");
 
-        public static final TagKey<Item> TOOLS_BUSH_HAMMER = tag("tools/bush_hammer");
+        public static final TagKey<Item> TOOLS_BUSH_HAMMER = cTag("tools/bush_hammer");
 
         public static final TagKey<Item> VIGIL_CANDLES = tag("vigil_candles");
 
