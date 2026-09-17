@@ -27,7 +27,6 @@ public class DGLang extends DGLangProvider {
         DGBlocks.vigilCandles().forEach(this::add);
         add(DGBlocks.BURIAL_DIRT);
 
-        add(DGItems.BUSH_HAMMER);
         add(DGItems.HOLLER_SPAWN_EGG);
         add(DGItems.HAMMER_AND_CHISEL);
 

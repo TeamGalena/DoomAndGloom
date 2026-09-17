@@ -7,7 +7,7 @@ import galena.doom_and_gloom.client.DGReloadListener;
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
 import galena.doom_and_gloom.content.block.StoneTabletText;
-import galena.doom_and_gloom.index.DGItems;
+import galena.doom_and_gloom.index.DGTags;
 import galena.doom_and_gloom.network.packet.StoneTabletUpdatePacket;
 import java.util.stream.IntStream;
 import net.mehvahdjukaar.moonlight.api.platform.network.NetworkHelper;
@@ -56,7 +56,7 @@ public class StoneTabletScreen extends Screen {
                 .mapToObj(i -> this.text.getMessage(i, isFiltered))
                 .map(Component::getString).toArray(String[]::new);
 
-        this.canEdit = tablet.type == StoneTabletBlock.Type.DEFAULT && stack.is(DGItems.BUSH_HAMMER.get());
+        this.canEdit = tablet.type == StoneTabletBlock.Type.DEFAULT && stack.is(DGTags.Items.TOOLS_BUSH_HAMMER);
     }
 
     @Override

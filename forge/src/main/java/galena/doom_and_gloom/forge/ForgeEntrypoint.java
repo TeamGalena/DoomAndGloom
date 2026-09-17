@@ -5,7 +5,6 @@ import galena.doom_and_gloom.client.DoomAndGloomClient;
 import galena.doom_and_gloom.compat.AmendmentsCompat;
 import galena.doom_and_gloom.compat.CompatMods;
 import galena.doom_and_gloom.content.entity.ISepulcherable;
-import galena.doom_and_gloom.forge.compat.OreganizedCompat;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -30,10 +29,6 @@ public class ForgeEntrypoint {
 
         if (CompatMods.AMENDMENTS) {
             forgeBus.addListener(this::onBlockInteract);
-        }
-
-        if (CompatMods.OREGANIZED) {
-            OreganizedCompat.init();
         }
 
         forgeBus.addListener(this::onServerStart);

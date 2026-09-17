@@ -19,7 +19,6 @@ public class DGItemModels extends DGItemModelProvider {
 
     @Override
     protected void registerModels() {
-        toolItem(DGItems.BUSH_HAMMER);
         block(DGBlocks.SEPULCHER);
         block(DGBlocks.BONE_PILE);
         block(DGBlocks.BURIAL_DIRT);

@@ -2,8 +2,9 @@ package galena.doom_and_gloom.content.item;
 
 import galena.doom_and_gloom.content.block.StoneTabletBlock;
 import galena.doom_and_gloom.content.block.StoneTabletBlockEntity;
-import galena.doom_and_gloom.index.DGItems;
+
 import java.util.Map;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -27,8 +28,9 @@ public class HammerAndChiselItem extends BlockItem {
 
         if (!updated && player instanceof ServerPlayer serverPlayer) {
             if (level.getBlockEntity(pos) instanceof StoneTabletBlockEntity blockEntity && state.getBlock() instanceof StoneTabletBlock block) {
-                if(!serverPlayer.getAbilities().instabuild) {
-                    serverPlayer.setItemInHand(serverPlayer.getUsedItemHand(), new ItemStack(DGItems.BUSH_HAMMER.get()));
+                if (!serverPlayer.getAbilities().instabuild) {
+                    // TODO re-implement something with whatever bush hammer we will be using in the end
+                    // serverPlayer.setItemInHand(serverPlayer.getUsedItemHand(), new ItemStack(OItems.BUSH_HAMMER.get()));
                 }
                 block.openTextEdit(serverPlayer, blockEntity);
             }

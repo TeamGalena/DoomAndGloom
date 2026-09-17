@@ -1,7 +1,5 @@
 package galena.doom_and_gloom.data;
 
-import static galena.doom_and_gloom.index.DGTags.Items.TOOLS_BUSH_HAMMER;
-
 import galena.doom_and_gloom.DoomAndGloom;
 import galena.doom_and_gloom.index.DGBlocks;
 import galena.doom_and_gloom.index.DGItems;
@@ -28,8 +26,6 @@ public class DGItemTags extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(TOOLS_BUSH_HAMMER).add(DGItems.BUSH_HAMMER.get());
-
         tag(Tags.Items.MUSIC_DISCS).add(DGItems.MUSIC_DISC_AFTERLIFE.get());
 
         copy(DGTags.Blocks.VIGIL_CANDLES, DGTags.Items.VIGIL_CANDLES);
