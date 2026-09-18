@@ -22,11 +22,13 @@ dependencies {
 
     modImplementation(pack.forge.modrinth.farmers.delight)
     modImplementation(pack.forge.modrinth.supplementaries)
-    modImplementation(libs.oreganized)
+    modRuntimeOnly(libs.oreganized)
 
     modImplementation(libs.multikulti.core.neoforge)
     modImplementation(libs.multikulti.datagen.neoforge)
-    modImplementation(libs.dye.depot.neoforge)
+
+    "dataImplementation"(libs.dye.depot.neoforge)
+    modRuntimeOnly(libs.dye.depot.neoforge)
 
     if (!env.isCI) {
         modRuntimeOnly(libs.jei.neoforge)
